@@ -1,0 +1,20 @@
+h1{text-align: center;}
+
+body{font-family: Arial, sans-serif; background-color: #f1f3f4; 
+	margin: 0; padding: 100px;}
+
+#loginForm{background-color: white; padding: 20px; border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3); max-width: 300px; margin: auto;
+	text-align: center;}
+
+input[type="text"], input[type="password"] {
+    width:90%; padding: 10px; margin: 5px 0;
+    border: 1px solid #ccc; border-radius: 6px;
+	border-color: #1f6dff; outline-color: #58f7fc;}
+		
+button{background-color: #6ea5ff; color: white; padding: 10px; 
+	border: none; border-radius: 4px; cursor: pointer; width: 100%;}
+			
+button:hover{color: #fcc058; background-color: #1369f2;}
+
+#message{text-align: center; margin-top: 10px; color: red; font-style: bold;}

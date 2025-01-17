@@ -1,0 +1,59 @@
+/*general*/
+*{margin: 0; padding: 0; box-sizing: border-box;}
+
+body{font-family: Arial, sans-serif;
+    background-color: #f1f3f4; color: #202124;}
+
+/*header*/
+#header{background-color: #ffffff; padding: 20px;
+    border-bottom: 1px solid #e0e0e0; text-align: center;}
+
+/*content area*/
+#contentarea{display: flex; height: calc(100vh - 70px);}
+
+/*sidebar*/
+#column1{background-color: #ffffff; width: 250px;
+    border-right: 1px solid #e0e0e0; padding: 20px;}
+
+#header2 {font-weight: bold; font-size: 1.2em;
+    margin-bottom: 10px; text-align:center;}
+
+#nav{list-style-type: none;}
+
+li{margin: 10px 0;}
+
+li a{text-decoration: none; color:black; display: flex; align-items: center; 
+	padding: 10px; border-radius: 4px; transition: background 0.2s; }
+
+li a:hover{background-color: #e8f0fe;}
+
+li a:active{color: #fa3434;}
+
+.link.active{background-color: #a6f263; color: #fa3434;}
+
+#homeIcon::before{content: "\1F3E0"; font-size:20px;}
+
+#chargeIcon::before{content: "\1F5F2"; font-size: 20px; color: yellow;}
+
+#humanIcon::before{content: "\1F9CD"; font-size: 20px;}
+
+#tempIcon::before{content: "\1F321"; font-size: 20px; color: red;}
+
+#waterIcon::before{content: "\1F4A7"; font-size: 20px;}
+
+#logoutIcon::before{content: "\1F6AA"; font-size: 20px;}
+
+#logoutIcon{cursor: pointer;}
+
+/*main content*/
+div#column2{width:80%; float:right; font-size:0.8em;}
+
+div#column2 iframe{width:100%; border:none; height:100vh;}
+
+/*clearfix*/
+.clearfloat{clear: both;}
+	
+/*media queries*/
+@media (max-width: px){div#column1, div#column2 {width: 100%; flex-direction: column;}
+	div#column1{order: 1;} div#column2 {order: 2;}
+}

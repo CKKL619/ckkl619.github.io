@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel= "stylesheet" href = "webpage_style.css">
+	<script src = "script.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+</head>
+<body>
+	<h1>Human Motion Sensor</h1>
+	<input id = "input" type = "text" placeholder = "Input charger number..." autocomplete="off">
+	<button id = "button" onclick = "printChargerNum()">search</button>
+	<p id = "output" class = "textStyle"></p><br/>
+	<p id = "data" class = "dataShow"></p>
+	<table>
+		<tr>
+			<td><p>ON</p></td>
+			<td><label class = "switch">
+				<input type = "checkbox">
+				<span class = "slider"></span>
+				</label>
+			</td>
+			<td><p>OFF</p></td>
+		</tr>
+	</table>
+	<button onclick = "exportToExcel(data)">Generate Log</button>
+	<script>
+        const data = [];
+		function printChargerNum(){
+			const chargerNum = document.getElementById("input").value.trim();
+			const outputNum = document.getElementById("output");
+			const outputData = document.getElementById("data");
+			const checkError = ("No");
+			const checkHuman = ("Yes");
+			const dataDisplay = {ChargerNo: chargerNum, Error: checkError, HumanActivity: checkHuman};
+			if (chargerNum === ""){
+				outputNum.innerHTML = "Please input charger number."
+				outputNum.style.backgroundColor = "red";
+			}else if(isNaN(chargerNum)){
+				outputNum.innerHTML = "Please input a number."
+				outputNum.style.backgroundColor = "#f0a23c";
+			}else{
+				outputNum.innerHTML = "Now controlling charger: " + chargerNum;
+				outputNum.style.backgroundColor = "#a6f263";
+				data.push(dataDisplay); 
+				outputData.textContent = `Charger Number: ${chargerNum}, Error: ${checkError}, HumanActivity: ${checkHuman}`;
+			}
+			const existData = data.find(entry => entry.ChargerNo === chargerNum);
+			if (existData){
+				outputElement.textContent = `Charger Number: ${chargerNum}, Error: ${checkError}, HumanActivity: ${checkHuman}`;
+			}else{
+				const logData = {ChargerNo: chargerNum, Error: checkError, HumanActivity: checkHuman};
+				data.push(logData);
+				outputElement.textContent = `Charger Number: ${chargerNum}, Error: ${checkError}, HumanActivity: ${checkHuman}`;
+			}
+			document.getElementById("input").value = '';
+		}
+        function exportToExcel(data) {
+            const workbook = XLSX.utils.book_new();
+            const worksheet = XLSX.utils.json_to_sheet(data);
+            XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
+            XLSX.writeFile(workbook, "humanMotionLog.xlsx");
+        }
+    </script>
+</body>
+</html>
