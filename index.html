@@ -34,12 +34,13 @@
 
         links.forEach(link => {
             link.addEventListener('click', function() {
-                // Remove 'active' class from all links
-                links.forEach(l => l.classList.remove('active'));
-                // Add 'active' class to the clicked link
+                links.forEach(l => l.classList.remove('active'))
                 this.classList.add('active');
             });
         });
+	if (document.referrer === ""){
+		window.location.href = "login.html";
+	}
     </script>
 </body>
 </html>
