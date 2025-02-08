@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel= "stylesheet" href = "webpage_style.css">
+	<link rel = "stylesheet" href = "webpage_style.css">
 	<script src = "script.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
 </head>
 <body>
-	<h1>Human Motion Sensor</h1>
+	<h1>Temperature/Humidity Sensor</h1>
 	<input id = "input" type = "text" placeholder = "Input charger number..." autocomplete="off">
 	<button id = "button" onclick = "printChargerNum()">search</button>
 	<p id = "output" class = "textStyle"></p><br/>
@@ -34,7 +34,8 @@
 			const checkHuman = ("Yes");
 			const chargerNumFormat = /^CDJ\d{6}$/;/*charger number format, must start with CDJ follow by six digit number*/
 			const dataDisplay = {ChargerNo: chargerNum, Error: checkError, HumanActivity: checkHuman};
-			if (chargerNum === ""){
+			if (chargerNum === ""){/*check if input is empty*/
+				outputData.textContent = "";
 				outputNum.innerHTML = "Please input charger number."
 				outputNum.style.backgroundColor = "red";
 			}else if(!chargerNumFormat.test(chargerNum)){/*check if charger number satisfies format*/
@@ -47,9 +48,9 @@
 				const existData = data.find(entry => entry.ChargerNo === chargerNum);
 				if (!existData) {
 					data.push(dataDisplay);
-					outputData.textContent = `Charger Number: ${chargerNum}, Error: ${checkError}, HumanActivity: ${checkHuman}`;
+					outputData.textContent = `ChargerNo: ${chargerNum}, Error: ${checkError}, HumanActivity: ${checkHuman}`;
 				}else{
-					outputData.textContent = `Charger Number: ${chargerNum}, Error: ${checkError}, HumanActivity: ${checkHuman}`;
+					outputData.textContent = `ChargerNo: ${chargerNum}, Error: ${checkError}, HumanActivity: ${checkHuman}`;
 				}
 			}
 			document.getElementById("input").value = '';/*set input to empty after button clicked*/
@@ -67,7 +68,8 @@
 				const workbook = XLSX.utils.book_new();
 				const worksheet = XLSX.utils.json_to_sheet(data);
 				XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
-				XLSX.writeFile(workbook, "humanMotionLog.xlsx");
+				XLSX.writeFile(workbook, "tempHumidLog.xlsx");
+			}
         }
     </script>
 </body>
