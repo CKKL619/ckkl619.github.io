@@ -48,9 +48,9 @@
 				const existData = data.find(entry => entry.ChargerNo === chargerNum);
 				if (!existData) {
 					data.push(dataDisplay);
-					outputData.textContent = `ChargerNo: chargerNum, Error: checkError, Power: checkPower`;
+					outputData.textContent = `ChargerNo: ${chargerNum}, Error: ${checkError}, Power: ${checkPower}`;
 				}else{
-					outputData.textContent = `ChargerNo: chargerNum, Error: checkError, Power: checkPower`;
+					outputData.textContent = `ChargerNo: ${chargerNum}, Error: ${checkError}, Power: ${checkPower}`;
 				}
 			}
 			document.getElementById("input").value = '';/*set input to empty after button clicked*/
