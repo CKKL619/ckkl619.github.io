@@ -37,8 +37,9 @@
 			if (chargerNum === ""){
 				outputNum.innerHTML = "Please input charger number."
 				outputNum.style.backgroundColor = "red";
-			}else if(!chargerNumFormat.test(chargerNum)){
-				outputNum.innerHTML = "Please input a number."
+			}else if(!chargerNumFormat.test(chargerNum)){/*check if charger number satisfies format*/
+				outputData.textContent = "";
+				outputNum.innerHTML = "Charger number must start with 'CDJ' follow by a six digit number."
 				outputNum.style.backgroundColor = "#f0a23c";
 			}else{
 				outputNum.innerHTML = "Now controlling charger: " + chargerNum;
