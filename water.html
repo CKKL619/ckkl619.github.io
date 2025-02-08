@@ -22,6 +22,7 @@
 			<td><p>ON</p></td>
 		</tr>
 	</table>
+	<p id = "warning" class = "dataShow"></p>
 	<button onclick = "exportToExcel(data)">Generate Log</button>
 	<script>
         const data = [];
@@ -31,6 +32,7 @@
 			const outputData = document.getElementById("data");
 			const checkError = ("No");
 			const checkWater = ("20mm");
+			const chargerNumFormat = /^CDJ\d{6}$/;/*charger number format, must start with CDJ follow by six digit number*/
 			const dataDisplay = {ChargerNo: chargerNum, Error: checkError, WaterLevel: checkWater};
 			if (chargerNum === ""){
 				outputNum.innerHTML = "Please input charger number."
@@ -41,25 +43,30 @@
 			}else{
 				outputNum.innerHTML = "Now controlling charger: " + chargerNum;
 				outputNum.style.backgroundColor = "#a6f263";
-				data.push(dataDisplay); 
-				outputData.textContent = `Charger Number: ${chargerNum}, Error: ${checkError}, WaterLevel: ${checkWater}`;
+				const existData = data.find(entry => entry.ChargerNo === chargerNum);
+				if (!existData) {
+					data.push(dataDisplay);
+					outputData.textContent = `Charger Number: ${chargerNum}, Error: ${checkError}, WaterLevel: ${checkWater}`;
+				}else{
+					outputData.textContent = `Charger Number: ${chargerNum}, Error: ${checkError}, WaterLevel: ${checkWater}`;
+				}
 			}
-			const existData = data.find(entry => entry.ChargerNo === chargerNum);
-			if (existData){
-				existData.Power = "On"; 
-				outputElement.textContent = `Charger Number: ${chargerNum}, Error: ${checkError}, WaterLevel: ${checkWater}`;
-			}else{
-				const logData = {ChargerNo: chargerNum, Error: checkError, WaterLevel: checkWater};
-				data.push(logData);
-				outputElement.textContent = `Charger Number: ${chargerNum}, Error: ${checkError}, WaterLevel: ${checkWater}`;
-			}
-			document.getElementById("input").value = '';
+			document.getElementById("input").value = '';/*set input to empty after button clicked*/
 		}
         function exportToExcel(data) {
-            const workbook = XLSX.utils.book_new();
-            const worksheet = XLSX.utils.json_to_sheet(data);
-            XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
-            XLSX.writeFile(workbook, "waterLog.xlsx");
+			const warningData = document.getElementById("warning");
+			const validData = data.filter(entry => entry.ChargerNo && /^CDJ\d{6}$/.test(entry.ChargerNo));/*only allow data with valid charger number been input*/
+			if (validData.length === 0) {
+				warningData.textContent =("No valid charger data to export.");
+				warningData.style.backgroundColor = "red";
+				return;
+			}else{
+				warningData.textContent = "";
+				warningData.style.backgroundColor = "transparent";
+				const workbook = XLSX.utils.book_new();
+				const worksheet = XLSX.utils.json_to_sheet(data);
+				XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
+				XLSX.writeFile(workbook, "waterLog.xlsx");
         }
     </script>
 </body>
