@@ -2,6 +2,10 @@
 <html>
 <head>
 	<link rel = "stylesheet" href = "webpage_style.css">
+	<style>
+		#manual{display: none;}
+		#chargerinfo{display: block;}
+	</style>
 	<script>
         function displayLoginTime() {
             const now = new Date();
@@ -18,15 +22,29 @@
             document.getElementById('loginTime').textContent = `Your login time: ${currentTime}`;
         }
         window.onload = displayLoginTime;
+		function switchTextToCharger(){
+			const textCharger = document.getElementById("chargerinfo");
+			const textManual = document.getElementById("manual");
+            textCharger.style.display = "block";/*show text*/
+			textManual.style.display = "none"; /*hide text*/
+        }
+		function switchTextToManual(){
+			const textCharger = document.getElementById("chargerinfo");
+			const textManual = document.getElementById("manual");
+            textManual.style.display = "block";/*show text*/
+			textCharger.style.display = "none";/*hide text*/
+        }
     </script>
 </head>
 <body>
 	<h1>Home</h1>
 	<h3 id="loginTime"></h3>
-	<p class="textStyle" style =background-color:white>Click <mark>"Charger"</mark> to check electricity supply, <mark>"Human Motion"</mark> to check human motion 
-	sensor,<mark>"Temperature/Humidity"</mark> to check temperature and humidity sensor, 
+	<button onclick="switchTextToCharger()">All Charger</button>
+	<button onclick="switchTextToManual()">User Manual</button>
+	<p id = "manual" class="textStyle" style =background-color:white>Click <mark>"Charger"</mark> to check electricity supply, <mark>"Human Motion"</mark> 
+	to check human motion sensor,<mark>"Temperature/Humidity"</mark> to check temperature and humidity sensor, 
 	and <mark>"Water Leakage"</mark> to check water sensor. Click <mark>"Logout"</mark> when tasks are completed.</p>
-	<p class="textStyle" style =background-color:white>Number of charger online:<br/>Number of charger offline:</p>
+	<p id = "chargerinfo" class="textStyle" style =background-color:white>Number of charger online:<br/>Number of charger offline:</p>
 	<table>
 		<tr>
 			<td><a href="charger.html" target="mainframe" class="shortcut">Charger</a></td>
