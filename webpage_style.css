@@ -18,6 +18,16 @@ button{padding: 10px 15px; background-color: #6ea5ff; color: white; border: none
 
 button:hover{color: #fcc058; background-color: #1369f2;}
 
+/*homepage shortcut*/
+.shortcut{text-decoration: none; color:black; padding: 10px; border-radius: 4px; 
+	text-align: center; padding: 10px; background-color:white;}
+
+.shortcut:hover{background-color: #e8f0fe;}
+
+.shortcut:active{color: #fa3434;}
+
+.shortcut.active{background-color: #a6f263; color: #fa3434;}
+
 /*output*/
 .textStyle{text-align: center; padding: 10px;
     border-radius: 4px; margin-top: 10px;}
