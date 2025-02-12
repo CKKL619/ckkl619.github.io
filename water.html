@@ -10,18 +10,35 @@
 	<input id = "input" type = "text" placeholder = "Input charger number..." autocomplete="off">
 	<button id = "button" onclick = "printChargerNum()">search</button>
 	<p id = "output" class = "textStyle"></p><br/>
-	<p id = "data" class = "dataShow"></p>
-	<table>
-		<tr>
-			<td><p>OFF</p></td>
-			<td><label class = "switch">
-				<input type = "checkbox">
-				<span class = "slider"></span>
-				</label>
-			</td>
-			<td><p>ON</p></td>
-		</tr>
-	</table>
+	<div class="container">
+		<table id="data" class="dataShow datatable">
+			<thead>
+				<tr>
+					<th>Charger Number</th>
+					<th>Error</th>
+					<th>Water Leak</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td id="charger-number"></td>
+					<td id="error"></td>
+					<td id="water"></td>
+				</tr>
+			</tbody>
+		</table>
+		<table class="switchtable">
+			<tr>
+				<td><p>OFF</p></td>
+				<td><label class = "switch">
+					<input type = "checkbox">
+					<span class = "slider"></span>
+					</label>
+				</td>
+				<td><p>ON</p></td>
+			</tr>
+		</table>
+	</div>
 	<p id = "warning" class = "dataShow"></p>
 	<button onclick = "exportToExcel(data)">Generate Log</button>
 	<script>
@@ -31,34 +48,44 @@
 			const outputNum = document.getElementById("output");
 			const outputData = document.getElementById("data");
 			const checkError = ("No");
-			const checkWater = ("20mm");
+			const checkWater = ("No");
 			const chargerNumFormat = /^CDJ\d{6}$/;/*charger number format, must start with CDJ follow by six digit number*/
-			const dataDisplay = {ChargerNo: chargerNum, Error: checkError, Water: checkWater};
-			if (chargerNum === ""){/*check if input is empty*/
-				outputData.textContent = "";
+			if(chargerNum === ""){/*check if input is empty*/
 				outputNum.innerHTML = "Please input charger number."
 				outputNum.style.backgroundColor = "red";
+				clearTable();
+                return;
 			}else if(!chargerNumFormat.test(chargerNum)){/*check if charger number satisfies format*/
-				outputData.textContent = "";
 				outputNum.innerHTML = "Charger number must start with 'CDJ' follow by a six digit number."
 				outputNum.style.backgroundColor = "#f0a23c";
+				clearTable();
+                return;
 			}else{
 				outputNum.innerHTML = "Now controlling charger: " + chargerNum;
 				outputNum.style.backgroundColor = "#a6f263";
-				const existData = data.find(entry => entry.ChargerNo === chargerNum);
-				if (!existData) {
-					data.push(dataDisplay);
-					outputData.textContent = `Charger Number: ${chargerNum}, Error: ${checkError}, Water: ${checkWater} `;
-				}else{
-					outputData.textContent = `Charger Number: ${chargerNum}, Error: ${checkError}, Water: ${checkWater} `;
-				}
 			}
+			document.getElementById("charger-number").textContent = chargerNum;
+            document.getElementById("error").textContent = checkError;
+            document.getElementById("water").textContent = checkWater;
+			const dataDisplay = {
+                ChargerNo: chargerNum,
+                Error: checkError,
+                WaterLeak: checkWater
+            };
+            if(!data.find(entry => entry.ChargerNo === chargerNum)){
+                data.push(dataDisplay);
+            }
 			document.getElementById("input").value = '';/*set input to empty after button clicked*/
 		}
-        function exportToExcel(data) {
+		function clearTable(){
+            document.getElementById("charger-number").textContent = "";
+            document.getElementById("error").textContent = "";
+            document.getElementById("human").textContent = "";
+        }
+        function exportToExcel(data){
 			const warningData = document.getElementById("warning");
 			const validData = data.filter(entry => entry.ChargerNo && /^CDJ\d{6}$/.test(entry.ChargerNo));/*only allow data with valid charger number been input*/
-			if (validData.length === 0) {
+			if(validData.length === 0){
 				warningData.textContent =("No valid charger data to export.");
 				warningData.style.backgroundColor = "red";
 				return;
