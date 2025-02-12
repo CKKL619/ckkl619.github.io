@@ -68,3 +68,9 @@ input:checked + .slider{background-color: #2196F3;}
 
 input:checked + .slider:before{transform: translateX(26px);}
 
+@media(max-width: 768px){
+    .container{flex-direction: column; align-items: center;}
+    .datatable{margin-left: 0; margin-right: 0; 
+        margin-bottom: 20px; max-width: 100%;}
+    .switchtable{max-width: 100%;}
+}
