@@ -19,26 +19,37 @@ button{padding: 10px 15px; background-color: #6ea5ff; color: white; border: none
 button:hover{color: #fcc058; background-color: #1369f2;}
 
 /*homepage shortcut*/
-.shortcut{text-decoration: none; color:black; padding: 10px; border-radius: 4px; 
-	text-align: center; padding: 10px; background-color:white;}
+
+/*.shortcut{text-decoration: none; color:black; padding: 10px; border-radius: 4px; 
+	text-align: center; padding: 10px; background-color:white; width:200px; height:200px;}
 
 .shortcut:hover{background-color: #e8f0fe;}
 
 .shortcut:active{color: #fa3434;}
 
-.shortcut.active{background-color: #a6f263; color: #fa3434;}
+.shortcut.active{background-color: #a6f263; color: #fa3434;}*/
 
 /*output*/
 .textStyle{text-align: center; padding: 10px;
-    border-radius: 4px; margin-top: 10px;}
+    border-radius: 4px; margin-top: 10px; font: bold;}
 
 .dataShow{text-align: center; padding: 10px;
     border-radius: 4px; margin-top: 10px;}
 
 /*table*/
-table{margin: 0 auto; margin-bottom: 20px;}
+table{margin: 0 auto; margin-top:10px; margin-bottom: 10px;}
 
 td{padding: 10px;}
+
+.container{display: flex; justify-content: space-between; align-items: flex-start; margin-top: 20px;
+	border-radius: 4px; background-color: #d6d6d6;}
+
+.datatable{flex: 1; max-width: 70%; margin-right: 20px; border-radius: 4px; background-color: white;}
+
+.datatable th, .datatable td{border: 2px solid #1f6dff; padding: 10px; text-align: center;
+	border-radius: 4px;}
+			
+.switchtable{flex: 0 0 30%; max-width: 20%; border-radius: 4px; background-color: white;} 
 
 /*switch*/
 .switch{position: relative; display: inline-block; width: 60px; height: 34px;}
@@ -56,3 +67,4 @@ td{padding: 10px;}
 input:checked + .slider{background-color: #2196F3;}
 
 input:checked + .slider:before{transform: translateX(26px);}
+
