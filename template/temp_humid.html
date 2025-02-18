@@ -29,7 +29,7 @@
 				</tr>
 			</tbody>
 		</table>
-		<table class="switchtable" id="toggleSwitchTempHumid">
+		<table class="switchtable">
 			<tr>
 				<td><p>OFF</p></td>
 				<td><label class = "switch">
@@ -104,27 +104,27 @@
 				XLSX.writeFile(workbook, "tempHumidLog.xlsx");
 			}
         }
-		document.getElementById("toggleSwitchTempHumid").addEventListener("change", function() {
-			if (this.checked) {
-				fetch("/toggleChargerTrue", {
-					method: "POST",
-					headers: { "Content-Type": "application/json" },
-					body: JSON.stringify({ status: "true" }) }
-				).then(response => {
-					if (response.ok) {
-						console.log("Toggle switched to true"); }
-					else {
-						console.error("Failed to send request"); } }).catch(error => {console.error("Error:", error); }); }
-			else {
-				fetch("/toggleChargerFalse", {
-					method: "POST",
-					headers: { "Content-Type": "application/json" },
-					body: JSON.stringify({ status: "false" }) }
-				).then(response => {
-					if (response.ok) {
-						console.log("Toggle switched to false"); }
-					else {
-						console.error("Failed to send request"); } }).catch(error => { console.error("Error:", error); }); } });
+	document.getElementById("toggleSwitch").addEventListener("change", function() {
+		if (this.checked) {
+			fetch("/toggleTemp_humidTrue", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({ status: "true" }) }
+			).then(response => {
+				if (response.ok) {
+					console.log("Toggle switched to true"); }
+				else {
+					console.error("Failed to send request"); } }).catch(error => {console.error("Error:", error); }); }
+		else {
+			fetch("/toggleTemp_humidFalse", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({ status: "false" }) }
+			).then(response => {
+				if (response.ok) {
+					console.log("Toggle switched to false"); }
+				else {
+					console.error("Failed to send request"); } }).catch(error => { console.error("Error:", error); }); } });
     </script>
 </body>
 </html>
