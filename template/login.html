@@ -2,6 +2,7 @@
 <head>
     <title>Login</title>
 	<link rel="stylesheet" href="{{url_for('static', filename='login_style.css')}}">
+	<script src="http://sibeeshpassion.com/content/scripts/jquery-1.11.1.min.js"></script><!--disable f12key-->
 </head>
 <body>
     <h1>EV Charger Monitoring System</h1>
@@ -54,6 +55,24 @@
                 }
             }
         });
+        document.onkeypress = function(event){  
+            event = (event || window.event);  
+            if(event.keyCode == 123){  
+                return false;  
+            }  
+        }  
+        document.onmousedown = function(event){  
+            event = (event || window.event);  
+            if (event.keyCode == 123) {  
+                return false;  
+            }  
+        }  
+        document.onkeydown = function(event){  
+            event = (event || window.event);  
+            if (event.keyCode == 123) {  
+                return false;  
+            }  
+        }  
     </script>
 </body>
 </html>
