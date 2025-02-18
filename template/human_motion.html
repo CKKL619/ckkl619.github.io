@@ -27,7 +27,7 @@
 				</tr>
 			</tbody>
 		</table>
-		<table class="switchtable" id="toggleSwitchHuman">
+		<table class="switchtable">
 			<tr>
 				<td><p>OFF</p></td>
 				<td><label class = "switch">
@@ -98,27 +98,27 @@
 				XLSX.writeFile(workbook, "humanmotionLog.xlsx");
 			}
         }
-		document.getElementById("toggleSwitchHuman").addEventListener("change", function() {
-			if (this.checked) {
-				fetch("/toggleChargerTrue", {
-					method: "POST",
-					headers: { "Content-Type": "application/json" },
-					body: JSON.stringify({ status: "true" }) }
-				).then(response => {
-					if (response.ok) {
-						console.log("Toggle switched to true"); }
-					else {
-						console.error("Failed to send request"); } }).catch(error => {console.error("Error:", error); }); }
-			else {
-				fetch("/toggleChargerFalse", {
-					method: "POST",
-					headers: { "Content-Type": "application/json" },
-					body: JSON.stringify({ status: "false" }) }
-				).then(response => {
-					if (response.ok) {
-						console.log("Toggle switched to false"); }
-					else {
-						console.error("Failed to send request"); } }).catch(error => { console.error("Error:", error); }); } });
+	document.getElementById("toggleSwitch").addEventListener("change", function() {
+		if (this.checked) {
+			fetch("/toggleHuman_motionTrue", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({ status: "true" }) }
+			).then(response => {
+				if (response.ok) {
+					console.log("Toggle switched to true"); }
+				else {
+					console.error("Failed to send request"); } }).catch(error => {console.error("Error:", error); }); }
+		else {
+			fetch("/toggleHuman_motionFalse", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({ status: "false" }) }
+			).then(response => {
+				if (response.ok) {
+					console.log("Toggle switched to false"); }
+				else {
+					console.error("Failed to send request"); } }).catch(error => { console.error("Error:", error); }); } });
     </script>
 </body>
 </html>
