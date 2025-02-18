@@ -2,8 +2,8 @@
 <html>
 <head>
 	<title>Homepage</title>
-	<link rel = "stylesheet" href = "index_style.css">
-	<script src = "index_script.js"></script>
+	<link rel = "stylesheet" href = "{{url _for('static', filename='index_style.css')}}">
+	<script src = "{{url _for('static', filename = 'index_script.js')}}"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
@@ -30,17 +30,16 @@
 		</div>
 	</div>
 	<script>
-        const links = document.querySelectorAll('link');
-
+        const links = document.querySelectorAll('link');/*icons for charger and IoTs*/
         links.forEach(link => {
             link.addEventListener('click', function() {
-                links.forEach(l => l.classList.remove('active'))
+                links.forEach(l => l.classList.remove('active'));
                 this.classList.add('active');
             });
         });
-	if (document.referrer === ""){
-		window.location.href = "login.html";
-	}
+		if (document.referrer === ""){/*check if url is input from textbar*/
+			window.location.href = "login.html";
+		}
     </script>
 </body>
 </html>
