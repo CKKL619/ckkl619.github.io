@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel = "stylesheet" href = "webpage_style.css">
-	<script src = "script.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+	<link rel = "stylesheet" href = "{{url_for('static', filename='webpage_style.css')}}">
+	<script src = "{{url_for('static', filename='script.js')}}">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script><!--generate excel file-->
 </head>
 <body>
 	<h1>Charger</h1>
@@ -15,19 +15,21 @@
 			<thead>
 				<tr>
 					<th>Charger Number</th>
-					<th>Error</th>
 					<th>Power</th>
+					<th>Charging Status</th>
+					<th>Energy Consumption</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
 					<td id="charger-number"></td>
-					<td id="error"></td>
-					<td id="power"></td>
+					<td id="power">{{power}}</td>
+					<td id="status">{{chargingStatus}}</td>
+					<td id="energy">{{energyConsumtion}}</td>
 				</tr>
 			</tbody>
 		</table>
-		<table class="switchtable">
+		<table class="switchtable" id="toggleSwitchCharger">
 			<tr>
 				<td><p>OFF</p></td>
 				<td><label class = "switch">
@@ -47,8 +49,9 @@
 			const chargerNum = document.getElementById("input").value.trim();
 			const outputNum = document.getElementById("output");
 			const outputData = document.getElementById("data");
-			const checkError = ("No");
 			const checkPower = ("On");
+			const checkStatus = ("Charging");
+			const checkEnergy = ("100v");
 			const chargerNumFormat = /^CDJ\d{6}$/;/*charger number format, must start with CDJ follow by six digit number*/
 			if(chargerNum === ""){/*check if input is empty*/
 				outputNum.innerHTML = "Please input charger number."
@@ -65,12 +68,14 @@
 				outputNum.style.backgroundColor = "#a6f263";
 			}
 			document.getElementById("charger-number").textContent = chargerNum;
-            document.getElementById("error").textContent = checkError;
             document.getElementById("power").textContent = checkPower;
+			document.getElementById("status").textContent = checkStatus;
+			document.getElementById("energy").textContent = checkEnergy;
 			const dataDisplay = {
                 ChargerNo: chargerNum,
-                Error: checkError,
-                Power: checkPower
+                Power: checkPower,
+				Status: checkStatus,
+				Energy: checkEnergy
             };
             if(!data.find(entry => entry.ChargerNo === chargerNum)){
                 data.push(dataDisplay);
@@ -79,8 +84,9 @@
 		}
 		function clearTable(){
             document.getElementById("charger-number").textContent = "";
-            document.getElementById("error").textContent = "";
             document.getElementById("power").textContent = "";
+			document.getElementById("status").textContent = "";
+			document.getElementById("energy").textContent = "";
         }
         function exportToExcel(data){
 			const warningData = document.getElementById("warning");
@@ -98,6 +104,27 @@
 				XLSX.writeFile(workbook, "chargerLog.xlsx");
 			}
         }
+		document.getElementById("toggleSwitchCharger").addEventListener("change", function() {
+			if (this.checked) {
+				fetch("/toggleChargerTrue", {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({ status: "true" }) }
+				).then(response => {
+					if (response.ok) {
+						console.log("Toggle switched to true"); }
+					else {
+						console.error("Failed to send request"); } }).catch(error => {console.error("Error:", error); }); }
+			else {
+				fetch("/toggleChargerFalse", {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({ status: "false" }) }
+				).then(response => {
+					if (response.ok) {
+						console.log("Toggle switched to false"); }
+					else {
+						console.error("Failed to send request"); } }).catch(error => { console.error("Error:", error); }); } });
     </script>
 </body>
 </html>
