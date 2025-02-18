@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel = "stylesheet" href = "webpage_style.css">
-	<script src = "script.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+	<link rel = "stylesheet" href = "{{url_for('static', filename='webpage_style.css')}}">
+	<script src = "{{url_for('static', filename='script.js')}}">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script><!--generate excel file-->
 </head>
 <body>
 	<h1>Temperature/Humidity Sensor</h1>
@@ -15,7 +15,7 @@
 			<thead>
 				<tr>
 					<th>Charger Number</th>
-					<th>Error</th>
+					<th>Power</th>
 					<th>Temperature</th>
 					<th>Humidity</th>
 				</tr>
@@ -23,13 +23,13 @@
 			<tbody>
 				<tr>
 					<td id="charger-number"></td>
-					<td id="error"></td>
-					<td id="temperature"></td>
-					<td id="humidity"></td>
+					<td id="power">{{power}}</td>
+					<td id="temperature">{{temperature}}</td>
+					<td id="humidity">{{humidity}}</td>
 				</tr>
 			</tbody>
 		</table>
-		<table class="switchtable">
+		<table class="switchtable" id="toggleSwitchTempHumid">
 			<tr>
 				<td><p>OFF</p></td>
 				<td><label class = "switch">
@@ -49,7 +49,7 @@
 			const chargerNum = document.getElementById("input").value.trim();
 			const outputNum = document.getElementById("output");
 			const outputData = document.getElementById("data");
-			const checkError = ("No");
+			const checkPower = ("On");
 			const checkTemp = ("40");
 			const checkHumid = ("60%");
 			const chargerNumFormat = /^CDJ\d{6}$/;/*charger number format, must start with CDJ follow by six digit number*/
@@ -68,12 +68,12 @@
 				outputNum.style.backgroundColor = "#a6f263";
 			}
 			document.getElementById("charger-number").textContent = chargerNum;
-            document.getElementById("error").textContent = checkError;
+            document.getElementById("power").textContent = checkPower;
             document.getElementById("temperature").textContent = checkTemp;
             document.getElementById("humidity").textContent = checkHumid;
 			const dataDisplay = {
                 ChargerNo: chargerNum,
-                Error: checkError,
+                Power: checkPower,
                 Temperature: checkTemp,
                 Humidity: checkHumid
             };
@@ -84,7 +84,7 @@
 		}
 		function clearTable(){
             document.getElementById("charger-number").textContent = "";
-            document.getElementById("error").textContent = "";
+            document.getElementById("power").textContent = "";
             document.getElementById("temperature").textContent = "";
             document.getElementById("humidity").textContent = "";
         }
@@ -104,6 +104,27 @@
 				XLSX.writeFile(workbook, "tempHumidLog.xlsx");
 			}
         }
+		document.getElementById("toggleSwitchTempHumid").addEventListener("change", function() {
+			if (this.checked) {
+				fetch("/toggleChargerTrue", {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({ status: "true" }) }
+				).then(response => {
+					if (response.ok) {
+						console.log("Toggle switched to true"); }
+					else {
+						console.error("Failed to send request"); } }).catch(error => {console.error("Error:", error); }); }
+			else {
+				fetch("/toggleChargerFalse", {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({ status: "false" }) }
+				).then(response => {
+					if (response.ok) {
+						console.log("Toggle switched to false"); }
+					else {
+						console.error("Failed to send request"); } }).catch(error => { console.error("Error:", error); }); } });
     </script>
 </body>
 </html>
