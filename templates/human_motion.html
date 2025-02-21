@@ -14,15 +14,17 @@
 		<table id="data" class="dataShow datatable">
 			<thead>
 				<tr>
-					<th>Record Time</th>
+					<th>Charger Number</th>
 					<th>Power</th>
+					<th>Record Time</th>
 					<th>HumanActivity</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
-					<td id="time">{{time}}</td>
+					<td id="charger-number"></td>
 					<td id="power">{{power}}</td>
+					<td id="time">{{time}}</td>
 					<td id="human">{{ispresence}}</td>
 				</tr>
 			</tbody>
@@ -31,7 +33,7 @@
 			<tr>
 				<td><p>OFF</p></td>
 				<td><label class = "switch">
-					<input type = "checkbox" id="toggleSwitch" {% if power %}checked{% endif %}>
+					<input type = "checkbox">
 					<span class = "slider"></span>
 					</label>
 				</td>
@@ -39,16 +41,31 @@
 			</tr>
 		</table>
 	</div>
+	<h2 style ="text-align: center">Search History</h2>
+    <table id="history" class="historytable">
+        <thead>
+            <tr>
+                <th>Charger Number</th>
+                <th>Power</th>
+                <th>Record Time</th>
+				<th>HumanActivity</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
 	<p id = "warning" class = "dataShow"></p>
 	<button onclick = "exportToExcel(data)">Generate Log</button>
 	<button onclick = "document.location='home.html'" target = "mainframe" style="float: right;">Home</button>
 	<script>
         const data = [];
+		const maxEntries = 5;
 		function printChargerNum(){
 			const chargerNum = document.getElementById("input").value.trim();
 			const outputNum = document.getElementById("output");
 			const outputData = document.getElementById("data");
 			const checkPower = ("On");
+			const checkTime = ("9:00")
 			const checkHuman = ("Yes");
 			const chargerNumFormat = /^CDJ\d{6}$/;/*charger number format, must start with CDJ follow by six digit number*/
 			if(chargerNum === ""){/*check if input is empty*/
@@ -67,26 +84,44 @@
 			}
 			document.getElementById("charger-number").textContent = chargerNum;
             document.getElementById("power").textContent = checkPower;
+			document.getElementById("time").textContent = checkTime;
             document.getElementById("human").textContent = checkHuman;
 			const dataDisplay = {
                 ChargerNo: chargerNum,
                 Power: checkPower,
+				Time: checkTime,
                 HumanActivity: checkHuman
             };
             if(!data.find(entry => entry.ChargerNo === chargerNum)){
                 data.push(dataDisplay);
+				updateHistoryRecord(); /*update history after new entry*/
             }
 			document.getElementById("input").value = '';/*set input to empty after button clicked*/
 		}
 		function clearTable(){
             document.getElementById("charger-number").textContent = "";
             document.getElementById("power").textContent = "";
+			document.getElementById("time").textContent = "";
             document.getElementById("human").textContent = "";
+        }
+		function updateHistoryRecord() {
+            const historyRecord = document.getElementById("history").querySelector("tbody");
+            historyRecord.innerHTML = ""; /*clear current record*/
+            const history = data.slice(-maxEntries); /*get last maxEntries*/
+            history.forEach(entry => {
+                const row = document.createElement("tr");
+                row.innerHTML =
+                    '<td>' + entry.ChargerNo + '</td>' +
+                    '<td>' + entry.Power + '</td>' +
+					'<td>' + entry.Time + '</td>' +
+                    '<td>' + entry.HumanActivity + '</td>';
+                historyRecord.appendChild(row); /*append new row*/
+            });
         }
         function exportToExcel(data){
 			const warningData = document.getElementById("warning");
 			const validData = data.filter(entry => entry.ChargerNo && /^CDJ\d{6}$/.test(entry.ChargerNo));/*only allow data with valid charger number been input*/
-			if(validData.length === 0){
+			if (validData.length === 0){
 				warningData.textContent =("No valid charger data to export.");
 				warningData.style.backgroundColor = "red";
 				return;
@@ -94,32 +129,32 @@
 				warningData.textContent = "";
 				warningData.style.backgroundColor = "transparent";
 				const workbook = XLSX.utils.book_new();
-				const worksheet = XLSX.utils.json_to_sheet(data);
+				const worksheet = XLSX.utils.json_to_sheet(validData);
 				XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
-				XLSX.writeFile(workbook, "humanmotionLog.xlsx");
+				XLSX.writeFile(workbook, "tempHumidLog.xlsx");
 			}
         }
-	document.getElementById("toggleSwitch").addEventListener("change", function() {
-		if (this.checked) {
-			fetch("/toggleHuman_motionTrue", {
-				method: "POST",
-				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({ status: "true" }) }
-			).then(response => {
-				if (response.ok) {
-					console.log("Toggle switched to true"); }
-				else {
-					console.error("Failed to send request"); } }).catch(error => {console.error("Error:", error); }); }
-		else {
-			fetch("/toggleHuman_motionFalse", {
-				method: "POST",
-				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({ status: "false" }) }
-			).then(response => {
-				if (response.ok) {
-					console.log("Toggle switched to false"); }
-				else {
-					console.error("Failed to send request"); } }).catch(error => { console.error("Error:", error); }); } });
+		document.getElementById("toggleSwitch").addEventListener("change", function() {
+			if (this.checked) {
+				fetch("/toggleHuman_motionTrue", {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({ status: "true" }) }
+				).then(response => {
+					if (response.ok) {
+						console.log("Toggle switched to true"); }
+					else {
+						console.error("Failed to send request"); } }).catch(error => {console.error("Error:", error); }); }
+			else {
+				fetch("/toggleHuman_motionFalse", {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({ status: "false" }) }
+				).then(response => {
+					if (response.ok) {
+						console.log("Toggle switched to false"); }
+					else {
+						console.error("Failed to send request"); } }).catch(error => { console.error("Error:", error); }); } });
     </script>
 </body>
 </html>
