@@ -1,0 +1,868 @@
+2025-02-20 13:40:13,746 - INFO - Starting data collection for charger CDJ940009
+2025-02-20 13:40:13,746 - INFO - Data will be collected every 10 seconds
+2025-02-20 13:40:13,747 - INFO - Press Ctrl+C to stop
+2025-02-20 13:40:13,747 - INFO - Logging to file: charger_data.log
+2025-02-20 13:40:34,801 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 13:40:34,801 - ERROR - Stderr: 
+2025-02-20 13:40:34,802 - ERROR - Failed to fetch data
+2025-02-20 13:41:05,880 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 13:41:05,881 - ERROR - Stderr: 
+2025-02-20 13:41:05,881 - ERROR - Failed to fetch data
+2025-02-20 13:41:36,956 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 13:41:36,956 - ERROR - Stderr: 
+2025-02-20 13:41:36,957 - ERROR - Failed to fetch data
+2025-02-20 13:41:36,957 - WARNING - Too many errors (3). Waiting 30 seconds before retry...
+2025-02-20 13:42:28,010 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 13:42:28,010 - ERROR - Stderr: 
+2025-02-20 13:42:28,011 - ERROR - Failed to fetch data
+2025-02-20 17:16:03,042 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 17:16:03,043 - ERROR - Stderr: 
+2025-02-20 17:17:07,567 - INFO - Starting data collection for charger CDJ940009
+2025-02-20 17:17:07,567 - INFO - Data will be collected every 10 seconds
+2025-02-20 17:17:07,568 - INFO - Press Ctrl+C to stop
+2025-02-20 17:17:07,568 - INFO - Logging to file: charger_data.log
+2025-02-20 17:17:28,621 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 17:17:28,621 - ERROR - Stderr: 
+2025-02-20 17:17:28,622 - ERROR - Failed to fetch data
+2025-02-20 17:17:57,736 - INFO - Shutdown signal received. Cleaning up...
+2025-02-20 17:17:57,736 - ERROR - Curl command failed. Exit code: 3221225786
+2025-02-20 17:17:57,737 - ERROR - Stderr: 
+2025-02-20 17:17:57,737 - ERROR - Failed to fetch data
+2025-02-20 17:17:59,022 - INFO - Shutdown signal received. Cleaning up...
+2025-02-20 17:18:07,738 - INFO - Shutdown complete
+2025-02-20 17:18:50,775 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 17:18:50,776 - ERROR - Stderr: 
+2025-02-20 17:22:54,348 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 17:22:54,349 - ERROR - Stderr: 
+2025-02-20 17:26:19,970 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 17:26:19,971 - ERROR - Stderr: 
+2025-02-20 17:28:11,935 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 17:28:11,936 - ERROR - Stderr: 
+2025-02-20 17:29:30,148 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 17:29:30,149 - ERROR - Stderr: 
+2025-02-20 17:29:53,710 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 17:29:53,710 - ERROR - Stderr: 
+2025-02-20 17:32:38,828 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 17:32:38,829 - ERROR - Stderr: 
+2025-02-20 17:33:28,652 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 17:33:28,653 - ERROR - Stderr: 
+2025-02-20 17:33:52,228 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 17:33:52,228 - ERROR - Stderr: 
+2025-02-20 17:35:03,012 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 17:35:03,013 - ERROR - Stderr: 
+2025-02-20 17:35:26,581 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 17:35:26,582 - ERROR - Stderr: 
+2025-02-20 18:31:02,667 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 18:31:02,668 - ERROR - Stderr: 
+2025-02-20 18:31:26,282 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 18:31:26,283 - ERROR - Stderr: 
+2025-02-20 18:31:49,878 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 18:31:49,879 - ERROR - Stderr: 
+2025-02-20 18:32:51,677 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 18:32:51,678 - ERROR - Stderr: 
+2025-02-20 18:33:15,276 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 18:33:15,276 - ERROR - Stderr: 
+2025-02-20 18:33:38,862 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 18:33:38,863 - ERROR - Stderr: 
+2025-02-20 19:00:47,207 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 19:00:47,208 - ERROR - Stderr: 
+2025-02-20 19:01:10,810 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 19:01:10,810 - ERROR - Stderr: 
+2025-02-20 19:01:34,408 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 19:01:34,410 - ERROR - Stderr: 
+2025-02-20 19:01:58,004 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 19:01:58,005 - ERROR - Stderr: 
+2025-02-20 19:02:21,618 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 19:02:21,620 - ERROR - Stderr: 
+2025-02-20 19:12:41,494 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 19:12:41,495 - ERROR - Stderr: 
+2025-02-20 19:12:55,541 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 19:12:55,542 - ERROR - Stderr: 
+2025-02-20 19:18:21,180 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 19:18:21,181 - ERROR - Stderr: 
+2025-02-20 19:18:37,200 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 19:18:37,201 - ERROR - Stderr: 
+2025-02-20 19:21:01,879 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 19:21:01,881 - ERROR - Stderr: 
+2025-02-20 19:21:17,632 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 19:21:17,633 - ERROR - Stderr: 
+2025-02-20 19:23:20,487 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 19:23:20,489 - ERROR - Stderr: 
+2025-02-20 19:23:35,928 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 19:23:35,929 - ERROR - Stderr: 
+2025-02-20 19:23:44,125 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 19:23:44,125 - ERROR - Stderr: 
+2025-02-20 19:23:59,601 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 19:23:59,602 - ERROR - Stderr: 
+2025-02-20 19:24:07,761 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 19:24:07,763 - ERROR - Stderr: 
+2025-02-20 19:24:23,225 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 19:24:23,226 - ERROR - Stderr: 
+2025-02-20 19:24:31,355 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 19:24:31,355 - ERROR - Stderr: 
+2025-02-20 19:24:46,833 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 19:24:46,834 - ERROR - Stderr: 
+2025-02-20 19:24:54,979 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 19:24:54,980 - ERROR - Stderr: 
+2025-02-20 19:25:18,614 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 19:25:18,615 - ERROR - Stderr: 
+2025-02-20 19:25:26,122 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 19:25:26,123 - ERROR - Stderr: 
+2025-02-20 19:25:42,229 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 19:25:42,230 - ERROR - Stderr: 
+2025-02-20 19:26:41,026 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 19:26:41,027 - ERROR - Stderr: 
+2025-02-20 19:26:58,609 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 19:26:58,610 - ERROR - Stderr: 
+2025-02-20 19:27:04,611 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 19:27:04,612 - ERROR - Stderr: 
+2025-02-20 20:22:31,036 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 20:22:31,037 - ERROR - Stderr: 
+2025-02-20 20:22:45,612 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 20:22:45,613 - ERROR - Stderr: 
+2025-02-20 20:22:54,608 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 20:22:54,609 - ERROR - Stderr: 
+2025-02-20 20:23:09,185 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 20:23:09,186 - ERROR - Stderr: 
+2025-02-20 20:23:18,171 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 20:23:18,171 - ERROR - Stderr: 
+2025-02-20 20:23:32,751 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 20:23:32,751 - ERROR - Stderr: 
+2025-02-20 20:23:41,729 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 20:23:41,729 - ERROR - Stderr: 
+2025-02-20 20:23:56,320 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 20:23:56,321 - ERROR - Stderr: 
+2025-02-20 20:24:05,294 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 20:24:05,295 - ERROR - Stderr: 
+2025-02-20 20:24:19,898 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 20:24:19,898 - ERROR - Stderr: 
+2025-02-20 20:24:28,858 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 20:24:28,859 - ERROR - Stderr: 
+2025-02-20 20:24:43,465 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 20:24:43,467 - ERROR - Stderr: 
+2025-02-20 20:24:52,419 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 20:24:52,420 - ERROR - Stderr: 
+2025-02-20 20:25:15,981 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 20:25:15,981 - ERROR - Stderr: 
+2025-02-20 20:25:30,484 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 20:25:30,485 - ERROR - Stderr: 
+2025-02-20 20:25:39,540 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 20:25:39,540 - ERROR - Stderr: 
+2025-02-20 20:25:54,045 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 20:25:54,045 - ERROR - Stderr: 
+2025-02-20 20:26:03,104 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 20:26:03,104 - ERROR - Stderr: 
+2025-02-20 20:26:26,672 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 20:26:26,673 - ERROR - Stderr: 
+2025-02-20 20:26:41,320 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 20:26:41,320 - ERROR - Stderr: 
+2025-02-20 20:26:50,239 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 20:26:50,241 - ERROR - Stderr: 
+2025-02-20 20:27:04,889 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 20:27:04,890 - ERROR - Stderr: 
+2025-02-20 20:27:13,806 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 20:27:13,807 - ERROR - Stderr: 
+2025-02-20 20:27:28,469 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 20:27:28,470 - ERROR - Stderr: 
+2025-02-20 20:27:37,364 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 20:27:37,365 - ERROR - Stderr: 
+2025-02-20 20:27:52,035 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 20:27:52,036 - ERROR - Stderr: 
+2025-02-20 20:28:00,939 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 20:28:00,939 - ERROR - Stderr: 
+2025-02-20 20:28:24,503 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 20:28:24,503 - ERROR - Stderr: 
+2025-02-20 20:28:48,073 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 20:28:48,073 - ERROR - Stderr: 
+2025-02-20 20:28:51,997 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 20:28:51,998 - ERROR - Stderr: 
+2025-02-20 20:29:45,236 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 20:29:45,237 - ERROR - Stderr: 
+2025-02-20 20:30:00,427 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 20:30:00,428 - ERROR - Stderr: 
+2025-02-20 20:30:08,818 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 20:30:08,819 - ERROR - Stderr: 
+2025-02-20 20:30:24,004 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 20:30:24,005 - ERROR - Stderr: 
+2025-02-20 20:30:32,377 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 20:30:32,377 - ERROR - Stderr: 
+2025-02-20 20:30:47,576 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 20:30:47,577 - ERROR - Stderr: 
+2025-02-20 20:30:55,938 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 20:30:55,939 - ERROR - Stderr: 
+2025-02-20 20:31:11,143 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 20:31:11,145 - ERROR - Stderr: 
+2025-02-20 20:31:19,499 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 20:31:19,499 - ERROR - Stderr: 
+2025-02-20 20:31:34,717 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 20:31:34,718 - ERROR - Stderr: 
+2025-02-20 20:31:43,055 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 20:31:43,056 - ERROR - Stderr: 
+2025-02-20 20:31:58,297 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 20:31:58,298 - ERROR - Stderr: 
+2025-02-20 20:32:06,612 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 20:32:06,613 - ERROR - Stderr: 
+2025-02-20 20:32:21,861 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 20:32:21,862 - ERROR - Stderr: 
+2025-02-20 20:32:30,170 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 20:32:30,171 - ERROR - Stderr: 
+2025-02-20 20:32:45,421 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 20:32:45,422 - ERROR - Stderr: 
+2025-02-20 20:32:53,740 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 20:32:53,742 - ERROR - Stderr: 
+2025-02-20 20:33:08,980 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 20:33:08,980 - ERROR - Stderr: 
+2025-02-20 20:33:17,315 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 20:33:17,315 - ERROR - Stderr: 
+2025-02-20 20:33:32,544 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 20:33:32,544 - ERROR - Stderr: 
+2025-02-20 20:33:40,880 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 20:33:40,880 - ERROR - Stderr: 
+2025-02-20 20:33:56,126 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 20:33:56,127 - ERROR - Stderr: 
+2025-02-20 20:34:04,440 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 20:34:04,441 - ERROR - Stderr: 
+2025-02-20 20:34:19,689 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 20:34:19,690 - ERROR - Stderr: 
+2025-02-20 20:34:28,014 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 20:34:28,014 - ERROR - Stderr: 
+2025-02-20 20:34:43,249 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 20:34:43,249 - ERROR - Stderr: 
+2025-02-20 20:34:51,585 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 20:34:51,585 - ERROR - Stderr: 
+2025-02-20 20:35:06,813 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 20:35:06,814 - ERROR - Stderr: 
+2025-02-20 20:35:15,144 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 20:35:15,146 - ERROR - Stderr: 
+2025-02-20 20:35:30,385 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 20:35:30,386 - ERROR - Stderr: 
+2025-02-20 20:35:38,712 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 20:35:38,712 - ERROR - Stderr: 
+2025-02-20 20:35:53,948 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 20:35:53,949 - ERROR - Stderr: 
+2025-02-20 20:36:02,274 - ERROR - Curl command failed. Exit code: 28
+2025-02-20 20:36:02,274 - ERROR - Stderr: 
+2025-02-21 07:09:14,294 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:09:14,295 - ERROR - Stderr: 
+2025-02-21 07:09:25,893 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:09:25,893 - ERROR - Stderr: 
+2025-02-21 07:09:37,916 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:09:37,916 - ERROR - Stderr: 
+2025-02-21 07:09:49,483 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:09:49,484 - ERROR - Stderr: 
+2025-02-21 07:10:01,518 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:10:01,518 - ERROR - Stderr: 
+2025-02-21 07:10:13,057 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:10:13,057 - ERROR - Stderr: 
+2025-02-21 07:10:25,111 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:10:25,111 - ERROR - Stderr: 
+2025-02-21 07:10:36,655 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:10:36,655 - ERROR - Stderr: 
+2025-02-21 07:10:48,731 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:10:48,731 - ERROR - Stderr: 
+2025-02-21 07:11:00,253 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:11:00,253 - ERROR - Stderr: 
+2025-02-21 07:11:12,337 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:11:12,338 - ERROR - Stderr: 
+2025-02-21 07:11:23,879 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:11:23,879 - ERROR - Stderr: 
+2025-02-21 07:11:35,924 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:11:35,924 - ERROR - Stderr: 
+2025-02-21 07:11:47,499 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:11:47,499 - ERROR - Stderr: 
+2025-02-21 07:13:08,596 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:13:08,596 - ERROR - Stderr: 
+2025-02-21 07:13:19,176 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:13:19,176 - ERROR - Stderr: 
+2025-02-21 07:13:32,209 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:13:32,209 - ERROR - Stderr: 
+2025-02-21 07:13:42,793 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:13:42,793 - ERROR - Stderr: 
+2025-02-21 07:13:55,790 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:13:55,791 - ERROR - Stderr: 
+2025-02-21 07:14:06,392 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:14:06,393 - ERROR - Stderr: 
+2025-02-21 07:14:19,390 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:14:19,391 - ERROR - Stderr: 
+2025-02-21 07:14:30,016 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:14:30,017 - ERROR - Stderr: 
+2025-02-21 07:14:42,973 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:14:42,975 - ERROR - Stderr: 
+2025-02-21 07:14:53,609 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:14:53,609 - ERROR - Stderr: 
+2025-02-21 07:15:06,585 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:15:06,586 - ERROR - Stderr: 
+2025-02-21 07:15:17,205 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:15:17,205 - ERROR - Stderr: 
+2025-02-21 07:15:30,222 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:15:30,223 - ERROR - Stderr: 
+2025-02-21 07:15:40,791 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:15:40,791 - ERROR - Stderr: 
+2025-02-21 07:15:53,811 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:15:53,812 - ERROR - Stderr: 
+2025-02-21 07:16:04,376 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:16:04,377 - ERROR - Stderr: 
+2025-02-21 07:16:17,427 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:16:17,427 - ERROR - Stderr: 
+2025-02-21 07:16:27,971 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:16:27,972 - ERROR - Stderr: 
+2025-02-21 07:16:41,050 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:16:41,050 - ERROR - Stderr: 
+2025-02-21 07:16:51,584 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:16:51,584 - ERROR - Stderr: 
+2025-02-21 07:17:04,620 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:17:04,624 - ERROR - Stderr: 
+2025-02-21 07:17:15,234 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:17:15,234 - ERROR - Stderr: 
+2025-02-21 07:17:28,227 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:17:28,228 - ERROR - Stderr: 
+2025-02-21 07:17:38,846 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:17:38,847 - ERROR - Stderr: 
+2025-02-21 07:17:51,823 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:17:51,825 - ERROR - Stderr: 
+2025-02-21 07:18:02,429 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:18:02,429 - ERROR - Stderr: 
+2025-02-21 07:18:15,413 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:18:15,413 - ERROR - Stderr: 
+2025-02-21 07:18:26,041 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:18:26,041 - ERROR - Stderr: 
+2025-02-21 07:18:39,008 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:18:39,008 - ERROR - Stderr: 
+2025-02-21 07:18:49,634 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:18:49,634 - ERROR - Stderr: 
+2025-02-21 07:19:02,620 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:19:02,620 - ERROR - Stderr: 
+2025-02-21 07:19:13,232 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:19:13,233 - ERROR - Stderr: 
+2025-02-21 07:19:26,229 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:19:26,229 - ERROR - Stderr: 
+2025-02-21 07:19:36,849 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:19:36,850 - ERROR - Stderr: 
+2025-02-21 07:19:49,812 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:19:49,812 - ERROR - Stderr: 
+2025-02-21 07:20:00,448 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:20:00,448 - ERROR - Stderr: 
+2025-02-21 07:20:13,399 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:20:13,399 - ERROR - Stderr: 
+2025-02-21 07:20:24,072 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:20:24,072 - ERROR - Stderr: 
+2025-02-21 07:20:37,012 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:20:37,013 - ERROR - Stderr: 
+2025-02-21 07:20:47,675 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:20:47,679 - ERROR - Stderr: 
+2025-02-21 07:21:00,623 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:21:00,623 - ERROR - Stderr: 
+2025-02-21 07:21:11,281 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:21:11,281 - ERROR - Stderr: 
+2025-02-21 07:21:24,230 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:21:24,231 - ERROR - Stderr: 
+2025-02-21 07:21:34,881 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:21:34,882 - ERROR - Stderr: 
+2025-02-21 07:21:47,829 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:21:47,829 - ERROR - Stderr: 
+2025-02-21 07:21:58,478 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:21:58,478 - ERROR - Stderr: 
+2025-02-21 07:22:11,415 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:22:11,417 - ERROR - Stderr: 
+2025-02-21 07:22:22,106 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:22:22,107 - ERROR - Stderr: 
+2025-02-21 07:22:35,040 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:22:35,043 - ERROR - Stderr: 
+2025-02-21 07:22:45,697 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:22:45,697 - ERROR - Stderr: 
+2025-02-21 07:22:58,643 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:22:58,644 - ERROR - Stderr: 
+2025-02-21 07:23:09,324 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:23:09,324 - ERROR - Stderr: 
+2025-02-21 07:23:22,249 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:23:22,249 - ERROR - Stderr: 
+2025-02-21 07:23:32,917 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:23:32,917 - ERROR - Stderr: 
+2025-02-21 07:23:45,871 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:23:45,871 - ERROR - Stderr: 
+2025-02-21 07:23:56,531 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:23:56,532 - ERROR - Stderr: 
+2025-02-21 07:24:09,466 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:24:09,466 - ERROR - Stderr: 
+2025-02-21 07:24:20,109 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:24:20,110 - ERROR - Stderr: 
+2025-02-21 07:24:33,076 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:24:33,076 - ERROR - Stderr: 
+2025-02-21 07:24:43,699 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:24:43,700 - ERROR - Stderr: 
+2025-02-21 07:24:56,671 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:24:56,671 - ERROR - Stderr: 
+2025-02-21 07:25:07,288 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:25:07,288 - ERROR - Stderr: 
+2025-02-21 07:25:20,239 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:25:20,241 - ERROR - Stderr: 
+2025-02-21 07:25:43,852 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:25:43,854 - ERROR - Stderr: 
+2025-02-21 07:25:58,142 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:25:58,143 - ERROR - Stderr: 
+2025-02-21 07:26:07,435 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:26:07,435 - ERROR - Stderr: 
+2025-02-21 07:26:21,761 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:26:21,761 - ERROR - Stderr: 
+2025-02-21 07:26:31,051 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:26:31,051 - ERROR - Stderr: 
+2025-02-21 07:26:45,354 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:26:45,355 - ERROR - Stderr: 
+2025-02-21 07:26:54,631 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:26:54,633 - ERROR - Stderr: 
+2025-02-21 07:27:08,971 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:27:08,972 - ERROR - Stderr: 
+2025-02-21 07:27:18,221 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:27:18,224 - ERROR - Stderr: 
+2025-02-21 07:27:32,556 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:27:32,556 - ERROR - Stderr: 
+2025-02-21 07:27:41,793 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:27:41,793 - ERROR - Stderr: 
+2025-02-21 07:27:56,153 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:27:56,154 - ERROR - Stderr: 
+2025-02-21 07:28:05,405 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:28:05,405 - ERROR - Stderr: 
+2025-02-21 07:28:19,733 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:28:19,734 - ERROR - Stderr: 
+2025-02-21 07:28:29,066 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:28:29,066 - ERROR - Stderr: 
+2025-02-21 07:28:43,338 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:28:43,339 - ERROR - Stderr: 
+2025-02-21 07:28:52,674 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:28:52,674 - ERROR - Stderr: 
+2025-02-21 07:29:06,941 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:29:06,942 - ERROR - Stderr: 
+2025-02-21 07:29:16,255 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:29:16,257 - ERROR - Stderr: 
+2025-02-21 07:29:30,539 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:29:30,541 - ERROR - Stderr: 
+2025-02-21 07:29:39,843 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:29:39,843 - ERROR - Stderr: 
+2025-02-21 07:29:54,124 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:29:54,124 - ERROR - Stderr: 
+2025-02-21 07:30:03,444 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:30:03,444 - ERROR - Stderr: 
+2025-02-21 07:30:17,708 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:30:17,709 - ERROR - Stderr: 
+2025-02-21 07:30:27,045 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:30:27,047 - ERROR - Stderr: 
+2025-02-21 07:30:41,307 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:30:41,307 - ERROR - Stderr: 
+2025-02-21 07:30:50,641 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:30:50,641 - ERROR - Stderr: 
+2025-02-21 07:31:04,907 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:31:04,909 - ERROR - Stderr: 
+2025-02-21 07:31:14,226 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:31:14,227 - ERROR - Stderr: 
+2025-02-21 07:31:28,492 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:31:28,494 - ERROR - Stderr: 
+2025-02-21 07:31:37,811 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:31:37,812 - ERROR - Stderr: 
+2025-02-21 07:31:52,072 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:31:52,072 - ERROR - Stderr: 
+2025-02-21 07:32:01,393 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:32:01,394 - ERROR - Stderr: 
+2025-02-21 07:32:15,675 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:32:15,677 - ERROR - Stderr: 
+2025-02-21 07:32:24,976 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:32:24,977 - ERROR - Stderr: 
+2025-02-21 07:32:39,273 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:32:39,274 - ERROR - Stderr: 
+2025-02-21 07:32:48,559 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:32:48,561 - ERROR - Stderr: 
+2025-02-21 07:33:02,859 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:33:02,861 - ERROR - Stderr: 
+2025-02-21 07:33:12,195 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:33:12,196 - ERROR - Stderr: 
+2025-02-21 07:33:26,446 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:33:26,446 - ERROR - Stderr: 
+2025-02-21 07:33:35,778 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:33:35,778 - ERROR - Stderr: 
+2025-02-21 07:33:50,026 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:33:50,026 - ERROR - Stderr: 
+2025-02-21 07:33:59,345 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:33:59,347 - ERROR - Stderr: 
+2025-02-21 07:34:13,626 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:34:13,627 - ERROR - Stderr: 
+2025-02-21 07:34:22,944 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:34:22,944 - ERROR - Stderr: 
+2025-02-21 07:34:37,194 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:34:37,195 - ERROR - Stderr: 
+2025-02-21 07:34:46,528 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:34:46,528 - ERROR - Stderr: 
+2025-02-21 07:35:00,794 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:35:00,796 - ERROR - Stderr: 
+2025-02-21 07:35:10,095 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:35:10,095 - ERROR - Stderr: 
+2025-02-21 07:35:24,381 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:35:24,382 - ERROR - Stderr: 
+2025-02-21 07:35:33,683 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:35:33,683 - ERROR - Stderr: 
+2025-02-21 07:35:47,945 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:35:47,947 - ERROR - Stderr: 
+2025-02-21 07:35:57,263 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:35:57,265 - ERROR - Stderr: 
+2025-02-21 07:36:11,531 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:36:11,532 - ERROR - Stderr: 
+2025-02-21 07:36:20,846 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:36:20,846 - ERROR - Stderr: 
+2025-02-21 07:36:44,462 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:36:44,463 - ERROR - Stderr: 
+2025-02-21 07:36:46,346 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:36:46,348 - ERROR - Stderr: 
+2025-02-21 07:37:08,064 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:37:08,064 - ERROR - Stderr: 
+2025-02-21 07:37:09,942 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:37:09,945 - ERROR - Stderr: 
+2025-02-21 07:37:31,663 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:37:31,665 - ERROR - Stderr: 
+2025-02-21 07:37:33,514 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:37:33,514 - ERROR - Stderr: 
+2025-02-21 07:37:55,252 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:37:55,252 - ERROR - Stderr: 
+2025-02-21 07:37:57,097 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:37:57,097 - ERROR - Stderr: 
+2025-02-21 07:38:18,832 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:38:18,833 - ERROR - Stderr: 
+2025-02-21 07:38:20,699 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:38:20,699 - ERROR - Stderr: 
+2025-02-21 07:38:42,414 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:38:42,417 - ERROR - Stderr: 
+2025-02-21 07:38:44,300 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:38:44,301 - ERROR - Stderr: 
+2025-02-21 07:39:06,023 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:39:06,023 - ERROR - Stderr: 
+2025-02-21 07:39:07,881 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:39:07,881 - ERROR - Stderr: 
+2025-02-21 07:39:29,608 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:39:29,612 - ERROR - Stderr: 
+2025-02-21 07:39:31,467 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:39:31,467 - ERROR - Stderr: 
+2025-02-21 07:39:53,254 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:39:53,254 - ERROR - Stderr: 
+2025-02-21 07:39:55,067 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:39:55,067 - ERROR - Stderr: 
+2025-02-21 07:40:16,848 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:40:16,849 - ERROR - Stderr: 
+2025-02-21 07:40:18,634 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:40:18,637 - ERROR - Stderr: 
+2025-02-21 07:40:40,444 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:40:40,444 - ERROR - Stderr: 
+2025-02-21 07:40:42,227 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:40:42,227 - ERROR - Stderr: 
+2025-02-21 07:41:04,034 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:41:04,034 - ERROR - Stderr: 
+2025-02-21 07:41:05,817 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:41:05,818 - ERROR - Stderr: 
+2025-02-21 07:41:27,615 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:41:27,615 - ERROR - Stderr: 
+2025-02-21 07:41:51,182 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:41:51,183 - ERROR - Stderr: 
+2025-02-21 07:42:14,399 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:42:14,399 - ERROR - Stderr: 
+2025-02-21 07:42:14,767 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:42:14,767 - ERROR - Stderr: 
+2025-02-21 07:42:38,044 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:42:38,044 - ERROR - Stderr: 
+2025-02-21 07:42:38,374 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:42:38,374 - ERROR - Stderr: 
+2025-02-21 07:43:01,630 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:43:01,630 - ERROR - Stderr: 
+2025-02-21 07:43:01,958 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:43:01,959 - ERROR - Stderr: 
+2025-02-21 07:43:25,585 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:43:25,586 - ERROR - Stderr: 
+2025-02-21 07:43:39,451 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:43:39,451 - ERROR - Stderr: 
+2025-02-21 07:43:49,159 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:43:49,159 - ERROR - Stderr: 
+2025-02-21 07:44:12,745 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:44:12,748 - ERROR - Stderr: 
+2025-02-21 07:44:18,339 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 07:44:18,340 - ERROR - Stderr: 
+2025-02-21 09:01:39,082 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:01:39,082 - ERROR - Stderr: 
+2025-02-21 09:01:44,417 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:01:44,417 - ERROR - Stderr: 
+2025-02-21 09:02:02,716 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:02:02,720 - ERROR - Stderr: 
+2025-02-21 09:02:08,061 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:02:08,061 - ERROR - Stderr: 
+2025-02-21 09:02:26,362 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:02:26,362 - ERROR - Stderr: 
+2025-02-21 09:02:31,711 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:02:31,711 - ERROR - Stderr: 
+2025-02-21 09:02:50,024 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:02:50,029 - ERROR - Stderr: 
+2025-02-21 09:02:55,344 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:02:55,344 - ERROR - Stderr: 
+2025-02-21 09:03:13,709 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:03:13,709 - ERROR - Stderr: 
+2025-02-21 09:03:18,985 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:03:18,988 - ERROR - Stderr: 
+2025-02-21 09:03:37,559 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:03:37,560 - ERROR - Stderr: 
+2025-02-21 09:03:42,665 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:03:42,666 - ERROR - Stderr: 
+2025-02-21 09:04:01,286 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:04:01,286 - ERROR - Stderr: 
+2025-02-21 09:04:06,327 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:04:06,327 - ERROR - Stderr: 
+2025-02-21 09:04:24,927 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:04:24,929 - ERROR - Stderr: 
+2025-02-21 09:04:30,031 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:04:30,037 - ERROR - Stderr: 
+2025-02-21 09:04:48,624 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:04:48,628 - ERROR - Stderr: 
+2025-02-21 09:04:53,847 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:04:53,851 - ERROR - Stderr: 
+2025-02-21 09:05:12,291 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:05:12,291 - ERROR - Stderr: 
+2025-02-21 09:05:17,522 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:05:17,523 - ERROR - Stderr: 
+2025-02-21 09:05:35,926 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:05:35,931 - ERROR - Stderr: 
+2025-02-21 09:05:41,230 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:05:41,230 - ERROR - Stderr: 
+2025-02-21 09:05:59,586 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:05:59,586 - ERROR - Stderr: 
+2025-02-21 09:06:04,881 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:06:04,882 - ERROR - Stderr: 
+2025-02-21 09:06:23,279 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:06:23,281 - ERROR - Stderr: 
+2025-02-21 09:06:28,519 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:06:28,519 - ERROR - Stderr: 
+2025-02-21 09:06:46,923 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:06:46,923 - ERROR - Stderr: 
+2025-02-21 09:06:52,144 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:06:52,144 - ERROR - Stderr: 
+2025-02-21 09:07:10,606 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:07:10,606 - ERROR - Stderr: 
+2025-02-21 09:07:15,803 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:07:15,811 - ERROR - Stderr: 
+2025-02-21 09:07:34,325 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:07:34,325 - ERROR - Stderr: 
+2025-02-21 09:07:39,463 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:07:39,464 - ERROR - Stderr: 
+2025-02-21 09:07:57,965 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:07:57,968 - ERROR - Stderr: 
+2025-02-21 09:08:03,122 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:08:03,122 - ERROR - Stderr: 
+2025-02-21 09:08:21,634 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:08:21,634 - ERROR - Stderr: 
+2025-02-21 09:08:26,777 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:08:26,777 - ERROR - Stderr: 
+2025-02-21 09:08:45,291 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:08:45,291 - ERROR - Stderr: 
+2025-02-21 09:08:50,413 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:08:50,414 - ERROR - Stderr: 
+2025-02-21 09:09:08,946 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:09:08,952 - ERROR - Stderr: 
+2025-02-21 09:09:14,071 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:09:14,071 - ERROR - Stderr: 
+2025-02-21 09:09:34,451 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:09:34,455 - ERROR - Stderr: 
+2025-02-21 09:09:38,390 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:09:38,392 - ERROR - Stderr: 
+2025-02-21 09:09:58,191 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:09:58,194 - ERROR - Stderr: 
+2025-02-21 09:10:02,626 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:10:02,626 - ERROR - Stderr: 
+2025-02-21 09:10:21,883 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:10:21,884 - ERROR - Stderr: 
+2025-02-21 09:10:26,287 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:10:26,291 - ERROR - Stderr: 
+2025-02-21 09:10:45,527 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:10:45,527 - ERROR - Stderr: 
+2025-02-21 09:10:49,965 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:10:49,968 - ERROR - Stderr: 
+2025-02-21 09:11:09,236 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:11:09,240 - ERROR - Stderr: 
+2025-02-21 09:11:13,674 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:11:13,675 - ERROR - Stderr: 
+2025-02-21 09:11:33,083 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:11:33,083 - ERROR - Stderr: 
+2025-02-21 09:11:37,339 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:11:37,339 - ERROR - Stderr: 
+2025-02-21 09:11:56,842 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:11:56,842 - ERROR - Stderr: 
+2025-02-21 09:12:01,005 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:12:01,006 - ERROR - Stderr: 
+2025-02-21 09:12:20,485 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:12:20,485 - ERROR - Stderr: 
+2025-02-21 09:12:24,667 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:12:24,667 - ERROR - Stderr: 
+2025-02-21 09:12:44,127 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:12:44,127 - ERROR - Stderr: 
+2025-02-21 09:12:48,317 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:12:48,317 - ERROR - Stderr: 
+2025-02-21 09:13:07,776 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:13:07,776 - ERROR - Stderr: 
+2025-02-21 09:13:11,982 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:13:11,984 - ERROR - Stderr: 
+2025-02-21 09:13:31,425 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:13:31,425 - ERROR - Stderr: 
+2025-02-21 09:13:35,680 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:13:35,680 - ERROR - Stderr: 
+2025-02-21 09:13:55,077 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:13:55,077 - ERROR - Stderr: 
+2025-02-21 09:13:59,314 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:13:59,314 - ERROR - Stderr: 
+2025-02-21 09:14:18,726 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:14:18,726 - ERROR - Stderr: 
+2025-02-21 09:14:22,988 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:14:22,988 - ERROR - Stderr: 
+2025-02-21 09:14:42,357 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:14:42,362 - ERROR - Stderr: 
+2025-02-21 09:14:46,620 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:14:46,620 - ERROR - Stderr: 
+2025-02-21 09:15:06,017 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:15:06,017 - ERROR - Stderr: 
+2025-02-21 09:15:10,293 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:15:10,297 - ERROR - Stderr: 
+2025-02-21 09:15:29,683 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:15:29,683 - ERROR - Stderr: 
+2025-02-21 09:15:33,951 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:15:33,951 - ERROR - Stderr: 
+2025-02-21 09:15:53,553 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:15:53,556 - ERROR - Stderr: 
+2025-02-21 09:15:54,265 - ERROR - Curl command failed. Exit code: 3221225786
+2025-02-21 09:15:54,265 - ERROR - Stderr: 
+2025-02-21 09:18:43,701 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:18:43,701 - ERROR - Stderr: 
+2025-02-21 09:18:55,771 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:18:55,771 - ERROR - Stderr: 
+2025-02-21 09:19:07,369 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:19:07,369 - ERROR - Stderr: 
+2025-02-21 09:19:19,461 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:19:19,462 - ERROR - Stderr: 
+2025-02-21 09:19:31,043 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:19:31,045 - ERROR - Stderr: 
+2025-02-21 09:19:43,123 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:19:43,125 - ERROR - Stderr: 
+2025-02-21 09:19:54,673 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:19:54,674 - ERROR - Stderr: 
+2025-02-21 09:20:06,759 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:20:06,759 - ERROR - Stderr: 
+2025-02-21 09:20:18,372 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:20:18,372 - ERROR - Stderr: 
+2025-02-21 09:20:30,415 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:20:30,415 - ERROR - Stderr: 
+2025-02-21 09:20:42,036 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:20:42,036 - ERROR - Stderr: 
+2025-02-21 09:20:54,077 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:20:54,080 - ERROR - Stderr: 
+2025-02-21 09:21:05,684 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:21:05,686 - ERROR - Stderr: 
+2025-02-21 09:21:17,752 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:21:17,752 - ERROR - Stderr: 
+2025-02-21 09:21:29,358 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:21:29,358 - ERROR - Stderr: 
+2025-02-21 09:21:41,415 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:21:41,415 - ERROR - Stderr: 
+2025-02-21 09:21:53,016 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:21:53,017 - ERROR - Stderr: 
+2025-02-21 09:22:05,116 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:22:05,121 - ERROR - Stderr: 
+2025-02-21 09:22:16,810 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:22:16,815 - ERROR - Stderr: 
+2025-02-21 09:22:28,766 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:22:28,766 - ERROR - Stderr: 
+2025-02-21 09:22:40,466 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:22:40,468 - ERROR - Stderr: 
+2025-02-21 09:22:52,459 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:22:52,462 - ERROR - Stderr: 
+2025-02-21 09:23:04,146 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:23:04,146 - ERROR - Stderr: 
+2025-02-21 09:23:16,130 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:23:16,130 - ERROR - Stderr: 
+2025-02-21 09:23:27,792 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:23:27,792 - ERROR - Stderr: 
+2025-02-21 09:23:39,802 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:23:39,803 - ERROR - Stderr: 
+2025-02-21 09:23:51,436 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:23:51,436 - ERROR - Stderr: 
+2025-02-21 09:24:03,442 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:24:03,445 - ERROR - Stderr: 
+2025-02-21 09:24:15,098 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:24:15,100 - ERROR - Stderr: 
+2025-02-21 09:24:27,197 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:24:27,197 - ERROR - Stderr: 
+2025-02-21 09:24:38,770 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:24:38,770 - ERROR - Stderr: 
+2025-02-21 09:24:50,848 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:24:50,850 - ERROR - Stderr: 
+2025-02-21 09:25:02,407 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:25:02,408 - ERROR - Stderr: 
+2025-02-21 09:25:14,507 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:25:14,511 - ERROR - Stderr: 
+2025-02-21 09:25:26,077 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:25:26,085 - ERROR - Stderr: 
+2025-02-21 09:25:38,166 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:25:38,167 - ERROR - Stderr: 
+2025-02-21 09:25:49,735 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:25:49,735 - ERROR - Stderr: 
+2025-02-21 09:26:01,822 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:26:01,822 - ERROR - Stderr: 
+2025-02-21 09:26:13,420 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:26:13,423 - ERROR - Stderr: 
+2025-02-21 09:26:25,481 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:26:25,483 - ERROR - Stderr: 
+2025-02-21 09:26:37,052 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:26:37,054 - ERROR - Stderr: 
+2025-02-21 09:26:49,129 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:26:49,129 - ERROR - Stderr: 
+2025-02-21 09:27:00,704 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:27:00,707 - ERROR - Stderr: 
+2025-02-21 09:27:12,912 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:27:12,917 - ERROR - Stderr: 
+2025-02-21 09:27:24,370 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:27:24,371 - ERROR - Stderr: 
+2025-02-21 09:27:36,567 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:27:36,568 - ERROR - Stderr: 
+2025-02-21 09:27:48,020 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:27:48,020 - ERROR - Stderr: 
+2025-02-21 09:28:00,219 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:28:00,219 - ERROR - Stderr: 
+2025-02-21 09:28:11,664 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:28:11,664 - ERROR - Stderr: 
+2025-02-21 09:28:23,897 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:28:23,897 - ERROR - Stderr: 
+2025-02-21 09:28:35,331 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:28:35,332 - ERROR - Stderr: 
+2025-02-21 09:28:47,570 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:28:47,570 - ERROR - Stderr: 
+2025-02-21 09:28:59,005 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:28:59,007 - ERROR - Stderr: 
+2025-02-21 09:29:11,223 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:29:11,223 - ERROR - Stderr: 
+2025-02-21 09:29:22,664 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:29:22,670 - ERROR - Stderr: 
+2025-02-21 09:29:34,912 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:29:34,913 - ERROR - Stderr: 
+2025-02-21 09:29:46,327 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:29:46,331 - ERROR - Stderr: 
+2025-02-21 09:29:58,617 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:29:58,618 - ERROR - Stderr: 
+2025-02-21 09:30:10,055 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:30:10,060 - ERROR - Stderr: 
+2025-02-21 09:30:22,283 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:30:22,283 - ERROR - Stderr: 
+2025-02-21 09:30:33,710 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:30:33,710 - ERROR - Stderr: 
+2025-02-21 09:30:45,965 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:30:45,965 - ERROR - Stderr: 
+2025-02-21 09:30:57,370 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:30:57,370 - ERROR - Stderr: 
+2025-02-21 09:31:42,488 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:31:42,489 - ERROR - Stderr: 
+2025-02-21 09:31:52,787 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:31:52,787 - ERROR - Stderr: 
+2025-02-21 09:32:06,138 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:32:06,139 - ERROR - Stderr: 
+2025-02-21 09:32:16,465 - ERROR - Curl command failed. Exit code: 28
+2025-02-21 09:32:16,466 - ERROR - Stderr: 
+2025-02-21 10:57:01,850 - ERROR - Curl command failed. Exit code: 7
+2025-02-21 10:57:01,851 - ERROR - Stderr: 
+2025-02-21 10:57:01,875 - ERROR - Curl command failed. Exit code: 7
+2025-02-21 10:57:01,877 - ERROR - Stderr: 

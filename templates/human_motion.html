@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel = "stylesheet" href = "{{url_for('static', filename='webpage_style.css')}}">
+	<script src = "{{url_for('static', filename='script.js')}}"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script><!--generate excel file-->
+</head>
+<body>
+	<h1>Human Motion Sensor</h1>
+	<input id = "input" type = "text" placeholder = "Input charger number..." autocomplete="off">
+	<button id = "button" onclick = "printChargerNum()">search</button>
+	<p id = "output" class = "textStyle"></p>
+	<div class="container">
+		<table id="data" class="dataShow datatable">
+			<thead>
+				<tr>
+					<th>Record Time</th>
+					<th>Power</th>
+					<th>HumanActivity</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td id="time">{{time}}</td>
+					<td id="power">{{power}}</td>
+					<td id="human">{{ispresence}}</td>
+				</tr>
+			</tbody>
+		</table>
+		<table class="switchtable">
+			<tr>
+				<td><p>OFF</p></td>
+				<td><label class = "switch">
+					<input type = "checkbox" id="toggleSwitch" {% if power %}checked{% endif %}>
+					<span class = "slider"></span>
+					</label>
+				</td>
+				<td><p>ON</p></td>
+			</tr>
+		</table>
+	</div>
+	<p id = "warning" class = "dataShow"></p>
+	<button onclick = "exportToExcel(data)">Generate Log</button>
+	<button onclick = "document.location='home.html'" target = "mainframe" style="float: right;">Home</button>
+	<script>
+        const data = [];
+		function printChargerNum(){
+			const chargerNum = document.getElementById("input").value.trim();
+			const outputNum = document.getElementById("output");
+			const outputData = document.getElementById("data");
+			const checkPower = ("On");
+			const checkHuman = ("Yes");
+			const chargerNumFormat = /^CDJ\d{6}$/;/*charger number format, must start with CDJ follow by six digit number*/
+			if(chargerNum === ""){/*check if input is empty*/
+				outputNum.innerHTML = "Please input charger number."
+				outputNum.style.backgroundColor = "red";
+				clearTable();
+                return;
+			}else if(!chargerNumFormat.test(chargerNum)){/*check if charger number satisfies format*/
+				outputNum.innerHTML = "Charger number must start with 'CDJ' follow by a six digit number."
+				outputNum.style.backgroundColor = "#f0a23c";
+				clearTable();
+                return;
+			}else{
+				outputNum.innerHTML = "Now controlling charger: " + chargerNum;
+				outputNum.style.backgroundColor = "#a6f263";
+			}
+			document.getElementById("charger-number").textContent = chargerNum;
+            document.getElementById("power").textContent = checkPower;
+            document.getElementById("human").textContent = checkHuman;
+			const dataDisplay = {
+                ChargerNo: chargerNum,
+                Power: checkPower,
+                HumanActivity: checkHuman
+            };
+            if(!data.find(entry => entry.ChargerNo === chargerNum)){
+                data.push(dataDisplay);
+            }
+			document.getElementById("input").value = '';/*set input to empty after button clicked*/
+		}
+		function clearTable(){
+            document.getElementById("charger-number").textContent = "";
+            document.getElementById("power").textContent = "";
+            document.getElementById("human").textContent = "";
+        }
+        function exportToExcel(data){
+			const warningData = document.getElementById("warning");
+			const validData = data.filter(entry => entry.ChargerNo && /^CDJ\d{6}$/.test(entry.ChargerNo));/*only allow data with valid charger number been input*/
+			if(validData.length === 0){
+				warningData.textContent =("No valid charger data to export.");
+				warningData.style.backgroundColor = "red";
+				return;
+			}else{
+				warningData.textContent = "";
+				warningData.style.backgroundColor = "transparent";
+				const workbook = XLSX.utils.book_new();
+				const worksheet = XLSX.utils.json_to_sheet(data);
+				XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
+				XLSX.writeFile(workbook, "humanmotionLog.xlsx");
+			}
+        }
+	document.getElementById("toggleSwitch").addEventListener("change", function() {
+		if (this.checked) {
+			fetch("/toggleHuman_motionTrue", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({ status: "true" }) }
+			).then(response => {
+				if (response.ok) {
+					console.log("Toggle switched to true"); }
+				else {
+					console.error("Failed to send request"); } }).catch(error => {console.error("Error:", error); }); }
+		else {
+			fetch("/toggleHuman_motionFalse", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({ status: "false" }) }
+			).then(response => {
+				if (response.ok) {
+					console.log("Toggle switched to false"); }
+				else {
+					console.error("Failed to send request"); } }).catch(error => { console.error("Error:", error); }); } });
+    </script>
+</body>
+</html>
