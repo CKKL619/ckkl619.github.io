@@ -42,18 +42,20 @@
 		</table>
 	</div>
 	<h2 style ="text-align: center">Search History</h2>
-    <table id="history" class="historytable">
-        <thead>
-            <tr>
-                <th>Charger Number</th>
-                <th>Power</th>
-				<th>Record Time</th>
-                <th>Water Leak</th>
-            </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
+	<div style="border-radius: 4px; background-color: #e6e6e6; display: flex;">
+		<table id="history" class="historytable">
+			<thead>
+				<tr>
+					<th>Charger Number</th>
+					<th>Power</th>
+					<th>Record Time</th>
+					<th>Water Leak</th>
+				</tr>
+			</thead>
+			<tbody>
+			</tbody>
+		</table>
+	</div>
 	<p id = "warning" class = "dataShow"></p>
 	<button onclick = "exportToExcel(data)">Generate Log</button>
 	<button onclick = "document.location='home.html'" target = "mainframe" style="float: right;">Home</button>
