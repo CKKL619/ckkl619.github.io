@@ -15,15 +15,17 @@
 			<thead>
 				<tr>
 					<th>Charger Number</th>
+					<th>Power</th>
 					<th>Charging Status</th>
 					<th>Charging Time</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
-					<td id="chargerid">{{chargerid}}</td>
+					<td id="charger-number"></td>
+					<td id="power">{{power}}</td>
 					<td id="status">{{chargingStatus}}</td>
-					<td id="energy">{{chargingTime}}</td>
+					<td id="time">{{chargingTime}}</td>
 				</tr>
 			</tbody>
 		</table>
@@ -31,7 +33,7 @@
 			<tr>
 				<td><p>OFF</p></td>
 				<td><label class = "switch">
-					<input type = "checkbox" id="toggleSwitch" {% if power %}checked{% endif %}>
+					<input type = "checkbox">
 					<span class = "slider"></span>
 					</label>
 				</td>
@@ -39,18 +41,32 @@
 			</tr>
 		</table>
 	</div>
+	<h2 style ="text-align: center">Search History</h2>
+    <table id="history" class="historytable">
+        <thead>
+            <tr>
+                <th>Charger Number</th>
+                <th>Power</th>
+                <th>Charging Status</th>
+				<th>Charging Time</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+	</table>
 	<p id = "warning" class = "dataShow"></p>
 	<button onclick = "exportToExcel(data)">Generate Log</button>
 	<button onclick = "document.location='home.html'" target = "mainframe" style="float: right;">Home</button>
 	<script>
         const data = [];
+		const maxEntries = 5;
 		function printChargerNum(){
 			const chargerNum = document.getElementById("input").value.trim();
 			const outputNum = document.getElementById("output");
 			const outputData = document.getElementById("data");
 			const checkPower = ("On");
 			const checkStatus = ("Charging");
-			const checkEnergy = ("100v");
+			const checkTime = ("100s");
 			const chargerNumFormat = /^CDJ\d{6}$/;/*charger number format, must start with CDJ follow by six digit number*/
 			if(chargerNum === ""){/*check if input is empty*/
 				outputNum.innerHTML = "Please input charger number."
@@ -69,15 +85,16 @@
 			document.getElementById("charger-number").textContent = chargerNum;
             document.getElementById("power").textContent = checkPower;
 			document.getElementById("status").textContent = checkStatus;
-			document.getElementById("energy").textContent = checkEnergy;
+			document.getElementById("time").textContent = checkTime;
 			const dataDisplay = {
                 ChargerNo: chargerNum,
                 Power: checkPower,
 				Status: checkStatus,
-				Energy: checkEnergy
+				Time: checkTime
             };
             if(!data.find(entry => entry.ChargerNo === chargerNum)){
                 data.push(dataDisplay);
+				updateHistoryRecord(); /*update history after new entry*/
             }
 			document.getElementById("input").value = '';/*set input to empty after button clicked*/
 		}
@@ -85,7 +102,21 @@
             document.getElementById("charger-number").textContent = "";
             document.getElementById("power").textContent = "";
 			document.getElementById("status").textContent = "";
-			document.getElementById("energy").textContent = "";
+			document.getElementById("time").textContent = "";
+        }
+		function updateHistoryRecord() {
+            const historyRecord = document.getElementById("history").querySelector("tbody");
+            historyRecord.innerHTML = ""; /*clear current record*/
+            const history = data.slice(-maxEntries); /*get last maxEntries*/
+            history.forEach(entry => {
+                const row = document.createElement("tr");
+                row.innerHTML =
+                    '<td>' + entry.ChargerNo + '</td>' +
+                    '<td>' + entry.Power + '</td>' +
+                    '<td>' + entry.Status + '</td>' +
+                    '<td>' + entry.Time + '</td>';
+                historyRecord.appendChild(row); /*append new row*/
+            });
         }
         function exportToExcel(data){
 			const warningData = document.getElementById("warning");
@@ -98,7 +129,7 @@
 				warningData.textContent = "";
 				warningData.style.backgroundColor = "transparent";
 				const workbook = XLSX.utils.book_new();
-				const worksheet = XLSX.utils.json_to_sheet(data);
+				const worksheet = XLSX.utils.json_to_sheet(validData);
 				XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
 				XLSX.writeFile(workbook, "chargerLog.xlsx");
 			}
