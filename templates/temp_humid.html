@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel = "stylesheet" href = "{{url_for('static', filename='webpage_style.css')}}">
+	<link rel = "stylesheet" href = "../static/webpage_style.css">
 	<script src = "{{url_for('static', filename='script.js')}}"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script><!--generate excel file-->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script><!--generate data graph-->
 </head>
 <body>
 	<h1>Temperature/Humidity Sensor</h1>
@@ -44,10 +45,25 @@
             </tr>
         </table>
     </div>
-	<h2 style ="text-align: center">Search History</h2>
 	<div style="border-radius: 4px; background-color: #e6e6e6; display: flex;">
 		<table id="history" class="historytable">
 			<thead>
+				<tr>
+					<th colspan="5" style="border-color: transparent;">
+						<label for="historyNumber">Select number of records for display:</label>
+						<select id="historyNumber">
+						  <option>5</option>
+						  <option>10</option>
+						  <option>15</option>
+						  <option>20</option>
+						  <option>25</option>
+						  <option>30</option>
+						</select>
+					</th>
+				</tr>
+				<tr>
+					<th colspan="5" style="border-color: red; font-weight: 900;">Search History</th>
+				</tr>
 				<tr>
 					<th>Charger Number</th>
 					<th>Power</th>
@@ -57,15 +73,104 @@
 				</tr>
 			</thead>
 			<tbody>
+				<tr>
+					<td colspan="5" style="border: none;"><p id="warning" class="dataShow">Search to add history record</p></td>
+				</tr>
 			</tbody>
+			<tr>
+				<td style="border: none;">
+					<button onclick = "exportToExcel(data)">Download History</button>
+				</td>
+			</tr>
 		</table>
 	</div>
-    <p id="warning" class="dataShow"></p>
-    <button onclick="exportToExcel(data)">Generate Log</button>
-    <button onclick="document.location='home.html'" target="mainframe" style="float: right;">Home</button>
+	<div style="border-radius: 4px; background-color: #e6e6e6; display: flex;">
+		<table id = "dataGraph" class="historytable">
+			<thead>
+				<tr>
+					<th colspan="5" style="border-color: red; font-weight: 900;">Data Graph</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td style="border-color: transparent";>
+						<canvas id="temperatureChart"></canvas>
+					</td>
+				</tr>
+				<tr>
+					<td style="border-color: transparent";>
+						<canvas id="humidityChart"></canvas>
+					</td>
+				</tr>
+			</tbody>
+			<tr>
+				<td style="border: none;">
+					<button onclick = "exportToExcel(graph)">Download Graph</button>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<p id = "warning" class = "dataShow"></p><!--keep log button functional-->
+	<button onclick="document.location='home.html'" target="mainframe" style="float: right;">Home</button>
     <script>
+		const tempChart = document.getElementById('temperatureChart');
+        const temperatureChart = new Chart(tempChart,{
+            type: 'line',
+            data: {
+                labels: ['00','01','02','03','04','05','06','07','08','09','10','11',
+				'12','13','14','15','16','17','18','19','20','21','22','23'],
+                datasets: [{
+                    label: 'Temperature (°C)', data: [25, 18, 21, 24, 26, 28, 30, 6, 4.5],
+                    borderColor: '#1f6dff', backgroundColor: 'transparent',
+                    tension: 0.1}]
+            },
+			options: {
+				responsive: true,
+				maintainAspectRatio: false,/*allow chart to take full height of container*/
+					scales: {
+						x: {
+							title: {
+								display: true, text: 'Time (hour)'}
+						},
+						y: {
+							title: {
+								display: true, text: 'Temperature (°C)'},
+							beginAtZero: true}
+					}
+			}
+		});
+		const humidChart = document.getElementById('humidityChart');
+        const humidityChart = new Chart(humidChart,{
+            type: 'line',
+            data: {
+                labels: ['00','01','02','03','04','05','06','07','08','09','10','11',
+				'12','13','14','15','16','17','18','19','20','21','22','23'],
+                datasets: [{
+                    label: 'Humidity (%)', data: [65, 60, 70, 55, 75, 72, 61, 76, 45],
+                    borderColor: '#1f6dff', backgroundColor: 'transparent',
+                    tension: 0.1}]
+            },
+			options: {
+				responsive: true,
+				maintainAspectRatio: false,/*allow chart to take full height of container*/
+					scales: {
+						x: {
+							title: {
+								display: true, text: 'Time (hour)'}
+						},
+						y: {
+							title: {
+								display: true, text: 'HUmidity (%)'},
+							beginAtZero: true}
+					}
+			}
+		});
         const data = [];
-		const maxEntries = 5;
+		let maxEntries = document.getElementById("historyNumber").value.trim();
+		document.getElementById("historyNumber").addEventListener("change", function() {
+			maxEntries = this.value.trim();
+			updateHistoryRecord();
+		});
 		function printChargerNum(){
 			const chargerNum = document.getElementById("input").value.trim();
 			const outputNum = document.getElementById("output");
