@@ -1,3 +1,4 @@
 Flask==3.1.0
 Flask-SocketIO==5.4.0
+MongoDB==8.0.0
 pymongo==4.10.0
