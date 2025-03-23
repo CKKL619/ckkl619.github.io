@@ -4,3 +4,5 @@ MongoDB==8.0.0
 pymongo==4.10.0
 requests==2.32.3
 JSON==2.9.1
+bson==0.5.11
+requests==2.32.3
