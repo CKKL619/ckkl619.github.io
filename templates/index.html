@@ -2,19 +2,18 @@
 <head>
 	<title>Homepage</title>
 	<link rel = "stylesheet" href = "{{url_for('static', filename='index_style.css')}}">
-	<script src = "{{url_for('static', filename = 'index_script.js')}}"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
 	<div id="contentarea">
 		<div id="column1">
 			<div id="header">Charger Info</div>
-			<a href="new_home.html" target="mainframe">🏠Home</a>
-			<a href="new_charger.html" target="mainframe">⚡Charger</a>
-			<a href="new_human_motion.html" target="mainframe">🙎‍Human Motion</a>
-			<a href="new_temp_humid.html" target="mainframe">🌡️Temperature/Humidity</a>
-			<a href="new_water.html" target="mainframe">💧Water Leakage</a>
-			<a href="new_login.html">🚪Logout</a>
+			<a href="home.html" target="mainframe">🏠Home</a>
+			<a href="charger.html" target="mainframe">⚡Charger</a>
+			<a href="human_motion.html" target="mainframe">🙎‍Human Motion</a>
+			<a href="temp_humid.html" target="mainframe">🌡️Temperature/Humidity</a>
+			<a href="water.html" target="mainframe">💧Water Leakage</a>
+			<a href="login.html">🚪Logout</a>
 		</div>
 		<div id="column2">
 			<iframe id="iFrame" name="mainframe" src="new_home.html"
@@ -35,6 +34,15 @@
 		if (document.referrer === ""){/*check if url is input from textbar*/
 			window.location.href = "login.html";
 		}
+	function resizeIFrameToFitContent(iFrame) {
+			iFrame.width = iFrame.contentWindow.document.body.scrollWidth;
+			iFrame.height = iFrame.contentWindow.document.body.scrollHeight;
+		}
+
+	window.addEventListener('DOMContentLoaded', function() {
+			var iFrame = document.getElementById('iFrame');
+			resizeIFrameToFitContent(iFrame);
+		});
     </script>
 </body>
 </html>
