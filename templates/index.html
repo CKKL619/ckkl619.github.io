@@ -6,28 +6,24 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
-	<h1 id ="header">Login success, welcome</h1>
-	<div id="contentarea" class="center">
+	<div id="contentarea">
 		<div id="column1">
-			<div id="header2">Charger Info</div>
-			<ul id="nav">
-				<li><a href="home.html" target="mainframe" id="homeIcon">Home</a></li>
-				<li><a href="charger.html" target="mainframe" id="chargeIcon">Charger</a></li>
-				<li><a href="human_motion.html" target="mainframe" id="humanIcon">Human Motion</a></li>
-				<li><a href="temp_humid.html" target="mainframe" id="tempIcon">Temperature/Humidity</a></li>
-				<li><a href="water.html" target="mainframe" id="waterIcon">Water Leakage</a></li>
-				<li onclick="logoutConfirm()" id="logoutIcon">Logout</li>
-			</ul>
+			<div id="header">Charger Info</div>
+			<a href="new_home.html" target="mainframe">🏠Home</a>
+			<a href="new_charger.html" target="mainframe">⚡Charger</a>
+			<a href="new_human_motion.html" target="mainframe">🙎‍Human Motion</a>
+			<a href="new_temp_humid.html" target="mainframe">🌡️Temperature/Humidity</a>
+			<a href="new_water.html" target="mainframe">💧Water Leakage</a>
+			<a href="new_login.html">🚪Logout</a>
 		</div>
 		<div id="column2">
-			<iframe id="iFrame" name="mainframe" src="home.html"
+			<iframe id="iFrame" name="mainframe" src="new_home.html"
 				frameborder="0" scrolling="yes" onload="resizeIFrameToFitContent(this);">
 			</iframe>
 		</div>
 		<div class="clearfloat">
 			<!-- purposely added to clear float -->
 		</div>
-	</div>
 	<script>
         const links = document.querySelectorAll('link');/*icons for charger and IoTs*/
         links.forEach(link => {
