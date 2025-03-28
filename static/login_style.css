@@ -1,6 +1,8 @@
 h1{text-align: center;}
 
-body{font-family: Arial, sans-serif; background-color: #f1f3f4; 
+div{background-color: #ffd775; padding: 10px; border-radius: 10px;}
+
+body{font-family: Verdana, sans-serif; background-color: #424242; 
 	margin: 0; padding: 100px;}
 
 #loginForm{background-color: white; padding: 20px; border-radius: 10px;
@@ -10,11 +12,12 @@ body{font-family: Arial, sans-serif; background-color: #f1f3f4;
 input[type="text"], input[type="password"] {
     width:90%; padding: 10px; margin: 5px 0;
     border: 1px solid #ccc; border-radius: 6px;
-	border-color: #1f6dff; outline-color: #58f7fc;}
+	border-color: #ffa700; outline-color: #f7ff76;
+	font-family: "Lucida Console", "Courier New", monospace;}
 		
-button{background-color: #6ea5ff; color: white; padding: 10px; 
-	border: none; border-radius: 4px; cursor: pointer; width: 100%;}
+button{background-color: #fccb47; color: white; border: none; padding: 10px;
+    border-radius: 10px; cursor: pointer; transition: background 0.2s; width: 100%;}
 			
-button:hover{color: #fcc058; background-color: #1369f2;}
+button:hover{color: #fffb00; background-color: #ffb704;}
 
 #message{text-align: center; margin-top: 10px; color: red; font-style: bold;}
