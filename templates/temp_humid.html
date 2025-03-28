@@ -9,109 +9,115 @@
 <body>
 	<h1>Temperature/Humidity Sensor</h1>
 	<input id = "input" type = "text" placeholder = "Input charger number..." autocomplete="off">
-	<button id = "button" onclick = "printChargerNum()">search</button>
-	<p id = "output" class = "textStyle"></p>
-	<div class="container">
-		<table id="data" class="dataShow datatable">
-			<thead>
-				<tr>
-					<th>Charger Number</th>
-					<th>Power</th>
-					<th>Record Time</th>
-					<th>Temperature</th>
-					<th>Humidity</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td id="charger-number"></td>
-					<td id="power">{{power}}</td>
-					<td id="time">{{time}}</td>
-					<td id="temperature">{{temperature}}</td>
-					<td id="humidity">{{humidity}}</td>
-				</tr>
-			</tbody>
-		</table>
-        <table class="switchtable">
-	<tr>
-		<th colspan="3">Charger Power</th>
-	</tr>
-            <tr>
-                <td><p>OFF</p></td>
-                <td>
-                    <label class="switch">
-                        <input type="checkbox" id="toggleSwitch">
-                        <span class="slider"></span>
-                    </label>
-                </td>
-                <td><p>ON</p></td>
-            </tr>
-        </table>
-    </div>
-	<div style="border-radius: 4px; background-color: #e6e6e6; display: flex;">
-		<table id="history" class="historytable">
-			<thead>
-				<tr>
-					<th colspan="5" style="border-color: transparent;">
-						<label for="historyNumber">Select number of records for display:</label>
-						<select id="historyNumber">
-						  <option>5</option>
-						  <option>10</option>
-						  <option>15</option>
-						  <option>20</option>
-						  <option>25</option>
-						  <option>30</option>
-						</select>
-					</th>
-				</tr>
-				<tr>
-					<th colspan="5" style="border-color: red; font-weight: 900;">Search History</th>
-				</tr>
-				<tr>
-					<th>Charger Number</th>
-					<th>Power</th>
-					<th>Record Time</th>
-					<th>Temperature</th>
-					<th>Humidity</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td colspan="5" style="border: none;"><p id="warning" class="dataShow">Search to add history record</p></td>
-				</tr>
-			</tbody>
-			<tr>
-				<td style="border: none;">
-					<button onclick = "exportToExcel(data)">Download History</button>
-				</td>
-			</tr>
-		</table>
-	</div>
-	<div style="border-radius: 4px; background-color: #e6e6e6; display: flex;">
-		<table id = "dataGraph" class="historytable">
-			<thead>
-				<tr>
-					<th colspan="5" style="border-color: red; font-weight: 900;">Data Graph</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td style="border-color: transparent";>
-						<canvas id="temperatureChart"></canvas>
-					</td>
-				</tr>
-				<tr>
-					<td style="border-color: transparent";>
-						<canvas id="humidityChart"></canvas>
-					</td>
-				</tr>
-			</tbody>
-			<tr>
-				<td style="border: none;">
-					<button onclick = "exportToExcel(graph)">Download Graph</button>
-				</td>
-			</tr>
-		</table>
+	<button id = "button" onclick = "printChargerNum()">Search</button>
+	<p id = "output"></p>
+	<div class="row">
+		<div class="column">
+			<div class="container1">
+				<table id="data">
+					<thead>
+						<tr>
+							<th class="th1">Charger Number</th>
+							<th class="th2">Power</th>
+							<th class="th1">Record Time</th>
+							<th class="th2">Temperature</th>
+							<th class="th1">Humidity</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="datarow">
+							<td id="charger-number"></td>
+							<td id="power">{{power}}</td>
+							<td id="time">{{time}}</td>
+							<td id="temperature">{{temperature}}</td>
+							<td id="humidity">{{humidity}}</td>
+						</tr>
+					</tbody>
+				</table>
+				<table class="switchtable">
+					<tr>
+						<th class="th1" colspan="3">Charger Power</th>
+					</tr>
+					<tr>
+						<td><p>OFF</p></td>
+						<td>
+							<label class="switch">
+								<input type="checkbox" id="toggleSwitch">
+								<span class="slider"></span>
+							</label>
+						</td>
+						<td><p>ON</p></td>
+					</tr>
+				</table>
+			</div>
+			<div class="container2">
+				<table id="history">
+					<thead>
+						<tr>
+							<th class="th1" colspan="5" style="font-weight: 900;">Search History</th>
+						</tr>
+						<tr>
+							<td colspan="5">
+								<label for="historyNumber">Select number of records for display:</label>
+								<select id="historyNumber">
+								  <option>5</option>
+								  <option>10</option>
+								  <option>15</option>
+								  <option>20</option>
+								  <option>25</option>
+								  <option>30</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<th class="th1">Charger Number</th>
+							<th class="th2">Power</th>
+							<th class="th1">Record Time</th>
+							<th class="th2">Temperature</th>
+							<th class="th1">Humidity</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="datarow">
+							<td colspan="5"><p id="warning" class="dataShow">Search to add history record</p></td>
+						</tr>
+					</tbody>
+					<tr>
+						<td colspan="5">
+							<button onclick = "exportToExcel(data)">Download History</button>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div class="column">
+			<div class="container3">
+				<table id = "dataGraph">
+					<thead>
+						<tr>
+							<th class="th1" colspan="5" style="font-weight: 900;">Data Graph</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>
+								<canvas id="temperatureChart"></canvas>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<canvas id="humidityChart"></canvas>
+							</td>
+						</tr>
+					</tbody>
+						<tr>
+							<td>
+								<button onclick = "exportToExcel(graph)">Download Graph</button>
+							</td>
+						</tr>
+				</table>
+			</div>
+		</div>
 	</div>
 	<p id = "warning" class = "dataShow"></p><!--keep log button functional-->
 	<button onclick="document.location='home.html'" target="mainframe" style="float: right;">Home</button>
@@ -231,9 +237,10 @@
                 row.innerHTML =
                     '<td>' + entry.ChargerNo + '</td>' +
                     '<td>' + entry.Power + '</td>' +
-					'<td>' + entry.Time + '</td>' +
+			'<td>' + entry.Time + '</td>' +
                     '<td>' + entry.Temperature + '</td>' +
                     '<td>' + entry.Humidity + '</td>';
+		row.style.backgroundColor = "#fff2cf";
                 historyRecord.appendChild(row); /*append new row*/
             });
         }
