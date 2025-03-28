@@ -1,11 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel = "stylesheet" href = "{{url_for('static', filename='webpage_style.css')}}">
-	<style>
-		#manual{display: none;}
-		#chargerinfo{display: block;}
-	</style>
+	<link rel = "stylesheet" href = "{{url_for('static', filename='home_style.css')}}">
 	<script>
         function displayLoginTime() {
             const now = new Date();
@@ -20,44 +16,35 @@
             };
             const currentTime= now.toLocaleString('en-US', options);
             document.getElementById('loginTime').textContent = `Your login time: ${currentTime}`;
+			const previousLoginTime = localStorage.getItem('previousLoginTime');
+            if(previousLoginTime){
+                document.getElementById('previousLoginTime').textContent = `Previous login time: ${previousLoginTime}`;
+            }
+            localStorage.setItem('previousLoginTime', currentTime);
         }
         window.onload = displayLoginTime;
-		function switchTextToCharger(){
-			const textCharger = document.getElementById("chargerinfo");
-			const textManual = document.getElementById("manual");
-            textCharger.style.display = "block";/*show text*/
-			textManual.style.display = "none"; /*hide text*/
-        }
-		function switchTextToManual(){
-			const textCharger = document.getElementById("chargerinfo");
-			const textManual = document.getElementById("manual");
-            textManual.style.display = "block";/*show text*/
-			textCharger.style.display = "none";/*hide text*/
-        }
     </script>
 </head>
 <body>
 	<h1>Home</h1>
-	<h3 id="loginTime"></h3>
-	<button onclick="switchTextToCharger()">All Charger</button>
-	<button onclick="switchTextToManual()">User Manual</button>
-	<p id = "manual" class="textStyle" style =background-color:white>Click <mark>"Charger"</mark> to check electricity supply, <mark>"Human Motion"</mark> 
-	to check human motion sensor,<mark>"Temperature/Humidity"</mark> to check temperature and humidity sensor, 
-	and <mark>"Water Leakage"</mark> to check water sensor. Click <mark>"Logout"</mark> when tasks are completed.</p>
-	<p id = "chargerinfo" class="textStyle" style =background-color:white>Number of charger online:<br/>Number of charger offline:</p>
-	<table id = "responsive">
-		<tr>
-			<td><a href="charger.html" target="mainframe" class="shortcut"><img src="Charger.jpg" alt="Charger" 
-			style="width:200px;height:200px;"></a></td>
-			<td><a href="human_motion.html" target="mainframe" class="shortcut"><img src="Human_motion.jpg" alt="Human Motion" 
-			style="width:200px;height:200px;"></a></td>
-		</tr>
-		<tr>
-			<td><a href="temp_humid.html" target="mainframe" class="shortcut"><img src="Temp_humid.jpg" alt="Temperature/Humidity" 
-			style="width:200px;height:200px;"></a></td>
-			<td><a href="water.html" target="mainframe" class="shortcut"><img src="Water_leak.jpg" alt="Water Leakage" 
-			style="width:200px;height:200px;"></a></td>
-		</tr>
-	</table>
+	<h2>Login success, welcome</h2>
+	<div id="Time">
+		<p id="loginTime"></p>
+		<p id="previousLoginTime"></p>
+	</div>
+	<div class="grid-container">
+		<a href="charger.html" target="mainframe" class="shortcut item1">
+			<img src="Charger.jpg" alt="Charger">
+		</a>
+		<a href="human_motion.html" target="mainframe" class="shortcut item2">
+			<img src="Human_motion.jpg" alt="Human Motion">
+		</a>
+		<a href="temp_humid.html" target="mainframe" class="shortcut item3">
+			<img src="Temp_humid.jpg" alt="Temperature/Humidity">
+		</a>
+		<a href="water.html" target="mainframe" class="shortcut item4">
+			<img src="Water_leak.jpg" alt="Water Leakage">
+		</a>
+	</div>
 </body>
 </html>
