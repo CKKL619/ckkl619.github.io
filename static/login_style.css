@@ -18,6 +18,6 @@ input[type="text"], input[type="password"] {
 button{background-color: #fccb47; color: white; border: none; padding: 10px;
     border-radius: 10px; cursor: pointer; transition: background 0.2s; width: 100%;}
 			
-button:hover{color: #fffb00; background-color: #ffb704;}
+button:hover{color: #fffb00; background-color: #ffb704; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);}
 
 #message{text-align: center; margin-top: 10px; color: red; font-style: bold;}
