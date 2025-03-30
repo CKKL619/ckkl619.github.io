@@ -5,11 +5,32 @@ body{background-color: #ebebeb;}
 #Time{background-color: #ffffff; border-radius: 10px; padding: 0.5px;
  font-family: "Lucida Console", "Courier New", monospace;}
  
- a{margin: 20px;}
+a{margin: 20px;}
+
+.preview{display: flex; justify-content: center; align-items: center;
+        border: 1px solid #ccc; border-radius: 10px; padding: 10px;
+        text-align: left; transition: transform 0.2s, box-shadow 0.2s;
+		font-family: Helvetica;}
 
 .shortcut img{width: 100%; height: auto; border-radius: 10px; margin:10px;}
 			
-.shortcut img:hover{transform: scale(1.05);}
+.preview:hover, .shortcut img:hover{transform: scale(1.05); box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);}
+
+#charger_preview{background-color: #feffa8;}
+
+#charger_preview:hover{background-color: #fdff6e;}
+
+#human_preview{background-color: #b6ffab;}
+
+#human_preview:hover{background-color: #7dff69;}
+
+#temphumid_preview{background-color: #ffec99;}
+
+#temphumid_preview:hover{background-color: #ffd61f;}
+
+#water_preview{background-color: #b5edff;}
+
+#water_preview:hover{background-color: #4dd2ff;}
 
 @media only screen and (max-width: 600px) {
   .item1 {grid-area: 1;}
@@ -32,4 +53,7 @@ body{background-color: #ebebeb;}
   .item4 {grid-area: 1;}
 }
 
-.grid-container {display: grid; padding: 10px;}
+.grid-container {display: grid; grid-template-areas: "item1" "item2"
+                "item3" "item4"; gap: 16px; margin: 20px;}
+
+.grid-container a{text-decoration: none; color: inherit;}
