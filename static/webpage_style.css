@@ -17,7 +17,7 @@ input[type="text"]{padding: 10px; border: 3px solid #ccc;
 button{padding: 10px 15px; background-color: #fccb47; color: white; border: none;
     border-radius: 10px; cursor: pointer; transition: background 0.2s;}
 
-button:hover{color: #fffb00; background-color: #ffb704;}
+button:hover{color: #fffb00; background-color: #ffb704; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);}
 
 /*container*/
 .container1, .container2, .container3{background-color: #ffffff; border-radius: 10px; margin:5px;
