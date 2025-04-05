@@ -8,12 +8,12 @@
 	<div id="contentarea">
 		<div id="column1">
 			<div id="header">Charger Info</div>
-			<a href="home.html" target="mainframe">🏠Home</a>
-			<a href="charger.html" target="mainframe">⚡Charger</a>
-			<a href="human_motion.html" target="mainframe">🙎‍Human Motion</a>
-			<a href="temp_humid.html" target="mainframe">🌡️Temperature/Humidity</a>
-			<a href="water.html" target="mainframe">💧Water Leakage</a>
-			<a href="login.html">🚪Logout</a>
+			<a href="home.html" target="mainframe">Home</a>
+			<a href="charger.html" target="mainframe">Charger</a>
+			<a href="human_motion.html" target="mainframe">Human Motion</a>
+			<a href="temp_humid.html" target="mainframe">Temperature/Humidity</a>
+			<a href="water.html" target="mainframe">Water Leakage</a>
+			<a onclick="logoutConfirm()">Logout</a>
 		</div>
 		<div id="column2">
 			<iframe id="iFrame" name="mainframe" src="home.html"
@@ -23,6 +23,7 @@
 		<div class="clearfloat">
 			<!-- purposely added to clear float -->
 		</div>
+	</div>
 	<script>
         const links = document.querySelectorAll('link');/*icons for charger and IoTs*/
         links.forEach(link => {
@@ -31,18 +32,30 @@
                 this.classList.add('active');
             });
         });
-		if (document.referrer === ""){/*check if url is input from textbar*/
+		if(document.referrer === ""){check if url is input from textbar
 			window.location.href = "login.html";
+		}else{
+			window.location.href = "index.html";
 		}
-	function resizeIFrameToFitContent(iFrame) {
+
+		function resizeIFrameToFitContent(iFrame) {
 			iFrame.width = iFrame.contentWindow.document.body.scrollWidth;
 			iFrame.height = iFrame.contentWindow.document.body.scrollHeight;
 		}
 
-	window.addEventListener('DOMContentLoaded', function() {
+		window.addEventListener('DOMContentLoaded', function() {
 			var iFrame = document.getElementById('iFrame');
 			resizeIFrameToFitContent(iFrame);
 		});
+		
+		function logoutConfirm(){
+        	let text = "Press OK to logout";
+        	if (confirm(text) == true) {
+        		window.location.href = "login.html" ;
+        	}else{
+        		window.location.href = "index.html";
+          }
+        }
     </script>
 </body>
 </html>
