@@ -1,36 +1,28 @@
 h1, h2, p{text-align: center; margin-bottom: 20px; font-family: "Times New Roman", Times, serif;}
 
-body{background-color: #ebebeb;}
+body{background-color: #FFFFFF;}
 
-#Time{background-color: #ffffff; border-radius: 10px; padding: 0.5px;
+#Time{background-color: #F1F1F2; border-radius: 10px; padding: 0.5px;
  font-family: "Lucida Console", "Courier New", monospace;}
  
-a{margin: 20px;}
+a{margin: 10px;}
+
+th{font-size: 30px;}
+
+.w3-light-grey{height: 16px; width: 50%;}
 
 .preview{display: flex; justify-content: center; align-items: center;
-        border: 1px solid #ccc; border-radius: 10px; padding: 10px;
+        border: 1px solid #ccc; border-radius: 10px; padding: 15px;
         text-align: left; transition: transform 0.2s, box-shadow 0.2s;
 		font-family: Helvetica;}
 
 .shortcut img{width: 100%; height: auto; border-radius: 10px; margin:10px;}
 			
-.preview:hover, .shortcut img:hover{transform: scale(1.05); box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);}
+.preview:hover, .shortcut img:hover{transform: scale(1.03); box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);}
 
-#charger_preview{background-color: #feffa8;}
+a{background-color: #A1D6E2;}
 
-#charger_preview:hover{background-color: #fdff6e;}
-
-#human_preview{background-color: #b6ffab;}
-
-#human_preview:hover{background-color: #7dff69;}
-
-#temphumid_preview{background-color: #ffec99;}
-
-#temphumid_preview:hover{background-color: #ffd61f;}
-
-#water_preview{background-color: #b5edff;}
-
-#water_preview:hover{background-color: #4dd2ff;}
+a:hover{background-color: #1995AD;}
 
 @media only screen and (max-width: 600px) {
   .item1 {grid-area: 1;}
