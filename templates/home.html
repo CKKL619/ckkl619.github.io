@@ -2,6 +2,7 @@
 <html>
 <head>
 	<link rel = "stylesheet" href = "{{url_for('static', filename='home_style.css')}}">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 	<script>
         function displayLoginTime() {
             const now = new Date();
@@ -37,8 +38,10 @@
 			<div>
 			<table>
 				<tr><th>Charger</th></tr>
-				<tr><td>Power: {{power}}</td></tr>
-				<tr><td>Status: {{chargingStatus}}</td></tr>
+				<tr><td>Power:</td></tr>
+				<tr><td>{{power}}</td></tr>
+				<tr><td>Status:</td></tr>
+				<tr><td>{{chargingStatus}}</td></tr>
 			</table>
 			</div>
 		</a>
@@ -46,43 +49,36 @@
 			<div>
 			<table>
 				<tr><th>Human Motion</th></tr>
-				<tr><td>Power: {{power}}</td></tr>
-				<tr><td>Human Activity: {{ispresence}}</td></tr>
+				<tr><td>Human Activity:</td></tr>
+				<tr><td>{{ispresence}}</td></tr>
 			</table>
 			</div>
 		</a>
-		<a id="temphumid_preview" href="temp_humid.html" target="mainframe" class="preview item3">
-			<div>
-			<table>
-				<tr><th>Temperature/Humidity</th></tr>
-				<tr><td>Power: {{power}}</td></tr>
-				<tr><td>Temperature: {{temperature}}</td></tr>
-				<tr><td>Humidity: {{humidity}}</td></tr>
-			</table>
-			</div>
-		</a>
-		<a id="water_preview" href="water.html" target="mainframe" class="preview item4">
+		<a id="water_preview" href="water.html" target="mainframe" class="preview item3">
 			<div>
 			<table>
 				<tr><th>Water Leakage</th></tr>
-				<tr><td>Power: {{power}}</td></tr>
-				<tr><td>Water Leak: {{isleak}}</td></tr>
+				<tr><td>Water Leak:</td></tr>
+				<tr><td>{{isleak}}</td></tr>
 			</table>
 			</div>
 		</a>
 	</div>
 	<div class="grid-container">
-		<a href="charger.html" target="mainframe" class="shortcut item1">
-			<img src="Charger.jpg" alt="Charger">
-		</a>
-		<a href="human_motion.html" target="mainframe" class="shortcut item2">
-			<img src="Human_motion.jpg" alt="Human Motion">
-		</a>
-		<a href="temp_humid.html" target="mainframe" class="shortcut item3">
-			<img src="Temp_humid.jpg" alt="Temperature/Humidity">
-		</a>
-		<a href="water.html" target="mainframe" class="shortcut item4">
-			<img src="Water_leak.jpg" alt="Water Leakage">
+		<a id="temphumid_preview" href="temp_humid.html" target="mainframe" class="preview">
+			<div>
+			<table class="w3-container">
+				<tr><th>Temperature/Humidity</th></tr>
+				<tr><td>Temperature(°C):</td></tr>
+				<tr class="w3-light-grey">
+					<td class="w3-red">{{temperature}}</td>
+				</tr>
+				<tr><td>Humidity(%):</td></tr>
+				<tr class="w3-light-grey">
+					<td class="w3-green">{{humidity}}</td>
+				</tr>
+			</table>
+			</div>
 		</a>
 	</div>
 </body>
