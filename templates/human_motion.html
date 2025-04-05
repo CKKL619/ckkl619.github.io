@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel = "stylesheet" href = "../static/webpage_style.css">
+	<link rel = "stylesheet" href = "{{url_for('static', filename='webpage_style.css')}}">
 	<script src = "{{url_for('static', filename='script.js')}}"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script><!--generate excel file-->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script><!--generate data graph-->
