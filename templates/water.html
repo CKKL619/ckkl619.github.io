@@ -8,143 +8,116 @@
 </head>
 <body>
 	<h1>Water Leakage</h1>
-	<input id = "input" type = "text" placeholder = "Input charger number..." autocomplete="off">
-	<button id = "button" onclick = "printChargerNum()">Search</button>
-	<p id = "output"></p>
+	<div class="row container1">
+		<table>
+			<tr><td>
+				<input id = "input" type = "text" placeholder = "Input charger number..." autocomplete="off">
+				<button id = "button" onclick = "printChargerNum()">Search</button>
+			</td></tr>
+			<tr><td>
+				<p id = "output"></p>
+			</td></tr>
+		</table>
+		<table id="data">
+			<tbody>
+				<tr>
+					<td>Charger Number:</td>
+					<td id="charger-number"></td>
+				</tr>
+				<tr>
+					<td>Power:</td>
+					<td id="power">{{power}}</td>
+				</tr>
+				<tr>
+					<td>Record Time:</td>
+					<td id="time">{{time}}</td>
+				</tr>
+				<tr>
+					<td>Water Leak:</td>
+					<td id="water">{{isleak}}</td>
+				</tr>
+			</tbody>
+		</table>
+		<table class="switchtable">
+			<tr>
+				<th colspan="3">Charger Power</th>
+			</tr>
+			<tr>
+				<td><p>OFF</p></td>
+				<td><label class = "switch">
+					<input type = "checkbox">
+					<span class = "slider"></span>
+					</label>
+				</td>
+				<td><p>ON</p></td>
+			</tr>
+		</table>
+	</div>
 	<div class="row">
-		<div class="column">
-			<div class="container1">
-				<table id="data">
-					<thead>
-						<tr>
-							<th class="th1">Charger Number</th>
-							<th class="th2">Power</th>
-							<th class="th1">Record Time</th>
-							<th class="th2">Water Leak</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class="datarow">
-							<td id="charger-number"></td>
-							<td id="power">{{power}}</td>
-							<td id="time">{{time}}</td>
-							<td id="water">{{isleak}}</td>
-						</tr>
-					</tbody>
-				</table>
-				<table class="switchtable">
+		<div class="column container2">
+			<table id="history">
+				<thead>
 					<tr>
-						<th class="th1" colspan="3">Charger Power</th>
+						<th colspan="4" style="font-weight: 900;">Search History</th>
 					</tr>
-					<tr>
-						<td><p>OFF</p></td>
-						<td><label class = "switch">
-							<input type = "checkbox">
-							<span class = "slider"></span>
-							</label>
-						</td>
-						<td><p>ON</p></td>
-					</tr>
-				</table>
-			</div>
-			<div class="container2">
-				<table id="history" class="historytable">
-					<thead>
-						<tr>
-							<th class="th1" colspan="4" style="font-weight: 900;">Search History</th>
-						</tr>
-						<tr>
-							<td colspan="4">
-								<label for="historyNumber">Select number of records for display:</label>
-								<select id="historyNumber">
-								  <option>5</option>
-								  <option>10</option>
-								  <option>15</option>
-								  <option>20</option>
-								  <option>25</option>
-								  <option>30</option>
-								</select>
-							</td>
-						</tr>
-						<tr>
-							<th class="th1">Charger Number</th>
-							<th class="th2">Power</th>
-							<th class="th1">Record Time</th>
-							<th class="th2">Water Leak</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class="datarow">
-							<td colspan="4" style="border: none;"><p id="warning" class="dataShow">Search to add history record</p></td>
-						</tr>
-					</tbody>
 					<tr>
 						<td colspan="4">
-							<button onclick = "exportToExcel(data)">Download History</button>
+							<label for="historyNumber">Select number of records for display:</label>
+							<select id="historyNumber">
+								<option>5</option>
+								<option>10</option>
+								<option>15</option>
+								<option>20</option>
+								<option>25</option>
+								<option>30</option>
+							</select>
 						</td>
 					</tr>
-				</table>
-			</div>
+					<tr>
+						<th>Charger Number</th>
+						<th>Power</th>
+						<th>Record Time</th>
+						<th>Water Leak</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td colspan="4"><p id="warning">Search to add history record</p></td>
+					</tr>
+				</tbody>
+				<tr>
+					<td colspan="4">
+						<button onclick = "exportToExcel(data)">Download History</button>
+					</td>
+				</tr>
+			</table>
 		</div>
-		<div class="column">
-			<div class="container3">
-				<table id = "dataGraph">
-					<thead>
-						<tr>
-							<th class="th1" colspan="5" style="font-weight: 900;">Data Graph</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>
-								<canvas id="waterLeakChart"></canvas>
-							</td>
-						</tr>
-					</tbody>
+		<div class="column container3">
+			<table id = "dataGraph">
+				<thead>
+					<tr>
+						<th colspan="5" style="font-weight: 900;">Data Graph</th>
+					</tr>
+				</thead>
+				<tbody>
 					<tr>
 						<td>
-							<button onclick = "exportToExcel(graph)">Download Graph</button>
+							<canvas id="waterLeakChart"></canvas>
 						</td>
 					</tr>
-				</table>
-			</div>
+				</tbody>
+				<tr>
+					<td>
+						<button onclick = "exportAsGraph(water)">Download Graph</button>
+					</td>
+				</tr>
+			</table>
 		</div>
 	</div>
 	<p id = "warning" class = "dataShow"></p><!--keep log button functional-->
 	<button onclick = "document.location='home.html'" target = "mainframe" style="float: right;">Home</button>
 	<script>
-        const waterChart = document.getElementById('waterLeakChart');
-        const waterLeakChart = new Chart(waterChart,{
-            type: 'line',
-            data: {
-                labels: ['00','01','02','03','04','05','06','07','08','09','10','11',
-				'12','13','14','15','16','17','18','19','20','21','22','23'],
-                datasets: [{
-                    label: 'Water Leak', data: [0,1,1,1,0,0,0,1,0,1,0,0],
-                    borderColor: '#1f6dff', backgroundColor: 'transparent',
-                    tension: 0.1}]
-            },
-			options: {
-				responsive: true,
-				maintainAspectRatio: false,/*allow chart to take full height of container*/
-					scales: {
-						x: {
-							title: {
-								display: true, text: 'Time (hour)'}
-						},
-						y: {
-							title: {
-								display: true, text: 'Water Leak (0=no, 1=yes)'},
-							beginAtZero: true}
-					}
-			}
-		});
 		const data = [];
-		let maxEntries = document.getElementById("historyNumber").value.trim();
-		document.getElementById("historyNumber").addEventListener("change", function() {
-			maxEntries = this.value.trim();
-			updateHistoryRecord();
-		});
 		function printChargerNum(){
 			const chargerNum = document.getElementById("input").value.trim();
 			const outputNum = document.getElementById("output");
@@ -159,7 +132,7 @@
 				clearTable();
                 return;
 			}else if(!chargerNumFormat.test(chargerNum)){/*check if charger number satisfies format*/
-				outputNum.innerHTML = "Charger number must start with 'CDJ' follow by a six digit number."
+				outputNum.innerHTML = "Charger number must start with 'CDJ'<br>follow by a six digit number."
 				outputNum.style.backgroundColor = "#f0a23c";
 				clearTable();
                 return;
@@ -189,6 +162,11 @@
 			document.getElementById("time").textContent = "";
             document.getElementById("water").textContent = "";
         }
+		let maxEntries = document.getElementById("historyNumber").value.trim();
+		document.getElementById("historyNumber").addEventListener("change", function() {
+			maxEntries = this.value.trim();
+			updateHistoryRecord();
+		});
 		function updateHistoryRecord() {
             const historyRecord = document.getElementById("history").querySelector("tbody");
             historyRecord.innerHTML = ""; /*clear current record*/
@@ -198,9 +176,8 @@
                 row.innerHTML =
                     '<td>' + entry.ChargerNo + '</td>' +
                     '<td>' + entry.Power + '</td>' +
-			'<td>' + entry.Time + '</td>' +
+					'<td>' + entry.Time + '</td>' +
                     '<td>' + entry.WaterLeak + '</td>';
-		row.style.backgroundColor = "#fff2cf";
                 historyRecord.appendChild(row); /*append new row*/
             });
         }
