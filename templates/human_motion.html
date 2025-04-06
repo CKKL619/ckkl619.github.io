@@ -220,6 +220,53 @@
 				XLSX.writeFile(workbook, "humanMotionLog.xlsx");
 			}
         }
+		document.addEventListener('DOMContentLoaded', function() {
+			const ctx = document.getElementById('humanMotionChart').getContext('2d');
+			const times = {{ times|tojson }};
+			const ispresenceValues = {{ ispresence_values|tojson }};
+			const humanMotionChart = new Chart(ctx, {
+				type: 'line',
+				data: {
+					labels: times,
+					datasets: [{
+						label: 'Human Presence (1 = Present, 0 = Not Present)',
+						data: ispresenceValues,
+						borderColor: 'rgba(75, 192, 192, 1)',
+						backgroundColor: 'rgba(75, 192, 192, 0.2)',
+						borderWidth: 2,
+						fill: false,
+					}]
+				},
+				options: {
+					scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Time'
+                        },
+                        ticks: {
+                            autoSkip: true,
+                            maxTicksLimit: 20
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Presence Status'
+                        },
+                        ticks: {
+                            min: 0,
+                            max: 1,
+                            stepSize: 1,
+                            callback: function(value) {
+                                return value === 1 ? 'Present' : 'Not Present';
+                            }
+                        }
+                    }
+                }
+				}
+			});
+		});
 		document.getElementById("toggleSwitch").addEventListener("change", function() {
 			if (this.checked) {
 				fetch("/toggleHuman_motionTrue", {
