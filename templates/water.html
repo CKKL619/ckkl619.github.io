@@ -197,6 +197,53 @@
 				XLSX.writeFile(workbook, "waterLog.xlsx");
 			}
         }
+		document.addEventListener('DOMContentLoaded', function() {
+			const ctx = document.getElementById('waterLeakChart').getContext('2d');
+			const times = {{ times|tojson }};
+			const isleakValues = {{ isleak_values|tojson }};
+			const waterLeakChart = new Chart(ctx, {
+				type: 'line',
+				data: {
+					labels: times,
+					datasets: [{
+						label: 'Water Leak (1 = Yes, 0 = Unknown)',
+						data: isleakValues,
+						borderColor: 'rgba(75, 192, 192, 1)',
+						backgroundColor: 'rgba(75, 192, 192, 0.2)',
+						borderWidth: 2,
+						fill: false,
+					}]
+				},
+				options: {
+					scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Time'
+                        },
+                        ticks: {
+                            autoSkip: true,
+                            maxTicksLimit: 20
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Water Leak Status'
+                        },
+                        ticks: {
+                            min: 0,
+                            max: 1,
+                            stepSize: 1,
+                            callback: function(value) {
+                                return value === 1 ? 'Yes' : 'Unknown';
+                            }
+                        }
+                    }
+                }
+				}
+			});
+		});
 		document.getElementById("toggleSwitch").addEventListener("change", function() {
 			if (this.checked) {
 				fetch("/toggleWaterleakTrue", {
