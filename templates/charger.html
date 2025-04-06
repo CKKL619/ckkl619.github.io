@@ -197,7 +197,52 @@
 				XLSX.writeFile(workbook, "chargerLog.xlsx");
 			}
         }
-		/*add function for data graph here*/
+	document.addEventListener('DOMContentLoaded', function() {
+			const ctx = document.getElementById('chargerChart').getContext('2d');
+			const chargingStatusValues = {{ chargingStatus_values|tojson }};
+			const chargingTimeValues = {{ chargingTime_values|tojson }};
+			const chargerChart = new Chart(ctx, {
+				type: 'line',
+				data: {
+					labels: chargingStatusValues,
+					datasets: [{
+						label: 'Charging Time',
+						data: chargingTimeValues,
+						borderColor: 'rgba(75, 192, 192, 1)',
+						backgroundColor: 'rgba(75, 192, 192, 0.2)',
+						borderWidth: 2,
+						fill: false,
+					}]
+				},
+				options: {
+					responsive: true, /*make the chart responsive*/
+                    maintainAspectRatio: false, /*allow height to be adjusted*/
+					scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Charging Status (1 = Charging, 0 = Unknown)'
+                        },
+                        ticks: {
+                            autoSkip: true,
+                            maxTicksLimit: 20
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Charging Time'
+                        },
+						min: 0,
+						beginAtZero: true,
+                        ticks: {
+                            stepSize: 1
+                        }
+                    }
+                }
+				}
+			});
+		});
 		document.getElementById("toggleSwitch").addEventListener("change", function() {
 		if (this.checked) {
 			fetch("/toggleChargerTrue", {
