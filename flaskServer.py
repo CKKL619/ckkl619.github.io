@@ -193,8 +193,8 @@ def home():
 def login(): 
     return render_template('login.html')
 
-@app.route('/charger.html') 
-def charger(): 
+@app.route('/charger.html')
+def charger():
     charger = testdatabase.get_collection("charger")#reach collections and find current data
     thechargerid = thelinkage["chargerid"]
     thecharger = charger.find_one(thechargerid)
@@ -206,7 +206,11 @@ def charger():
     chargerid = str(raw_chargerid) if raw_chargerid else "Can not fetch"
 
     chargercollection = historydatabase.get_collection("charger")#getting the history data
-    records = chargercollection.find({"deviceid": thechargerid }).skip(0).limit(20)
+    records = list(chargercollection.find({"deviceid": thechargerid }).skip(0).limit(20))
+
+    # Prepare data for line graph
+    chargingStatus_values = [0 if record['chargingStatus'] == 'unknown' else 1 for record in records]  # Convert presence to binary
+    chargingTime_values = [record['chargingTime'] for record in records]
     """
     # need to use a loop to retrieve data in html, maximum 20 records can be read
     #example one record of records in a charger:
@@ -218,7 +222,7 @@ def charger():
 
 
     """
-    return render_template('charger.html', power = power, chargingStatus=chargingStatus, chargingTime=chargingTime, chargerid = chargerid, records=records)
+    return render_template('charger.html', power = power, chargingStatus=chargingStatus, chargingTime=chargingTime, chargerid = chargerid, records=records, chargingStatus_values = chargingStatus_values, chargingTime_values = chargingTime_values)
 
 @app.route('/human_motion.html')
 def human_motion():
@@ -246,7 +250,6 @@ def human_motion():
     """
     return render_template('human_motion.html', power = power, ispresence = ispresence, time = time, records=records, times=times, ispresence_values=ispresence_values)
 
-
 @app.route('/water.html')
 def water():
     waterleak =testdatabase.get_collection("waterleak")
@@ -273,8 +276,8 @@ def water():
     """
     return render_template('water.html',power = power, isleak = isleak, time = time, records=records, times=times, isleak_values=isleak_values)
 
-@app.route('/temp_humid.html') 
-def temp_humid(): 
+@app.route('/temp_humid.html')
+def temp_humid():
     temp_humid = testdatabase.get_collection("temp_humid")
     thesensor = temp_humid.find_one(thetemphumidid)
     power = thesensor["power"] if thesensor["power"] else False
@@ -284,15 +287,20 @@ def temp_humid():
     time = thesensor["datetime"] if thesensor["datetime"] else "unknown"
 
     temp_humidcollection = historydatabase.get_collection("temp_humid")
-    records = temp_humidcollection.find({"deviceid": thetemphumidid }).skip(0).limit(20)
+    records = list(temp_humidcollection.find({"deviceid": thetemphumidid }).skip(0).limit(20))
+
+    # Prepare data for line graph
+    times = [record['datetime'] for record in records]
+    temperature_values = [record['temperature'] for record in records]
+    humidity_values = [record['humidity'] for record in records]
     """
-    # example one record of records in a temp humid sensor: 
+    # example one record of records in a temp humid sensor:
     #{'_id': ObjectId('6784559cdb5ebfa5ad8cc782'), 'datetime': '2025-03-22 09:18:12', 'temperature': 'unknown', 'humidity': 'unknown', 'power': False}
     for record in records:
         print(record)
 
     """
-    return render_template('temp_humid.html',power = power, temperature = temperature, humidity =humidity, chargerid = chargerid,time=time, records=records)
+    return render_template('temp_humid.html',power = power, temperature = temperature, humidity =humidity, chargerid = chargerid,time=time, records=records, times=times, temperature_values = temperature_values, humidity_values = humidity_values)
 
 @app.route("/toggleChargerTrue", methods=['POST'])
 def togglechargertrue():
