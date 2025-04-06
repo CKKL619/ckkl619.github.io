@@ -220,8 +220,8 @@ def charger():
     """
     return render_template('charger.html', power = power, chargingStatus=chargingStatus, chargingTime=chargingTime, chargerid = chargerid, records=records)
 
-@app.route('/human_motion.html') 
-def human_motion(): 
+@app.route('/human_motion.html')
+def human_motion():
     human_motion = testdatabase.get_collection("human_motion")
     themotionid = thelinkage["human_motionid"]
     thesensor = human_motion.find_one(themotionid)
@@ -231,7 +231,12 @@ def human_motion():
     time = thesensor["datetime"] if thesensor["datetime"] else "No Status"
 
     human_motioncollection = historydatabase.get_collection("human_motion")
-    records = human_motioncollection.find({"deviceid": themotionid }).skip(0).limit(20)
+    records = list(human_motioncollection.find({"deviceid": themotionid}).skip(0).limit(20))
+
+    # Prepare data for line graph
+    times = [record['datetime'] for record in records]
+    ispresence_values = [1 if record['ispresence'] == 'pir' else 0 for record in records]  # Convert presence to binary
+
     """
     # example one record of records in a human motion sensor: ispresence could be "pir" or "unknown"
     #{'_id': ObjectId('6784559cdb5ebfa5ad8cc77f'), 'datetime': '2025-03-22 09:18:12', 'ispresence': 'unknown', 'power': False}
@@ -239,10 +244,11 @@ def human_motion():
         print(record)
 
     """
-    return render_template('human_motion.html', power = power, ispresence = ispresence, time = time, records=records)
+    return render_template('human_motion.html', power = power, ispresence = ispresence, time = time, records=records, times=times, ispresence_values=ispresence_values)
 
-@app.route('/water.html') 
-def water(): 
+
+@app.route('/water.html')
+def water():
     waterleak =testdatabase.get_collection("waterleak")
     thewaterleakid = thelinkage["waterleakid"]
     thesensor = waterleak.find_one(thewaterleakid)
@@ -252,16 +258,20 @@ def water():
     time = thesensor["datetime"] if thesensor["datetime"] else "No Status"
 
     waterleakcollection = historydatabase.get_collection("waterleak")
-    records = waterleakcollection.find({"deviceid": thewaterleakid }).skip(0).limit(20)
+    records = list(waterleakcollection.find({"deviceid": thewaterleakid }).skip(0).limit(20))
+
+    # Prepare data for line graph
+    times = [record['datetime'] for record in records]
+    isleak_values = [0 if record['isleak'] == 'unknown' else 1 for record in records]  # Convert presence to binary
 
     """
-    # example one record of records in a waterleak sensor: 
+    # example one record of records in a waterleak sensor:
     #{'_id': ObjectId('6784559cdb5ebfa5ad8cc784'), 'datetime': '2025-03-22 09:18:12', 'isleak': 'unknown', 'power': False}
     for record in records:
         print(record)
 
     """
-    return render_template('water.html',power = power, isleak = isleak, time = time, records=records)
+    return render_template('water.html',power = power, isleak = isleak, time = time, records=records, times=times, isleak_values=isleak_values)
 
 @app.route('/temp_humid.html') 
 def temp_humid(): 
