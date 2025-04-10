@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify, render_template
 from flask_socketio import SocketIO, emit
-import makeJSON, time
+import makeJSON, time,json
 from bson.objectid import ObjectId
 from pymongo import MongoClient
 import Motion_sensor, Temp_Hum_sensor, Water_leak_sensor, charger_data
@@ -100,7 +100,41 @@ def autoUpdate():#set time limit for one loop, save cpu power
             waterleak_data["deviceid"] = thewaterleakid
             thewaterleakhis = waterleakhis.insert_one(waterleak_data)
             #print(f"update waterleak failed:{thewaterleak}panel{thepanel}")
-    
+
+        try:
+            charger = testdatabase.get_collection("charger")
+            thecharger = charger.find_one({'_id': thechargerid})##record to current database
+            #print(thecharger)
+            thechargerpower = thecharger["power"]
+            thepanel = panel.find_one_and_update({'_id': thepanelid},{'$set': {'ischarger': thechargerpower}})
+
+            thecharger = charger.find_one({'_id': thechargerid})
+            chargerjson = json.dumps(thecharger, default=str)
+            #print(chargerjson)
+            data_dict = json.loads(chargerjson)
+            #print(data_dict)
+            data_dict.pop("_id", None)
+            #print(data_dict)
+            data_dict["deviceid"] = thechargerid
+            print(data_dict)
+            #updated_chargerjson = json.dumps(data_dict)
+            #print(updated_chargerjson)
+
+            #chargerjson["deviceid"] = thechargerid
+            thechargerhis = chargerhis.insert_one(data_dict)##record to history database
+            #print(thechargerhis)
+            
+        except Exception as e:
+            chargerData = makeJSON.makeJSON.charger("unknown", "unknown", "unknown", "unknown", "unknown", "unknown", False)
+            thecharger = charger.find_one_and_update({'_id': thechargerid},{'$set': chargerData})
+            thepanel = panel.find_one_and_update({'_id': thepanelid},{'$set':{'ischarger': False}})
+
+            thechargerhis = chargerhis.insert_one(chargerData)
+
+
+        #print("Complete one loop")
+        time.sleep(2.5)
+        """
         try:
             charger_id = 'CDJ940009'
             chargerData = charger_data.fetch_data_with_curl(charger_id)
@@ -128,10 +162,8 @@ def autoUpdate():#set time limit for one loop, save cpu power
             chargerData["deviceid"] = thechargerid
             thechargerhis = chargerhis.insert_one(chargerData)
             #print(f"update charger failed:{thecharger}panel{thepanel}")
-
-        #print("Complete one loop")
-        time.sleep(2.5)
-
+        """
+        
 # Create and start the database update
 update_thread = threading.Thread(target=autoUpdate)
 update_thread.daemon = True  # Ensure the thread will exit when the main program exits
@@ -187,7 +219,55 @@ def index():
 
 @app.route('/home.html') 
 def home(): 
-    return render_template('home.html')
+    charger = testdatabase.get_collection("charger")#reach collections and find current data
+    thechargerid = thelinkage["chargerid"]
+    thecharger = charger.find_one(thechargerid)
+    #print(thecharger["power"])
+    chpower = thecharger["power"] if thecharger["power"] else False
+    chargingStatus = thecharger["chargingStatus"] if thecharger["chargingStatus"] else "No Status"
+    chargingTime = thecharger["chargingTime"] if thecharger["chargingTime"] else 0
+    raw_chargerid = thecharger["_id"]
+    chargerid = str(raw_chargerid) if raw_chargerid else "Can not fetch"
+
+    chargercollection = historydatabase.get_collection("charger")#getting the history data
+    chrecords = chargercollection.find({"deviceid": thechargerid }).skip(0).limit(20)
+    #charger end
+
+    human_motion = testdatabase.get_collection("human_motion")
+    themotionid = thelinkage["human_motionid"]
+    thesensor = human_motion.find_one(themotionid)
+
+    hmpower = thesensor["power"] if thesensor["power"] else False
+    ispresence = thesensor["ispresence"] if thesensor["ispresence"] else "No Status"
+    hmtime = thesensor["datetime"] if thesensor["datetime"] else "No Status"
+
+    human_motioncollection = historydatabase.get_collection("human_motion")
+    hmrecords = human_motioncollection.find({"deviceid": themotionid }).skip(0).limit(20)
+    #human_motion end
+
+    waterleak =testdatabase.get_collection("waterleak")
+    thewaterleakid = thelinkage["waterleakid"]
+    thesensor = waterleak.find_one(thewaterleakid)
+
+    wlpower = thesensor["power"] if thesensor["power"] else False
+    isleak = thesensor["isleak"] if thesensor["isleak"] else "No Status"
+    wltime = thesensor["datetime"] if thesensor["datetime"] else "No Status"
+
+    waterleakcollection = historydatabase.get_collection("waterleak")
+    wlrecords = waterleakcollection.find({"deviceid": thewaterleakid }).skip(0).limit(20)
+    #waterleak end
+
+    temp_humid = testdatabase.get_collection("temp_humid")
+    thesensor = temp_humid.find_one(thetemphumidid)
+    thpower = thesensor["power"] if thesensor["power"] else False
+    temperature = thesensor["temperature"] if thesensor["temperature"] else "unknown"
+    humidity = thesensor["humidity"] if thesensor["humidity"] else "unknown"
+    chargerid = thesensor["_id"] if thesensor["_id"] else "unknown"
+    thtime = thesensor["datetime"] if thesensor["datetime"] else "unknown"
+
+    temp_humidcollection = historydatabase.get_collection("temp_humid")
+    threcords = temp_humidcollection.find({"deviceid": thetemphumidid }).skip(0).limit(20)
+    return render_template('home.html',chpower = chpower, chargingStatus=chargingStatus, chargingTime=chargingTime, chargerid = chargerid, chrecords=chrecords,hmpower = hmpower, ispresence = ispresence, hmtime = hmtime, hmrecords=hmrecords,wlpower = wlpower, isleak = isleak, wltime = wltime, wlrecords=wlrecords,thpower = thpower, temperature = temperature, humidity =humidity, thtime=thtime, threcords=threcords)
 
 @app.route('/') 
 def login(): 
@@ -233,6 +313,7 @@ def human_motion():
     power = thesensor["power"] if thesensor["power"] else False
     ispresence = thesensor["ispresence"] if thesensor["ispresence"] else "No Status"
     time = thesensor["datetime"] if thesensor["datetime"] else "No Status"
+    chargerid = thechargerid
 
     human_motioncollection = historydatabase.get_collection("human_motion")
     records = list(human_motioncollection.find({"deviceid": themotionid}).skip(0).limit(20))
@@ -248,7 +329,7 @@ def human_motion():
         print(record)
 
     """
-    return render_template('human_motion.html', power = power, ispresence = ispresence, time = time, records=records, times=times, ispresence_values=ispresence_values)
+    return render_template('human_motion.html', power = power, ispresence = ispresence, time = time, records=records, times=times, ispresence_values=ispresence_values,chargerid = chargerid)
 
 @app.route('/water.html')
 def water():
@@ -259,6 +340,7 @@ def water():
     power = thesensor["power"] if thesensor["power"] else False
     isleak = thesensor["isleak"] if thesensor["isleak"] else "No Status"
     time = thesensor["datetime"] if thesensor["datetime"] else "No Status"
+    chargerid = thechargerid
 
     waterleakcollection = historydatabase.get_collection("waterleak")
     records = list(waterleakcollection.find({"deviceid": thewaterleakid }).skip(0).limit(20))
@@ -274,7 +356,7 @@ def water():
         print(record)
 
     """
-    return render_template('water.html',power = power, isleak = isleak, time = time, records=records, times=times, isleak_values=isleak_values)
+    return render_template('water.html',power = power, isleak = isleak, time = time, records=records, times=times, isleak_values=isleak_values,chargerid = chargerid)
 
 @app.route('/temp_humid.html')
 def temp_humid():
@@ -283,7 +365,7 @@ def temp_humid():
     power = thesensor["power"] if thesensor["power"] else False
     temperature = thesensor["temperature"] if thesensor["temperature"] else "unknown"
     humidity = thesensor["humidity"] if thesensor["humidity"] else "unknown"
-    chargerid = thesensor["_id"] if thesensor["_id"] else "unknown"
+    chargerid = thechargerid
     time = thesensor["datetime"] if thesensor["datetime"] else "unknown"
 
     temp_humidcollection = historydatabase.get_collection("temp_humid")

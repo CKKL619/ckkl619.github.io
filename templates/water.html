@@ -22,7 +22,7 @@
 			<tbody>
 				<tr>
 					<td>Charger Number:</td>
-					<td id="charger-number"></td>
+					<td id="charger-number">{{chargerid}}</td>
 				</tr>
 				<tr>
 					<td>Power:</td>
@@ -246,7 +246,7 @@
 		});
 		document.getElementById("toggleSwitch").addEventListener("change", function() {
 			if (this.checked) {
-				fetch("/toggleWaterleakTrue", {
+				fetch("/toggleChargerTrue", {
 					method: "POST",
 					headers: { "Content-Type": "application/json" },
 					body: JSON.stringify({ status: "true" }) }
@@ -256,7 +256,7 @@
 					else {
 						console.error("Failed to send request"); } }).catch(error => {console.error("Error:", error); }); }
 			else {
-				fetch("/toggleWaterleakFalse", {
+				fetch("/toggleChargerFalse", {
 					method: "POST",
 					headers: { "Content-Type": "application/json" },
 					body: JSON.stringify({ status: "false" }) }

@@ -25,7 +25,7 @@
 					</thead>
 					<tbody>
 						<tr class="datarow">
-							<td id="charger-number"></td>
+							<td id="charger-number">{{chargerid}}</td>
 							<td id="power">{{power}}</td>
 							<td id="time">{{time}}</td>
 							<td id="human">{{ispresence}}</td>
@@ -269,7 +269,7 @@
 		});
 		document.getElementById("toggleSwitch").addEventListener("change", function() {
 			if (this.checked) {
-				fetch("/toggleHuman_motionTrue", {
+				fetch("/toggleChargerTrue", {
 					method: "POST",
 					headers: { "Content-Type": "application/json" },
 					body: JSON.stringify({ status: "true" }) }
@@ -279,7 +279,7 @@
 					else {
 						console.error("Failed to send request"); } }).catch(error => {console.error("Error:", error); }); }
 			else {
-				fetch("/toggleHuman_motionFalse", {
+				fetch("/toggleChargerFalse", {
 					method: "POST",
 					headers: { "Content-Type": "application/json" },
 					body: JSON.stringify({ status: "false" }) }
