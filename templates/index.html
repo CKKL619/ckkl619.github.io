@@ -1,61 +1,216 @@
 <!DOCTYPE html>
+<html lang="en">
 <head>
-	<title>Homepage</title>
-	<link rel = "stylesheet" href = "{{url_for('static', filename='index_style.css')}}">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>EV Charger Monitoring</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='styles.css')}}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
 </head>
 <body>
-	<div id="contentarea">
-		<div id="column1">
-			<div id="header">Charger Info</div>
-			<a href="home.html" target="mainframe">Home</a>
-			<a href="charger.html" target="mainframe">Charger</a>
-			<a href="human_motion.html" target="mainframe">Human Motion</a>
-			<a href="temp_humid.html" target="mainframe">Temperature/Humidity</a>
-			<a href="water.html" target="mainframe">Water Leakage</a>
-			<a onclick="logoutConfirm()">Logout</a>
-		</div>
-		<div id="column2">
-			<iframe id="iFrame" name="mainframe" src="home.html"
-				frameborder="0" scrolling="yes" onload="resizeIFrameToFitContent(this);">
-			</iframe>
-		</div>
-		<div class="clearfloat">
-			<!-- purposely added to clear float -->
-		</div>
-	</div>
-	<script>
-        const links = document.querySelectorAll('link');/*icons for charger and IoTs*/
-        links.forEach(link => {
-            link.addEventListener('click', function() {
-                links.forEach(l => l.classList.remove('active'));
-                this.classList.add('active');
-            });
-        });
-		if(document.referrer === ""){check if url is input from textbar
-			window.location.href = "login.html";
-		}else{
-			window.location.href = "index.html";
-		}
+    <div id="app">
+        <!-- Login Page -->
+        <div id="login-page" class="page">
+            <div class="login-container">
+                <div class="login-header">
+                    <img src="{{url_for('static', filename='ev-logo.png')}}" alt="EV Logo" class="logo">
+                    <h1>EV Charger Monitoring</h1>
+                </div>
+                <div class="login-form">
+                    <input type="text" id="username" placeholder="Username" class="input-field">
+                    <input type="password" id="password" placeholder="Password" class="input-field">
+                    <button onclick="login()" class="login-btn">Login</button>
+                </div>
+            </div>
+        </div>
 
-		function resizeIFrameToFitContent(iFrame) {
-			iFrame.width = iFrame.contentWindow.document.body.scrollWidth;
-			iFrame.height = iFrame.contentWindow.document.body.scrollHeight;
-		}
+        <!-- Main Content -->
+        <div id="main-content" style="display: none;">
+            <!-- Navigation -->
+            <nav class="sidebar">
+                <div class="logo-container">
+                    <img src="{{url_for('static', filename='ev-logo.png')}}" alt="EV Logo" class="logo">
+                    <h2>EV Monitoring</h2>
+                </div>
+                <ul class="nav-links">
+                    <li><button onclick="showPage('home')" class="nav-btn active">Home</button></li>
+                    <li><button onclick="showPage('charger')" class="nav-btn">Charger Status</button></li>
+                    <li><button onclick="showPage('temp-humidity')" class="nav-btn">Temp & Humidity</button></li>
+                    <li><button onclick="showPage('motion')" class="nav-btn">Motion Sensor</button></li>
+                    <li><button onclick="showPage('water')" class="nav-btn">Water Leak</button></li>
+                </ul>
+            </nav>
 
-		window.addEventListener('DOMContentLoaded', function() {
-			var iFrame = document.getElementById('iFrame');
-			resizeIFrameToFitContent(iFrame);
-		});
-		
-		function logoutConfirm(){
-        	let text = "Press OK to logout";
-        	if (confirm(text) == true) {
-        		window.location.href = "login.html" ;
-        	}else{
-        		window.location.href = "index.html";
-          }
-        }
-    </script>
+            <!-- Home Page -->
+            <div id="home" class="page content-area">
+                <div class="dashboard-header">
+                    <h1>Real-time EV Charger Monitoring</h1>
+                </div>
+                <div class="dashboard-content">
+                    <div class="info-card">
+                        <h2>About the System</h2>
+                        <p>Our IoT-based EV Charger Monitoring System provides real-time insights into charger status, environmental conditions, and security metrics. The system integrates multiple sensors to ensure optimal charging conditions and safety.</p>
+                    </div>
+                    <div class="info-card">
+                        <h2>Key Features</h2>
+                        <ul>
+                            <li>Real-time charger status monitoring</li>
+                            <li>Temperature and humidity tracking</li>
+                            <li>Motion detection for security</li>
+                            <li>Water leak detection system</li>
+                            <li>Comprehensive data visualization</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charger Page -->
+            <div id="charger" class="page content-area">
+                <div class="dashboard-header">
+                    <h1>Charger Status</h1>
+                </div>
+                <div class="charger-content">
+                    <!-- Current Status Section -->
+                    <div class="status-section">
+                        <div class="status-card">
+                            <h3>Current Status</h3>
+                            <div class="status-info">
+                                <p>Charger ID: <span id="charger-id">{{chargerid}}</span></p>
+                                <p>Status: <span id="charging-status">{{chargingStatus}}</span></p>
+                                <p>Charging Time: <span id="charging-time">{{chargingTime}}</span></p>
+                            </div>
+                            <div class="status-controls">
+                                <table class="switchtable">
+                                    <tr>
+                                        <td><p>OFF</p></td>
+                                        <td><label class = "switch">
+                                            <input type = "checkbox" id="toggleSwitch" {% if chpower %}checked{% endif %}>
+                                            <span class = "slider"></span>
+                                            </label>
+                                        </td>
+                                        <td><p>ON</p></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Search Section -->
+                    <div class="search-section">
+                        <input type="text" id="charger-search" placeholder="Enter Charger ID" class="search-input">
+                        <button onclick="searchCharger()" class="search-btn">Search</button>
+                    </div>
+
+                    <!-- Data Visualization Section -->
+                    <div class="chart-section">
+                        <canvas id="charger-chart"></canvas>
+                    </div>
+
+                    <!-- Data Management Section -->
+                    <div class="data-management">
+                        <button onclick="generateLog()" class="data-btn">Generate Log</button>
+                        <button onclick="exportExcel()" class="data-btn">Export to Excel</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Temperature & Humidity Page -->
+            <div id="temp-humidity" class="page content-area">
+                <div class="dashboard-header">
+                    <h1>Temperature & Humidity Sensor</h1>
+                </div>
+                <div class="sensor-content">
+                    <!-- Current Status Section -->
+                    <div class="status-section">
+                        <div class="status-card">
+                            <h3>Current Readings</h3>
+                            <div class="status-info">
+                                <p>Record Time: <span id="record-time">{{thtime}}</span></p>
+                                <p>Power: <span id="power">{{thpower}}</span></p>
+                                <p>Temperature: <span id="temperature">{{temperature}}</span>°C</p>
+                                <p>Humidity: <span id="humidity">{{humidity}}</span>%</p>
+                            </div>
+                            <h3> </h3>
+                        </div>
+                    </div>
+
+                    <!-- Data Visualization Section -->
+                    <div class="chart-section">
+                        <canvas id="temp-humidity-chart"></canvas>
+                    </div>
+
+                    <!-- Data Management Section -->
+                    <div class="data-management">
+                        <button onclick="exportSensorExcel()" class="data-btn">Export to Excel</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Human Motion Sensor Page -->
+            <div id="motion" class="page content-area">
+                <div class="dashboard-header">
+                    <h1>Human Motion Sensor</h1>
+                </div>
+                <div class="sensor-content">
+                    <!-- Current Status Section -->
+                    <div class="status-section">
+                        <div class="status-card">
+                            <h3>Current Readings</h3>
+                            <div class="status-info">
+                                <p>Record Time: <span id="motion-time">{{hmtime}}</span></p>
+                                <p>Power: <span id="motion-power">{{hmpower}}</span></p>
+                                <p>Human Activity: <span id="human-activity">{{ispresence}}</span></p>
+                            </div>
+                            <h3> </h3>
+                        </div>
+                    </div>
+
+                    <!-- Data Visualization Section -->
+                    <div class="chart-section">
+                        <canvas id="motion-chart"></canvas>
+                    </div>
+
+                    <!-- Data Management Section -->
+                    <div class="data-management">
+                        <button onclick="exportMotionExcel()" class="data-btn">Export to Excel</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Water Leak Sensor Page -->
+            <div id="water" class="page content-area">
+                <div class="dashboard-header">
+                    <h1>Water Leak Sensor</h1>
+                </div>
+                <div class="sensor-content">
+                    <!-- Current Status Section -->
+                    <div class="status-section">
+                        <div class="status-card">
+                            <h3>Current Readings</h3>
+                            <div class="status-info">
+                                <p>Record Time: <span id="water-time">{{wltime}}</span></p>
+                                <p>Power: <span id="water-power">{{wlpower}}</span></p>
+                                <p>Water Leak: <span id="water-leak">{{isleak}}</span></p>
+                            </div>
+                            <h3> </h3>
+                        </div>
+                    </div>
+
+                    <!-- Data Visualization Section -->
+                    <div class="chart-section">
+                        <canvas id="water-chart"></canvas>
+                    </div>
+
+                    <!-- Data Management Section -->
+                    <div class="data-management">
+                        <button onclick="exportWaterExcel()" class="data-btn">Export to Excel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{{url_for('static', filename='script.js')}}"></script>
 </body>
-</html>
+</html> 

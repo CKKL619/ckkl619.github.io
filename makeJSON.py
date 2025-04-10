@@ -334,8 +334,6 @@ class Read:
     print("done")
 """
 
-
-
 """testing update
     result = Read.powerstatus("6784559bdb5ebfa5ad8cc77e","charger")
     print(f"the result is: {result}")

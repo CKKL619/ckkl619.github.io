@@ -101,32 +101,7 @@ def autoUpdate():#set time limit for one loop, save cpu power
             thewaterleakhis = waterleakhis.insert_one(waterleak_data)
             #print(f"update waterleak failed:{thewaterleak}panel{thepanel}")
     
-        try:
-            charger_id = 'CDJ940009'
-            chargerData = charger_data.fetch_data_with_curl(charger_id)
-            charger = testdatabase.get_collection("charger")
-            if chargerData != None:
-                thecharger = charger.find_one_and_update({'_id': thechargerid},{'$set': chargerData})
-                thepanel = panel.find_one_and_update({'_id': thepanelid},{'$set':{'ischarger': True}})
-
-                chargerData["deviceid"] = thechargerid
-                thechargerhis = chargerhis.insert_one(chargerData)
-                #print(f"charger data:{chargerData}panel{thepanel}")   
-            else:
-                chargerData = makeJSON.makeJSON.charger("unknown", "unknown", "unknown", "unknown", "unknown", "unknown", False)
-                thecharger = charger.find_one_and_update({'_id': thechargerid},{'$set': chargerData})
-                thepanel = panel.find_one_and_update({'_id': thepanelid},{'$set':{'ischarger': False}})
-
-                chargerData["deviceid"] = thechargerid
-                thechargerhis = chargerhis.insert_one(chargerData)
-                #print(f"update charger failed:{thecharger}panel{thepanel}") 
-        except Exception as e:
-            chargerData = makeJSON.makeJSON.charger("unknown", "unknown", "unknown", "unknown", "unknown", "unknown", False)
-            thecharger = charger.find_one_and_update({'_id': thechargerid},{'$set': chargerData})
-            thepanel = panel.find_one_and_update({'_id': thepanelid},{'$set':{'ischarger': False}})
-
-            chargerData["deviceid"] = thechargerid
-            thechargerhis = chargerhis.insert_one(chargerData)
+            
             #print(f"update charger failed:{thecharger}panel{thepanel}")
 
         #print("Complete one loop")
@@ -163,7 +138,7 @@ def updates_for_charger():
         thelinkage = linkagecollection.find_one({'ownerid': ObjectId("6784559cdb5ebfa5ad8cc783")})
         thechargerid = thelinkage["chargerid"]
         thecharger = chargercollection.find_one(thechargerid)
-        print(thecharger["power"])
+        #print(thecharger["power"])
         state = thecharger["power"] if thecharger["power"] else False
         chargingStatus = thecharger["chargingStatus"] if thecharger["chargingStatus"] else 0
         energyConsumption = thecharger["energyConsumption"] if thecharger["energyConsumption"] else False
@@ -174,13 +149,14 @@ def updates_for_charger():
                 'energyConsumption': energyConsumption
             })
 
+
 def send_update(state, chargingStatus, energyConsumption):
     sio.emit('update_data', {
         'state': state,
         'chargingStatus': chargingStatus,
         'energyConsumption': energyConsumption
     })
-
+"""
 @app.route('/index.html') 
 def index(): 
     return render_template('index.html')
@@ -188,13 +164,62 @@ def index():
 @app.route('/home.html') 
 def home(): 
     return render_template('home.html')
-
+"""
 @app.route('/') 
 def login(): 
-    return render_template('login.html')
+    charger = testdatabase.get_collection("charger")#reach collections and find current data
+    thechargerid = thelinkage["chargerid"]
+    thecharger = charger.find_one(thechargerid)
+    #print(thecharger["power"])
+    chpower = thecharger["power"] if thecharger["power"] else False
+    chargingStatus = thecharger["chargingStatus"] if thecharger["chargingStatus"] else "No Status"
+    chargingTime = thecharger["chargingTime"] if thecharger["chargingTime"] else 0
+    raw_chargerid = thecharger["_id"]
+    chargerid = str(raw_chargerid) if raw_chargerid else "Can not fetch"
 
-@app.route('/charger.html')
-def charger():
+    chargercollection = historydatabase.get_collection("charger")#getting the history data
+    chrecords = chargercollection.find({"deviceid": thechargerid }).skip(0).limit(20)
+    #charger end
+
+    human_motion = testdatabase.get_collection("human_motion")
+    themotionid = thelinkage["human_motionid"]
+    thesensor = human_motion.find_one(themotionid)
+
+    hmpower = thesensor["power"] if thesensor["power"] else False
+    ispresence = thesensor["ispresence"] if thesensor["ispresence"] else "No Status"
+    hmtime = thesensor["datetime"] if thesensor["datetime"] else "No Status"
+
+    human_motioncollection = historydatabase.get_collection("human_motion")
+    hmrecords = human_motioncollection.find({"deviceid": themotionid }).skip(0).limit(20)
+    #human_motion end
+
+    waterleak =testdatabase.get_collection("waterleak")
+    thewaterleakid = thelinkage["waterleakid"]
+    thesensor = waterleak.find_one(thewaterleakid)
+
+    wlpower = thesensor["power"] if thesensor["power"] else False
+    isleak = thesensor["isleak"] if thesensor["isleak"] else "No Status"
+    wltime = thesensor["datetime"] if thesensor["datetime"] else "No Status"
+
+    waterleakcollection = historydatabase.get_collection("waterleak")
+    wlrecords = waterleakcollection.find({"deviceid": thewaterleakid }).skip(0).limit(20)
+    #waterleak end
+
+    temp_humid = testdatabase.get_collection("temp_humid")
+    thesensor = temp_humid.find_one(thetemphumidid)
+    thpower = thesensor["power"] if thesensor["power"] else False
+    temperature = thesensor["temperature"] if thesensor["temperature"] else "unknown"
+    humidity = thesensor["humidity"] if thesensor["humidity"] else "unknown"
+    chargerid = thesensor["_id"] if thesensor["_id"] else "unknown"
+    thtime = thesensor["datetime"] if thesensor["datetime"] else "unknown"
+
+    temp_humidcollection = historydatabase.get_collection("temp_humid")
+    threcords = temp_humidcollection.find({"deviceid": thetemphumidid }).skip(0).limit(20)
+    #temp_humid end
+    return render_template('index.html',chpower = chpower, chargingStatus=chargingStatus, chargingTime=chargingTime, chargerid = chargerid, chrecords=chrecords,hmpower = hmpower, ispresence = ispresence, hmtime = hmtime, hmrecords=hmrecords,wlpower = wlpower, isleak = isleak, wltime = wltime, wlrecords=wlrecords,thpower = thpower, temperature = temperature, humidity =humidity, thtime=thtime, threcords=threcords)
+
+@app.route('/charger.html') 
+def charger(): 
     charger = testdatabase.get_collection("charger")#reach collections and find current data
     thechargerid = thelinkage["chargerid"]
     thecharger = charger.find_one(thechargerid)
@@ -206,11 +231,7 @@ def charger():
     chargerid = str(raw_chargerid) if raw_chargerid else "Can not fetch"
 
     chargercollection = historydatabase.get_collection("charger")#getting the history data
-    records = list(chargercollection.find({"deviceid": thechargerid }).skip(0).limit(20))
-
-    # Prepare data for line graph
-    chargingStatus_values = [0 if record['chargingStatus'] == 'unknown' else 1 for record in records]  # Convert presence to binary
-    chargingTime_values = [record['chargingTime'] for record in records]
+    chrecords = chargercollection.find({"deviceid": thechargerid }).skip(0).limit(20)
     """
     # need to use a loop to retrieve data in html, maximum 20 records can be read
     #example one record of records in a charger:
@@ -222,10 +243,10 @@ def charger():
 
 
     """
-    return render_template('charger.html', power = power, chargingStatus=chargingStatus, chargingTime=chargingTime, chargerid = chargerid, records=records, chargingStatus_values = chargingStatus_values, chargingTime_values = chargingTime_values)
+    return render_template('charger.html', power = power, chargingStatus=chargingStatus, chargingTime=chargingTime, chargerid = chargerid, chrecords=chrecords)
 
-@app.route('/human_motion.html')
-def human_motion():
+@app.route('/human_motion.html') 
+def human_motion(): 
     human_motion = testdatabase.get_collection("human_motion")
     themotionid = thelinkage["human_motionid"]
     thesensor = human_motion.find_one(themotionid)
@@ -235,12 +256,7 @@ def human_motion():
     time = thesensor["datetime"] if thesensor["datetime"] else "No Status"
 
     human_motioncollection = historydatabase.get_collection("human_motion")
-    records = list(human_motioncollection.find({"deviceid": themotionid}).skip(0).limit(20))
-
-    # Prepare data for line graph
-    times = [record['datetime'] for record in records]
-    ispresence_values = [1 if record['ispresence'] == 'pir' else 0 for record in records]  # Convert presence to binary
-
+    hmrecords = human_motioncollection.find({"deviceid": themotionid }).skip(0).limit(20)
     """
     # example one record of records in a human motion sensor: ispresence could be "pir" or "unknown"
     #{'_id': ObjectId('6784559cdb5ebfa5ad8cc77f'), 'datetime': '2025-03-22 09:18:12', 'ispresence': 'unknown', 'power': False}
@@ -248,10 +264,10 @@ def human_motion():
         print(record)
 
     """
-    return render_template('human_motion.html', power = power, ispresence = ispresence, time = time, records=records, times=times, ispresence_values=ispresence_values)
+    return render_template('human_motion.html', power = power, ispresence = ispresence, time = time, hmrecords=hmrecords)
 
-@app.route('/water.html')
-def water():
+@app.route('/water.html') 
+def water(): 
     waterleak =testdatabase.get_collection("waterleak")
     thewaterleakid = thelinkage["waterleakid"]
     thesensor = waterleak.find_one(thewaterleakid)
@@ -261,23 +277,19 @@ def water():
     time = thesensor["datetime"] if thesensor["datetime"] else "No Status"
 
     waterleakcollection = historydatabase.get_collection("waterleak")
-    records = list(waterleakcollection.find({"deviceid": thewaterleakid }).skip(0).limit(20))
-
-    # Prepare data for line graph
-    times = [record['datetime'] for record in records]
-    isleak_values = [0 if record['isleak'] == 'unknown' else 1 for record in records]  # Convert presence to binary
+    wlrecords = waterleakcollection.find({"deviceid": thewaterleakid }).skip(0).limit(20)
 
     """
-    # example one record of records in a waterleak sensor:
+    # example one record of records in a waterleak sensor: 
     #{'_id': ObjectId('6784559cdb5ebfa5ad8cc784'), 'datetime': '2025-03-22 09:18:12', 'isleak': 'unknown', 'power': False}
     for record in records:
         print(record)
 
     """
-    return render_template('water.html',power = power, isleak = isleak, time = time, records=records, times=times, isleak_values=isleak_values)
+    return render_template('water.html',power = power, isleak = isleak, time = time, wlrecords=wlrecords)
 
-@app.route('/temp_humid.html')
-def temp_humid():
+@app.route('/temp_humid.html') 
+def temp_humid(): 
     temp_humid = testdatabase.get_collection("temp_humid")
     thesensor = temp_humid.find_one(thetemphumidid)
     power = thesensor["power"] if thesensor["power"] else False
@@ -287,20 +299,15 @@ def temp_humid():
     time = thesensor["datetime"] if thesensor["datetime"] else "unknown"
 
     temp_humidcollection = historydatabase.get_collection("temp_humid")
-    records = list(temp_humidcollection.find({"deviceid": thetemphumidid }).skip(0).limit(20))
-
-    # Prepare data for line graph
-    times = [record['datetime'] for record in records]
-    temperature_values = [record['temperature'] for record in records]
-    humidity_values = [record['humidity'] for record in records]
+    threcords = temp_humidcollection.find({"deviceid": thetemphumidid }).skip(0).limit(20)
     """
-    # example one record of records in a temp humid sensor:
+    # example one record of records in a temp humid sensor: 
     #{'_id': ObjectId('6784559cdb5ebfa5ad8cc782'), 'datetime': '2025-03-22 09:18:12', 'temperature': 'unknown', 'humidity': 'unknown', 'power': False}
     for record in records:
         print(record)
 
     """
-    return render_template('temp_humid.html',power = power, temperature = temperature, humidity =humidity, chargerid = chargerid,time=time, records=records, times=times, temperature_values = temperature_values, humidity_values = humidity_values)
+    return render_template('temp_humid.html',power = power, temperature = temperature, humidity =humidity, chargerid = chargerid,time=time, threcords=threcords)
 
 @app.route("/toggleChargerTrue", methods=['POST'])
 def togglechargertrue():

@@ -1,0 +1,374 @@
+/* General Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f7fa;
+    color: #333;
+}
+
+/* Login Page */
+#login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+}
+
+.login-container {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.logo {
+    width: 80px;
+    margin-bottom: 1rem;
+}
+
+.input-field {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.login-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #1e3c72;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.login-btn:hover {
+    background-color: #2a5298;
+}
+
+/* Main Layout */
+#main-content {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 250px;
+    background: #1e3c72;
+    color: white;
+    padding: 1.5rem;
+}
+
+.logo-container {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.nav-links {
+    list-style: none;
+    padding: 0;
+}
+
+.nav-btn {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 0.5rem;
+    background: none;
+    border: none;
+    color: white;
+    text-align: left;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.nav-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.nav-btn.active {
+    background-color: #2a5298;
+}
+
+.content-area {
+    flex: 1;
+    padding: 2rem;
+}
+
+/* Dashboard Styles */
+.dashboard-header {
+    margin-bottom: 2rem;
+}
+
+.info-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    margin-bottom: 1.5rem;
+}
+
+.info-card h2 {
+    color: #1e3c72;
+    margin-bottom: 1rem;
+}
+
+.info-card p {
+    line-height: 1.6;
+    color: #666;
+}
+
+.info-card ul {
+    list-style: none;
+    padding: 0;
+}
+
+.info-card ul li {
+    padding: 8px 0;
+    color: #666;
+}
+
+/* Charger Page Styles */
+.charger-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+.status-section {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.status-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.status-info p {
+    margin: 0.5rem 0;
+    color: #666;
+}
+
+.status-info span {
+    color: #1e3c72;
+    font-weight: 500;
+}
+
+.status-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.control-btn {
+    padding: 8px 16px;
+    background-color: #1e3c72;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.control-btn:hover {
+    background-color: #2a5298;
+}
+
+.search-section {
+    display: flex;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.search-input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.search-btn {
+    padding: 8px 16px;
+    background-color: #1e3c72;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.search-btn:hover {
+    background-color: #2a5298;
+}
+
+.chart-section {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.data-management {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+}
+
+.data-btn {
+    padding: 8px 16px;
+    background-color: #1e3c72;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.data-btn:hover {
+    background-color: #2a5298;
+}
+
+/* Sensor Page Styles */
+.sensor-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+.status-info p {
+    margin: 0.5rem 0;
+    color: #666;
+}
+
+.status-info span {
+    color: #1e3c72;
+    font-weight: 500;
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+    /* General Layout */
+    #main-content {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        padding: 1rem;
+    }
+
+    .logo-container {
+        display: none;
+    }
+
+    .nav-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .nav-btn {
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+
+    .content-area {
+        padding: 1rem;
+    }
+
+    /* Login Page */
+    .login-container {
+        padding: 1.5rem;
+        margin: 1rem;
+    }
+
+    /* Status Cards */
+    .status-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .status-controls {
+        margin-top: 1rem;
+        width: 100%;
+    }
+
+    .control-btn {
+        width: 100%;
+        margin-top: 0.5rem;
+    }
+
+    /* Search Section */
+    .search-section {
+        flex-direction: column;
+    }
+
+    .search-btn {
+        width: 100%;
+        margin-top: 0.5rem;
+    }
+
+    /* Charts */
+    .chart-section {
+        padding: 1rem;
+    }
+
+    /* Data Management */
+    .data-management {
+        flex-direction: column;
+    }
+
+    .data-btn {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+
+    /* Info Cards */
+    .info-card {
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Further adjustments for very small screens */
+    .login-container {
+        padding: 1rem;
+    }
+
+    .status-info p {
+        font-size: 14px;
+    }
+
+    .dashboard-header h1 {
+        font-size: 1.5rem;
+    }
+
+    .info-card h2 {
+        font-size: 1.2rem;
+    }
+
+    .info-card p {
+        font-size: 14px;
+    }
+}
+
+/* Add viewport meta tag in HTML head */ 
