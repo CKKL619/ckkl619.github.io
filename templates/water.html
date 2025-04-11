@@ -4,7 +4,7 @@
 	<link rel = "stylesheet" href = "{{url_for('static', filename='webpage_style.css')}}">
 	<script src = "{{url_for('static', filename='script.js')}}"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script><!--generate excel file-->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script><!--generate data graph-->
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script><!--generate data graph-->
 </head>
 <body>
 	<h1>Water Leakage</h1>
@@ -21,19 +21,19 @@
 		<table id="data">
 			<tbody>
 				<tr>
-					<td>Charger Number:</td>
-					<td id="charger-number"></td>
+					<td class="info">Charger Number:</td>
+					<td id="charger-number">{{chargerid}}</td>
 				</tr>
 				<tr>
-					<td>Power:</td>
+					<td class="info">Power:</td>
 					<td id="power">{{power}}</td>
 				</tr>
 				<tr>
-					<td>Record Time:</td>
+					<td class="info">Record Time:</td>
 					<td id="time">{{time}}</td>
 				</tr>
 				<tr>
-					<td>Water Leak:</td>
+					<td class="info">Water Leak:</td>
 					<td id="water">{{isleak}}</td>
 				</tr>
 			</tbody>
@@ -122,9 +122,9 @@
 			const chargerNum = document.getElementById("input").value.trim();
 			const outputNum = document.getElementById("output");
 			const outputData = document.getElementById("data");
-			const checkPower = ("On");
-			const checkTime = ("9:00");
-			const checkWater = ("No");
+			const checkPower = {{ power|tojson }};
+			const checkTime = {{ time|tojson }};
+			const checkWater = {{ isleak|tojson }};
 			const chargerNumFormat = /^CDJ\d{6}$/;/*charger number format, must start with CDJ follow by six digit number*/
 			if(chargerNum === ""){/*check if input is empty*/
 				outputNum.innerHTML = "Please input charger number."
@@ -197,7 +197,7 @@
 				XLSX.writeFile(workbook, "waterLog.xlsx");
 			}
         }
-		document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function() {
 			const ctx = document.getElementById('waterLeakChart').getContext('2d');
 			const times = {{ times|tojson }};
 			const isleakValues = {{ isleak_values|tojson }};
@@ -215,6 +215,8 @@
 					}]
 				},
 				options: {
+				    responsive: true, /*make the chart responsive*/
+                    maintainAspectRatio: false, /*allow height to be adjusted*/
 					scales: {
                     x: {
                         title: {
@@ -231,9 +233,10 @@
                             display: true,
                             text: 'Water Leak Status'
                         },
+                        min: 0,
+                        max: 1,
+                        beginAtZero: true,
                         ticks: {
-                            min: 0,
-                            max: 1,
                             stepSize: 1,
                             callback: function(value) {
                                 return value === 1 ? 'Yes' : 'Unknown';
@@ -244,6 +247,18 @@
 				}
 			});
 		});
+		function exportAsGraph(water) {
+			const times = {{ times|tojson }};
+			const isleakValues = {{ isleak_values|tojson }};
+			const wb = XLSX.utils.book_new();
+			const wsData = [['Time', 'Water Leak Status']];
+			for (let i = 0; i < times.length; i++) {
+				wsData.push([times[i], isleakValues[i]]);
+			}
+			const ws = XLSX.utils.aoa_to_sheet(wsData);
+			XLSX.utils.book_append_sheet(wb, ws, 'Water Leak Data');
+			XLSX.writeFile(wb, 'waterLeakGraphData.xlsx');
+		}
 		document.getElementById("toggleSwitch").addEventListener("change", function() {
 			if (this.checked) {
 				fetch("/toggleWaterleakTrue", {
