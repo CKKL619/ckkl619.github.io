@@ -32,10 +32,8 @@
                 this.classList.add('active');
             });
         });
-		if(document.referrer === ""){check if url is input from textbar
-			window.location.href = "login.html";
-		}else{
-			window.location.href = "index.html";
+		if(document.referrer === ""){/*check if url is input from textbar*/
+			window.location.href = "/";
 		}
 
 		function resizeIFrameToFitContent(iFrame) {
@@ -47,11 +45,11 @@
 			var iFrame = document.getElementById('iFrame');
 			resizeIFrameToFitContent(iFrame);
 		});
-		
+
 		function logoutConfirm(){
         	let text = "Press OK to logout";
         	if (confirm(text) == true) {
-        		window.location.href = "login.html" ;
+        		window.location.href = "/" ;
         	}else{
         		window.location.href = "index.html";
           }
@@ -59,3 +57,4 @@
     </script>
 </body>
 </html>
+
