@@ -4,7 +4,7 @@
 	<link rel = "stylesheet" href = "{{url_for('static', filename='webpage_style.css')}}">
 	<script src = "{{url_for('static', filename='script.js')}}"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script><!--generate excel file-->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script><!--generate data graph-->
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script><!--generate data graph-->
 </head>
 <body>
 	<h1>Charger</h1>
@@ -21,19 +21,19 @@
 		<table id="data">
 			<tbody>
 				<tr>
-					<td>Charger Number:</td>
-					<td id="charger-number"></td>
+					<td class="info">Charger Number:</td>
+					<td id="charger-number">{{chargerid}}</td>
 				</tr>
 				<tr>
-					<td>Power:</td>
+					<td class="info">Power:</td>
 					<td id="power">{{power}}</td>
 				</tr>
 				<tr>
-					<td>Charging Status:</td>
+					<td class="info">Charging Status:</td>
 					<td id="status">{{chargingStatus}}</td>
 				</tr>
 				<tr>
-					<td>Charging Time:</td>
+					<td class="info">Charging Time:</td>
 					<td id="time">{{chargingTime}}</td>
 				</tr>
 			</tbody>
@@ -122,9 +122,9 @@
 			const chargerNum = document.getElementById("input").value.trim();
 			const outputNum = document.getElementById("output");
 			const outputData = document.getElementById("data");
-			const checkPower = ("On");
-			const checkStatus = ("Charging");
-			const checkTime = ("100s");
+			const checkPower = {{ power|tojson }};
+			const checkStatus = {{ chargingStatus|tojson }};
+			const checkTime = {{ chargingTime|tojson }};
 			const chargerNumFormat = /^CDJ\d{6}$/;/*charger number format, must start with CDJ follow by six digit number*/
 			if(chargerNum === ""){/*check if input is empty*/
 				outputNum.innerHTML = "Please input charger number.";
@@ -197,7 +197,7 @@
 				XLSX.writeFile(workbook, "chargerLog.xlsx");
 			}
         }
-	document.addEventListener('DOMContentLoaded', function() {
+		document.addEventListener('DOMContentLoaded', function() {
 			const ctx = document.getElementById('chargerChart').getContext('2d');
 			const chargingStatusValues = {{ chargingStatus_values|tojson }};
 			const chargingTimeValues = {{ chargingTime_values|tojson }};
@@ -243,6 +243,18 @@
 				}
 			});
 		});
+		function exportAsGraph(charge) {
+			const chargingStatusValues = {{ chargingStatus_values|tojson }};
+			const chargingTimeValues = {{ chargingTime_values|tojson }};
+			const wb = XLSX.utils.book_new();
+			const wsData = [['Charging Status', 'Charging Time']];
+			for (let i = 0; i < chargingStatusValues.length; i++) {
+				wsData.push([chargingStatusValues[i], chargingTimeValues[i]]);
+			}
+			const ws = XLSX.utils.aoa_to_sheet(wsData);
+			XLSX.utils.book_append_sheet(wb, ws, 'Charger Data');
+			XLSX.writeFile(wb, 'chargerGraphData.xlsx');
+		}
 		document.getElementById("toggleSwitch").addEventListener("change", function() {
 		if (this.checked) {
 			fetch("/toggleChargerTrue", {
