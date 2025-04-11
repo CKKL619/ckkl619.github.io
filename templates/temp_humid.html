@@ -4,7 +4,7 @@
 	<link rel = "stylesheet" href = "{{url_for('static', filename='webpage_style.css')}}">
 	<script src = "{{url_for('static', filename='script.js')}}"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script><!--generate excel file-->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script><!--generate data graph-->
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script><!--generate data graph-->
 </head>
 <body>
 	<h1>Temperature/Humidity Sensor</h1>
@@ -21,23 +21,23 @@
 		<table id="data">
 			<tbody>
 				<tr>
-					<td>Charger Number:</td>
-					<td id="charger-number"></td>
+					<td class="info">Charger Number:</td>
+					<td id="charger-number">{{chargerid}}</td>
 				</tr>
 				<tr>
-					<td>Power:</td>
+					<td class="info">Power:</td>
 					<td id="power">{{power}}</td>
 				</tr>
 				<tr>
-					<td>Record Time:</td>
+					<td class="info">Record Time:</td>
 					<td id="time">{{time}}</td>
 				</tr>
 				<tr>
-					<td>Temperature:</td>
+					<td class="info">Temperature:</td>
 					<td id="temperature">{{temperature}}</td>
 				</tr>
 				<tr>
-					<td>Humidity:</td>
+					<td class="info">Humidity:</td>
 					<td id="humidity">{{humidity}}</td>
 				</tr>
 			</tbody>
@@ -137,10 +137,10 @@
 			const chargerNum = document.getElementById("input").value.trim();
 			const outputNum = document.getElementById("output");
 			const outputData = document.getElementById("data");
-			const checkPower = ("On");
-			const checkTime = ("9:00");
-			const checkTemp = ("40");
-			const checkHumid = ("60%");
+			const checkPower = {{ power|tojson }};
+			const checkTime = {{ time|tojson }};
+			const checkTemp = {{ temperature|tojson }};
+			const checkHumid = {{ humidity|tojson }};
 			const chargerNumFormat = /^CDJ\d{6}$/;/*charger number format, must start with CDJ follow by six digit number*/
 			if(chargerNum === ""){/*check if input is empty*/
 				outputNum.innerHTML = "Please input charger number."
@@ -217,6 +217,124 @@
 				XLSX.writeFile(workbook, "tempHumidLog.xlsx");
 			}
         }
+		document.addEventListener('DOMContentLoaded', function() {
+			const ctx = document.getElementById('temperatureChart').getContext('2d');
+			const times = {{ times|tojson }};
+			const temperatureValues = {{ temperature_values|tojson }};
+			const temperatureChart = new Chart(ctx, {
+				type: 'line',
+				data: {
+					labels: times,
+					datasets: [{
+						label: 'Temperature (°C)',
+						data: temperatureValues,
+						borderColor: 'rgba(75, 192, 192, 1)',
+						backgroundColor: 'rgba(75, 192, 192, 0.2)',
+						borderWidth: 2,
+						fill: false,
+					}]
+				},
+				options: {
+					responsive: true, /*make the chart responsive*/
+                    maintainAspectRatio: false, /*allow height to be adjusted*/
+					scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Time'
+                        },
+                        ticks: {
+                            autoSkip: true,
+                            maxTicksLimit: 20
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Temperature (°C)'
+                        },
+						min: 0,
+                        max: 40,
+						beginAtZero: true,
+                        ticks: {
+                            stepSize: 1
+                        }
+                    }
+                }
+				}
+			});
+		});
+		document.addEventListener('DOMContentLoaded', function() {
+			const ctx = document.getElementById('humidityChart').getContext('2d');
+			const times = {{ times|tojson }};
+			const humidityValues = {{ humidity_values|tojson }};
+			const humidityChart = new Chart(ctx, {
+				type: 'line',
+				data: {
+					labels: times,
+					datasets: [{
+						label: 'Humidity (%)',
+						data: humidityValues,
+						borderColor: 'rgba(75, 192, 192, 1)',
+						backgroundColor: 'rgba(75, 192, 192, 0.2)',
+						borderWidth: 2,
+						fill: false,
+					}]
+				},
+				options: {
+					responsive: true, /*make the chart responsive*/
+                    maintainAspectRatio: false, /*allow height to be adjusted*/
+					scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Time'
+                        },
+                        ticks: {
+                            autoSkip: true,
+                            maxTicksLimit: 20
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Humidity (%)'
+                        },
+						min: 0,
+                        max: 100,
+						beginAtZero: true,
+                        ticks: {
+                            stepSize: 1
+                        }
+                    }
+                }
+				}
+			});
+		});
+		function exportAsGraph(temp) {
+			const times = {{ times|tojson }};
+			const temperatureValues = {{ temperature_values|tojson }};
+			const wb = XLSX.utils.book_new();
+			const wsData = [['Time', 'Temperature (°C)']];
+			for (let i = 0; i < times.length; i++) {
+				wsData.push([times[i], temperatureValues[i]]);
+			}
+			const ws = XLSX.utils.aoa_to_sheet(wsData);
+			XLSX.utils.book_append_sheet(wb, ws, 'Temperature Data');
+			XLSX.writeFile(wb, 'temperatureGraphData.xlsx');
+		}
+		function exportAsGraph(humid) {
+			const times = {{ times|tojson }};
+			const humidityValues = {{ humidity_values|tojson }};
+			const wb = XLSX.utils.book_new();
+			const wsData = [['Time', 'Humidity (%)']];
+			for (let i = 0; i < times.length; i++) {
+				wsData.push([times[i], humidityValues[i]]);
+			}
+			const ws = XLSX.utils.aoa_to_sheet(wsData);
+			XLSX.utils.book_append_sheet(wb, ws, 'Humidity Data');
+			XLSX.writeFile(wb, 'humidityGraphData.xlsx');
+		}
 		document.getElementById("toggleSwitch").addEventListener("change", function() {
 			if (this.checked) {
 				fetch("/toggleTemp_humidTrue", {
