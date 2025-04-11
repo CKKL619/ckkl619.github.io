@@ -1,10 +1,12 @@
-h1, h2, p{text-align: center; margin-bottom: 20px; font-family: "Times New Roman", Times, serif;}
+h1, h2{font-weight: bold; font-size: 2em; margin-top: 10px; text-align:center;}
+
+p{text-align: center; margin-bottom: 20px; font-family: "Times New Roman", serif;}
 
 body{background-color: #FFFFFF;}
 
 #Time{background-color: #F1F1F2; border-radius: 10px; padding: 0.5px;
  font-family: "Lucida Console", "Courier New", monospace;}
- 
+
 a{margin: 10px;}
 
 th{font-size: 30px;}
@@ -17,12 +19,12 @@ th{font-size: 30px;}
 		font-family: Helvetica;}
 
 .shortcut img{width: 100%; height: auto; border-radius: 10px; margin:10px;}
-			
+
 .preview:hover, .shortcut img:hover{transform: scale(1.03); box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);}
 
-a{background-color: #A1D6E2;}
+a{color: #FFFFFF; background-color: #A1D6E2;}
 
-a:hover{background-color: #1995AD;}
+a:hover{color: #FFFFFF; background-color: #1995AD;}
 
 @media only screen and (max-width: 600px) {
   .item1 {grid-area: 1;}
