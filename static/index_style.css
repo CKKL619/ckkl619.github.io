@@ -15,16 +15,16 @@ a:hover{background-color: #1995AD; color: #FFFFFF;}
 
 a:active{color: #F1F1F2;}
 
-div#column1{color: #FFFFFF; background-color: #A1D6E2; width: 250px; margin-right: 10px;}
+div#column1{color: #FFFFFF; background-color: #A1D6E2; width: 250px; margin-right: 10px; border-radius: 4px;}
 
 /*main content*/
 div#column2{width:90%; float:right;}
 
-div#column2 iframe{width:100%; border:none; height:100vh;}
+div#column2 iframe{width:100%; border:none; height:100vh; border-radius: 4px;}
 
 /*clearfix*/
 .clearfloat{clear: both;}
-	
+
 /*media queries*/
 @media (max-width: px){div#column1, div#column2 {width: 100%; flex-direction: column;}
 	div#column1{order: 1;} div#column2 {order: 2;}
