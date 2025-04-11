@@ -6,7 +6,7 @@ p{padding:10px;}
 body{background-color: #F1F1F2}
 
 input[type="text"]{padding: 5px; border: 3px solid #ccc;
-    border-radius: 5px; width: 200px; margin: 10px 10px 10px; 
+    border-radius: 5px; width: 200px; margin: 10px 10px 10px;
 	height: 30px; border-color: #A1D6E2; outline-color: #1995AD;
 	font-family: "Lucida Console", "Courier New", monospace;}
 
@@ -25,13 +25,15 @@ text-align:center;}
 table{margin: 0 auto; margin-top:10px; margin-bottom: 10px; border-collapse: collapse;
 padding: 10px;}
 
-th{font-size: 24px;}
+th{font-size: 24px; padding: 10px;}
 
 td{padding: 10px; font-family: Verdana, Helvetica, sans-serif;}
 
 .row{display: flex; flex-wrap: wrap;}
 
 .column{flex: 1; padding: 10px;}
+
+.info{text-align: left;}
 
 #warning, #output{border-radius: 5px; color: #FFFFFF;}
 
@@ -57,7 +59,9 @@ input:checked + .slider{background-color: #A1D6E2;}
 input:checked + .slider:before{transform: translateX(26px);}
 
 /*data graph*/
-canvas{max-width: 100%; height: 600px;}
+#dataGraph {width: 100%;}
+
+canvas {width: 100% !important; height: 400px; max-height: 100%;}
 
 .container2{flex: 1 1 40%; margin-right: 10px;}
 
