@@ -166,7 +166,7 @@ def main():
         try:
             # Fetch data
             data = fetch_data_with_curl(charger_id)
-            print(f"data from id:{data}")
+            #print(f"data from id:{data}")
             if data:
                 logger.info(f"Data fetched successfully for charger {charger_id}")
                 if store_in_mongodb(data):

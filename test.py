@@ -2,7 +2,7 @@ import makeJSON
 import time
 from bson.objectid import ObjectId
 from pymongo import MongoClient
-import Motion_sensor, Temp_Hum_sensor, Water_leak_sensor, charger_data
+#import Motion_sensor, Temp_Hum_sensor, Water_leak_sensor, charger_data
 
 class Database:
     def __init__(self, host):
@@ -36,6 +36,12 @@ thepanelid = thelinkage["panelid"]
 thetemphumidid = thelinkage["temp_humidid"]
 thewaterleakid = thelinkage["waterleakid"]
 
+thecharger = charger.find_one(thechargerid)
+chargernum = thecharger["chargeBoxId"]
+
+
+
+print(chargernum)
 def autoUpdate():
     while True:
         try:
@@ -97,4 +103,25 @@ def autoUpdate():
         print("Complete one loop")
         time.sleep(2.5)
 
-autoUpdate()
+historydatabase = databaseConnection.client.get_database("TestHistory")#connect to database history
+chargerhis = historydatabase.get_collection("charger")#reach collections
+human_motionhis = historydatabase.get_collection("human_motion")
+panelhis = historydatabase.get_collection("panel")
+#speaker = testdatabase.get_collection("speaker")
+temp_humidhis = historydatabase.get_collection("temp_humid")
+#user = testdatabase.get_collection("user")
+waterleakhis =historydatabase.get_collection("waterleak")
+linkagehis = historydatabase.get_collection("linkage")
+chargercollection = historydatabase.get_collection("charger")#getting the history data
+records = list(chargercollection.find({"deviceid": thechargerid }).skip(0).limit(20))
+
+temphumidcollection = historydatabase.get_collection("temp_humid")
+threcords = temphumidcollection.find({"deviceid": thetemphumidid }).skip(0).limit(20)
+
+
+temperature_list = [record['temperature'] for record in threcords]
+threcords = temphumidcollection.find({"deviceid": thetemphumidid }).skip(0).limit(20)
+humidity_list = [record['humidity'] for record in threcords]
+
+print(humidity_list)
+#autoUpdate()

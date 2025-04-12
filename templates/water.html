@@ -22,7 +22,7 @@
 			<tbody>
 				<tr>
 					<td class="info">Charger Number:</td>
-					<td id="charger-number">{{chargerid}}</td>
+					<td id="charger-number">{{chargernum}}</td>
 				</tr>
 				<tr>
 					<td class="info">Power:</td>
@@ -37,7 +37,7 @@
 					<td id="water">{{isleak}}</td>
 				</tr>
 			</tbody>
-		</table>
+		</table><!--
 		<table class="switchtable">
 			<tr>
 				<th colspan="3">Charger Power</th>
@@ -51,7 +51,7 @@
 				</td>
 				<td><p>ON</p></td>
 			</tr>
-		</table>
+		</table>-->
 	</div>
 	<div class="row">
 		<div class="column container2">
@@ -116,6 +116,7 @@
 	</div>
 	<p id = "warning" class = "dataShow"></p><!--keep log button functional-->
 	<button onclick = "document.location='home.html'" target = "mainframe" style="float: right;">Home</button>
+	<br><br><br>
 	<script>
 		const data = [];
 		function printChargerNum(){
@@ -206,7 +207,7 @@
 				data: {
 					labels: times,
 					datasets: [{
-						label: 'Water Leak (1 = Yes, 0 = Unknown)',
+						label: 'Water Leak (1 = Yes, 0 = No)',
 						data: isleakValues,
 						borderColor: 'rgba(75, 192, 192, 1)',
 						backgroundColor: 'rgba(75, 192, 192, 0.2)',
@@ -239,7 +240,7 @@
                         ticks: {
                             stepSize: 1,
                             callback: function(value) {
-                                return value === 1 ? 'Yes' : 'Unknown';
+                                return value === 1 ? 'Yes' : 'No';
                             }
                         }
                     }
@@ -258,7 +259,7 @@
 			const ws = XLSX.utils.aoa_to_sheet(wsData);
 			XLSX.utils.book_append_sheet(wb, ws, 'Water Leak Data');
 			XLSX.writeFile(wb, 'waterLeakGraphData.xlsx');
-		}
+		}/*
 		document.getElementById("toggleSwitch").addEventListener("change", function() {
 			if (this.checked) {
 				fetch("/toggleWaterleakTrue", {
@@ -279,7 +280,7 @@
 					if (response.ok) {
 						console.log("Toggle switched to false"); }
 					else {
-						console.error("Failed to send request"); } }).catch(error => { console.error("Error:", error); }); } });
+						console.error("Failed to send request"); } }).catch(error => { console.error("Error:", error); }); } });*/
     </script>
 </body>
 </html>

@@ -1,60 +1,99 @@
 <!DOCTYPE html>
+<html>
 <head>
-	<title>Homepage</title>
-	<link rel = "stylesheet" href = "{{url_for('static', filename='index_style.css')}}">
+	<title>Charger Info Dashboard</title>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='unified_style.css') }}">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+	<script src="{{url_for('static', filename='script.js')}}"></script>
 </head>
-<body>
-	<div id="contentarea">
-		<div id="column1">
-			<div id="header">Charger Info</div>
-			<a href="home.html" target="mainframe">Home</a>
-			<a href="charger.html" target="mainframe">Charger</a>
-			<a href="human_motion.html" target="mainframe">Human Motion</a>
-			<a href="temp_humid.html" target="mainframe">Temperature/Humidity</a>
-			<a href="water.html" target="mainframe">Water Leakage</a>
-			<a onclick="logoutConfirm()">Logout</a>
+<body class="dashboard-body">
+	<div class="dashboard-container">
+		<button class="nav-toggle" onclick="toggleNav()">☰</button>
+		<div class="nav-overlay" onclick="toggleNav()"></div>
+		
+		<div class="sidebar">
+			<div class="sidebar-header">
+				<h1>Charger Info</h1>
+			</div>
+			<ul class="nav-menu">
+				<li class="nav-item">
+					<a href="home.html" target="mainframe" class="nav-link">
+						<i class="fas fa-home"></i> Home
+					</a>
+				</li>
+				<li class="nav-item">
+					<a href="charger.html" target="mainframe" class="nav-link">
+						<i class="fas fa-charging-station"></i> Charger
+					</a>
+				</li>
+				<li class="nav-item">
+					<a href="human_motion.html" target="mainframe" class="nav-link">
+						<i class="fas fa-walking"></i> Human Motion
+					</a>
+				</li>
+				<li class="nav-item">
+					<a href="temp_humid.html" target="mainframe" class="nav-link">
+						<i class="fas fa-temperature-high"></i> Temperature/Humidity
+					</a>
+				</li>
+				<li class="nav-item">
+					<a href="water.html" target="mainframe" class="nav-link">
+						<i class="fas fa-tint"></i> Water Leakage
+					</a>
+				</li>
+				<li class="nav-item">
+					<a href="#" onclick="logoutConfirm()" class="nav-link logout-btn">
+						<i class="fas fa-sign-out-alt"></i> Logout
+					</a>
+				</li>
+			</ul>
 		</div>
-		<div id="column2">
-			<iframe id="iFrame" name="mainframe" src="home.html"
-				frameborder="0" scrolling="yes" onload="resizeIFrameToFitContent(this);">
-			</iframe>
-		</div>
-		<div class="clearfloat">
-			<!-- purposely added to clear float -->
+		
+		<div class="main-content">
+			<div class="iframe-container">
+				<iframe id="mainframe" name="mainframe" src="home.html" frameborder="0" scrolling="yes"></iframe>
+			</div>
 		</div>
 	</div>
+	
 	<script>
-        const links = document.querySelectorAll('link');/*icons for charger and IoTs*/
-        links.forEach(link => {
-            link.addEventListener('click', function() {
-                links.forEach(l => l.classList.remove('active'));
-                this.classList.add('active');
-            });
-        });
-		if(document.referrer === ""){/*check if url is input from textbar*/
+		// Add active class to current page link
+		document.addEventListener('DOMContentLoaded', function() {
+			const links = document.querySelectorAll('.nav-link');
+			const currentPage = window.location.pathname.split('/').pop() || 'home.html';
+			
+			links.forEach(link => {
+				const href = link.getAttribute('href');
+				if (href === currentPage) {
+					link.classList.add('active');
+				}
+				
+				link.addEventListener('click', function() {
+					links.forEach(l => l.classList.remove('active'));
+					this.classList.add('active');
+				});
+			});
+		});
+		
+		// Check if URL is directly accessed
+		if(document.referrer === "") {
 			window.location.href = "/";
 		}
-
-		function resizeIFrameToFitContent(iFrame) {
-			iFrame.width = iFrame.contentWindow.document.body.scrollWidth;
-			iFrame.height = iFrame.contentWindow.document.body.scrollHeight;
+		
+		// Logout confirmation
+		function logoutConfirm() {
+			if (confirm("Are you sure you want to logout?")) {
+				window.location.href = "/";
+			}
 		}
-
-		window.addEventListener('DOMContentLoaded', function() {
-			var iFrame = document.getElementById('iFrame');
-			resizeIFrameToFitContent(iFrame);
-		});
-
-		function logoutConfirm(){
-        	let text = "Press OK to logout";
-        	if (confirm(text) == true) {
-        		window.location.href = "/" ;
-        	}else{
-        		window.location.href = "index.html";
-          }
-        }
-    </script>
+		
+		function toggleNav() {
+			const nav = document.querySelector('.sidebar');
+			const overlay = document.querySelector('.nav-overlay');
+			nav.classList.toggle('active');
+			overlay.classList.toggle('active');
+		}
+	</script>
 </body>
 </html>
 

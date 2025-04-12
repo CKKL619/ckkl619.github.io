@@ -22,7 +22,7 @@
 			<tbody>
 				<tr>
 					<td class="info">Charger Number:</td>
-					<td id="charger-number">{{chargerid}}</td>
+					<td id="charger-number">{{chargernum}}</td>
 				</tr>
 				<tr>
 					<td class="info">Power:</td>
@@ -41,7 +41,7 @@
 					<td id="humidity">{{humidity}}</td>
 				</tr>
 			</tbody>
-		</table>
+		</table><!--
 		<table class="switchtable">
 			<tr>
 				<th colspan="3">Charger Power</th>
@@ -55,7 +55,7 @@
 				</td>
 				<td><p>ON</p></td>
 			</tr>
-		</table>
+		</table>-->
 	</div>
 	<div class="row">
 		<div class="column container2">
@@ -112,26 +112,27 @@
 					</tr>
 					<tr>
 						<td>
+							<button onclick = "exportAsGraphtemp()">Download Graph(Temp)</button>
+						</td>
+					</tr>
+					<tr>
+						<td>
 							<canvas id="humidityChart"></canvas>
 						</td>
 					</tr>
-				</tbody>
-				<tr>
-					<td>
-						<button onclick = "exportAsGraph(temp)">Download Graph(Temp)</button>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<button onclick = "exportAsGraph(humid)">Download Graph(Humid)</button>
-					</td>
-				</tr>
+					<tr>
+						<td>
+							<button onclick = "exportAsGraphhumid()">Download Graph(Humid)</button>
+						</td>
+					</tr>
+				</tbody>	
 			</table>
 		</div>
 	</div>
 	<p id = "warning" class = "dataShow"></p><!--keep log button functional-->
 	<button onclick="document.location='home.html'" target="mainframe" style="float: right;">Home</button>
-    <script>
+    <br><br><br>
+	<script>
         const data = [];
 		function printChargerNum(){
 			const chargerNum = document.getElementById("input").value.trim();
@@ -311,7 +312,7 @@
 				}
 			});
 		});
-		function exportAsGraph(temp) {
+		function exportAsGraphtemp() {
 			const times = {{ times|tojson }};
 			const temperatureValues = {{ temperature_values|tojson }};
 			const wb = XLSX.utils.book_new();
@@ -323,7 +324,7 @@
 			XLSX.utils.book_append_sheet(wb, ws, 'Temperature Data');
 			XLSX.writeFile(wb, 'temperatureGraphData.xlsx');
 		}
-		function exportAsGraph(humid) {
+		function exportAsGraphhumid() {
 			const times = {{ times|tojson }};
 			const humidityValues = {{ humidity_values|tojson }};
 			const wb = XLSX.utils.book_new();
@@ -334,7 +335,7 @@
 			const ws = XLSX.utils.aoa_to_sheet(wsData);
 			XLSX.utils.book_append_sheet(wb, ws, 'Humidity Data');
 			XLSX.writeFile(wb, 'humidityGraphData.xlsx');
-		}
+		}/*
 		document.getElementById("toggleSwitch").addEventListener("change", function() {
 			if (this.checked) {
 				fetch("/toggleTemp_humidTrue", {
@@ -355,7 +356,7 @@
 					if (response.ok) {
 						console.log("Toggle switched to false"); }
 					else {
-						console.error("Failed to send request"); } }).catch(error => { console.error("Error:", error); }); } });
+						console.error("Failed to send request"); } }).catch(error => { console.error("Error:", error); }); } });*/
     </script>
 </body>
 </html>
