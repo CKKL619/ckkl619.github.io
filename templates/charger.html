@@ -217,7 +217,7 @@
 				data: {
 					labels: times,
 					datasets: [{
-						label: 'Charging Current(unit = Amperes)',
+						label: 'Charging Voltage(unit = voltage)',
 						data: current,
 						borderColor: 'rgba(75, 192, 192, 1)',
 						backgroundColor: 'rgba(75, 192, 192, 0.2)',
@@ -242,10 +242,10 @@
 						y: {
 							title: {
 								display: true,
-								text: 'Current A'
+								text: 'Voltage V'
 							},
 							min: 0,
-							max: 350,
+							max: 240,
 							beginAtZero: true,
 							ticks: {
 								stepSize: 1

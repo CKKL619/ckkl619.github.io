@@ -283,13 +283,21 @@ def charger():
     chargernum = thecharger["chargeBoxId"]
 
     chargercollection = historydatabase.get_collection("charger")#getting the history data
-    records = list(chargercollection.find({"deviceid": thechargerid }).skip(0).limit(20))
+    records = list(chargercollection.find({"deviceid": thechargerid }).sort([("datetime", -1)]).limit(80))
 
     # Prepare data for line graph
-    times = [record['datetime'] for record in records]
-    chargingStatus_values = [record['connectorStatus'] for record in records]  # Convert presence to binary
-    chargingTime_values = [record['chargingTime'] for record in records]
-    current = [record["meterValues"]["values"]["current.import"]["value"] for record in records]
+    #time
+    rawtimes = [record['datetime'] for record in records]
+    times = [rawtimes[i] for i in range(0, 80, 4)][:20]
+    #status
+    rawchargingStatus_values = [record['connectorStatus'] for record in records]  # Convert presence to binary
+    chargingStatus_values = [rawchargingStatus_values[i] for i in range(0, 80, 4)][:20]
+    #charging time
+    rawchargingTime_values = [record['chargingTime'] for record in records]
+    chargingTime_values = [rawchargingTime_values[i] for i in range(0, 80, 4)][:20]
+    #current
+    rawcurrent = [record["meterValues"]["values"]["voltage"]["value"] for record in records]
+    current = [rawcurrent[i] for i in range(0, 80, 4)][:20]
     """
     # need to use a loop to retrieve data in html, maximum 20 records can be read
     #example one record of records in a charger:
@@ -315,14 +323,19 @@ def human_motion():
     records = list(human_motioncollection.find({"deviceid": themotionid}).skip(0).limit(20))
 
     # Prepare data for line graph
-    times = [record['datetime'] for record in records]
-    ispresence_values = [1 if record['ispresence'] == 'pir' else 0 for record in records]  # Convert presence to binary
-    chargerid = thechargerid
+    #time
+    timesrecords = list(human_motioncollection.find({"deviceid": themotionid }).sort([("datetime", -1)]).limit(80))
+    rawtimes = [record['datetime'] for record in timesrecords]
+    times = [rawtimes[i] for i in range(0, 80, 4)][:20]
+    #ispresence
+    ispresencerecords = list(human_motioncollection.find({"deviceid": themotionid }).sort([("datetime", -1)]).limit(80))
+    rawispresence_values = [1 if record['ispresence'] == 'pir' else 0 for record in ispresencerecords]
+    ispresence_values = [rawispresence_values[i] for i in range(0, 80, 4)][:20]
 
     charger = testdatabase.get_collection("charger")#read charger number
     thecharger = charger.find_one(thechargerid)
     chargernum = thecharger["chargeBoxId"]
-    
+    chargerid = thechargerid
     """
     # example one record of records in a human motion sensor: ispresence could be "pir" or "unknown"
     #{'_id': ObjectId('6784559cdb5ebfa5ad8cc77f'), 'datetime': '2025-03-22 09:18:12', 'ispresence': 'unknown', 'power': False}
@@ -343,16 +356,21 @@ def water():
     time = thesensor["datetime"] if thesensor["datetime"] else "No Status"
 
     waterleakcollection = historydatabase.get_collection("waterleak")
-    records = list(waterleakcollection.find({"deviceid": thewaterleakid }).skip(0).limit(20))
 
     # Prepare data for line graph
-    times = [record['datetime'] for record in records]
-    isleak_values = [0 if record['isleak'] == 'unknown' or 'normal' else 1 for record in records]  # Convert presence to binary
-    chargerid = thechargerid
+    #time
+    timesrecords = list(waterleakcollection.find({"deviceid": thewaterleakid }).sort([("datetime", -1)]).limit(80))
+    rawtimes = [record['datetime'] for record in timesrecords]
+    times = [rawtimes[i] for i in range(0, 80, 4)][:20]
+    #isleak value
+    isleakrecords = list(waterleakcollection.find({"deviceid": thewaterleakid }).sort([("datetime", -1)]).limit(80))
+    rawisleak_values = [0 if record['isleak'] == 'unknown' or 'normal' else 1 for record in isleakrecords]
+    isleak_values = [rawisleak_values[i] for i in range(0, 80, 4)][:20]
 
     charger = testdatabase.get_collection("charger")#read charger number
     thecharger = charger.find_one(thechargerid)
     chargernum = thecharger["chargeBoxId"]
+    chargerid = thechargerid
     """
     # example one record of records in a waterleak sensor:
     #{'_id': ObjectId('6784559cdb5ebfa5ad8cc784'), 'datetime': '2025-03-22 09:18:12', 'isleak': 'unknown', 'power': False}
@@ -360,7 +378,7 @@ def water():
         print(record)
 
     """
-    return render_template('water.html',power = power, isleak = isleak, time = time, records=records, times=times, isleak_values=isleak_values,chargernum = chargernum)
+    return render_template('water.html',power = power, isleak = isleak, time = time, times=times, isleak_values=isleak_values,chargernum = chargernum)
 
 @app.route('/temp_humid.html')
 def temp_humid():
@@ -372,14 +390,22 @@ def temp_humid():
     time = thesensor["datetime"] if thesensor["datetime"] else "unknown"
 
     temp_humidcollection = historydatabase.get_collection("temp_humid")
-    records = list(temp_humidcollection.find({"deviceid": thetemphumidid }).skip(0).limit(20))
 
     # Prepare data for line graph
-    times = [record['datetime'] for record in records]
-    temperature_values = [record['temperature'] for record in records]
-    humidity_values = [record['humidity'] for record in records]
+    #time data
+    timesrecords = list(temp_humidcollection.find({"deviceid": thetemphumidid }).sort([("datetime", -1)]).limit(80))
+    rawtimes = [record['datetime'] for record in timesrecords]
+    times = [rawtimes[i] for i in range(0, 80, 4)][:20]
+    #humidity data
+    humidrecords = list(temp_humidcollection.find({"deviceid": thetemphumidid }).sort([("datetime", -1)]).limit(80))
+    rawhumidity_values = [record['humidity'] for record in humidrecords]
+    humidity_values = [rawhumidity_values[i] for i in range(0, 80, 4)][:20]
+    #temperature data
+    temprecords = list(temp_humidcollection.find({"deviceid": thetemphumidid }).sort([("datetime", -1)]).limit(80))
+    rawtemperature_list = [record['temperature'] for record in temprecords]
+    temperature_values = [rawtemperature_list[i] for i in range(0, 80, 4)][:20]
+
     chargerid = thechargerid
-    
     charger = testdatabase.get_collection("charger")#read charger number
     thecharger = charger.find_one(thechargerid)
     chargernum = thecharger["chargeBoxId"]
@@ -390,7 +416,7 @@ def temp_humid():
         print(record)
 
     """
-    return render_template('temp_humid.html',power = power, temperature = temperature, humidity =humidity, chargernum = chargernum,time=time, records=records, times=times, temperature_values = temperature_values, humidity_values = humidity_values)
+    return render_template('temp_humid.html',power = power, temperature = temperature, humidity =humidity, chargernum = chargernum,time=time, times=times, temperature_values = temperature_values, humidity_values = humidity_values)
 
 @app.route("/toggleChargerTrue", methods=['POST'])
 def togglechargertrue():

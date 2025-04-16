@@ -67,7 +67,7 @@
 						<tr><th colspan="2">Human Motion</th></tr>
 						<tr>
 							<td>Human Activity:</td>
-							<td>{{ispresence}}</td>
+							<td>{{ 'Detected' if ispresence == 'pir' else 'Not Detected' }}</td>
 						</tr>
 					</table>
 				</div>

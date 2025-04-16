@@ -34,7 +34,7 @@
 				</tr>
 				<tr>
 					<td class="info">Human Activity:</td>
-					<td id="human">{{ispresence}}</td>
+					<td id="human">{{ 'Detected' if ispresence == 'pir' else 'Not Detected' }}</td>
 				</tr>
 			</tbody>
 		</table><!--
