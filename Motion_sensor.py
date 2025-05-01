@@ -6,7 +6,7 @@ import AccessToken
 # Credentials
 ACCESS_ID = "jrhutams3vc49ge8qvfk"
 ACCESS_SECRET = "9d9ca40de6b74ea399e80a3d5a2f41af"
-ACCESS_TOKEN = AccessToken.accessToken  
+ACCESS_TOKEN = AccessToken.accessToken
 DEVICE_ID = "d7c6c6837d8f185db39hyr"
 BASE_URL = "https://openapi.tuyain.com"
 
@@ -38,7 +38,7 @@ response = requests.get(device_info_url, headers=get_headers(device_info_path), 
 
 if response.status_code == 200:
     device_info = response.json()
-    
+
     if not device_info.get("success"):
         print(f"Failed to check device status: {device_info.get('msg', 'Unknown error')}")
     else:
@@ -48,12 +48,12 @@ if response.status_code == 200:
             # Device is online, get the status
             status_path = f"/v1.0/iot-03/devices/{DEVICE_ID}/status"
             status_url = f"{BASE_URL}{status_path}"
-            
+
             response = requests.get(status_url, headers=get_headers(status_path), timeout=5)
 
             if response.status_code == 200:
                 data = response.json()
-                
+
                 if data.get("success"):
                     status_list = data.get("result", [])
 
