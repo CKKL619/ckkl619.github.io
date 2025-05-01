@@ -63,7 +63,7 @@ if response.status_code == 200:
                         "No data"
                     )
 
-                    print("Current Status is:", waterLeak) # Output only the Waterleak sensor status value, normal = nothing happen / alarm = water leak
+                    print("Current Water Leak Status is:", waterLeak) # Output only the Waterleak sensor status value, normal = nothing happen / alarm = water leak
                 else:
                     print(f"Failed to fetch data: {data.get('msg', 'Unknown error')}")
             else:
