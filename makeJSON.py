@@ -1,7 +1,7 @@
 from pymongo import MongoClient
 from datetime import datetime
 from bson.objectid import ObjectId
-import Motion_sensor, Temp_Hum_sensor, Water_leak_sensor, charger_data, time
+#import Motion_sensor, Temp_Hum_sensor, Water_leak_sensor, charger_data, time
 
 class makeJSON:
     def __init__(self):##defalt
