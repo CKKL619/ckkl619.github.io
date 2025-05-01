@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel = "stylesheet" href = "{{url_for('static', filename='webpage_style.css')}}">
-	<script src = "{{url_for('static', filename='script.js')}}"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script><!--generate excel file-->
-	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script><!--generate data graph-->
+	<link rel="stylesheet" href="{{url_for('static', filename='webpage_style.css')}}">
+	<script src="{{url_for('static', filename='script.js')}}"></script>
+	<!-- Script for generating excel file -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+	<!-- Script for generating data graph -->
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 	<h1>Charger</h1>
@@ -22,15 +24,15 @@
 			<tbody>
 				<tr>
 					<td class="info">Charger Number:</td>
-					<td id="charger-number">{{chargerid}}</td>
+					<td id="charger-number">{{chargernum}}</td>
 				</tr>
 				<tr>
 					<td class="info">Power:</td>
 					<td id="power">{{power}}</td>
 				</tr>
 				<tr>
-					<td class="info">Charging Status:</td>
-					<td id="status">{{chargingStatus}}</td>
+					<td class="info">Charger Status:</td>
+					<td id="status">{{connectorStatus}}</td>
 				</tr>
 				<tr>
 					<td class="info">Charging Time:</td>
@@ -44,24 +46,26 @@
 			</tr>
 			<tr>
 				<td><p>OFF</p></td>
-				<td><label class = "switch">
-					<input type = "checkbox">
-					<span class = "slider"></span>
+				<td>
+					<label class="switch">
+						<input type="checkbox" id="toggleSwitch" {% if power %}checked{% endif %}>
+						<span class="slider"></span>
 					</label>
 				</td>
 				<td><p>ON</p></td>
 			</tr>
 		</table>
 	</div>
-	<div class="row">
-		<div class="column container2">
-			<table id="history">
-				<thead>
-					<tr>
-						<th colspan="4" style="font-weight: 900;">Search History</th>
-					</tr>
-					<tr>
-						<td colspan="4">
+
+	<div class="column container2">
+		<table id="history">
+			<thead>
+				<tr>
+					<th colspan="4">Search History</th>
+				</tr>
+				<tr>
+					<td colspan="4">
+						<div class="history-controls">
 							<label for="historyNumber">Select number of records for display:</label>
 							<select id="historyNumber">
 								<option>5</option>
@@ -71,51 +75,56 @@
 								<option>25</option>
 								<option>30</option>
 							</select>
-						</td>
-					</tr>
-					<tr>
-						<th>Charger Number</th>
-						<th>Power</th>
-						<th>Charging Status</th>
-						<th>Charging Time</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td colspan="4"><p id="warning">Search to add history record</p></td>
-					</tr>
-				</tbody>
+						</div>
+					</td>
+				</tr>
+				<tr class="history-header">
+					<th>Charger Number</th>
+					<th>Power</th>
+					<th>Charging Status</th>
+					<th>Charging Time</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td colspan="4"><p id="warning">Search to add history record</p></td>
+				</tr>
+			</tbody>
+			<tfoot>
 				<tr>
 					<td colspan="4">
-						<button onclick = "exportToExcel(data)">Download History</button>
+						<button onclick="exportToExcel(data)">Download History</button>
 					</td>
 				</tr>
-			</table>
-		</div>
-		<div class="column container3">
-			<table id = "dataGraph">
-				<thead>
-					<tr>
-						<th colspan="5" style="font-weight: 900;">Data Graph</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>
-							<canvas id="chargerChart"></canvas>
-						</td>
-					</tr>
-				</tbody>
+			</tfoot>
+		</table>
+	</div>
+
+	<div class="column container3">
+		<table id="dataGraph">
+			<thead>
+				<tr>
+					<th colspan="5" style="font-weight: 900;">Data Graph</th>
+				</tr>
+			</thead>
+			<tbody>
 				<tr>
 					<td>
-						<button onclick = "exportAsGraph(charge)">Download Graph</button>
+						<canvas id="chargerChart"></canvas>
 					</td>
 				</tr>
-			</table>
-		</div>
+			</tbody>
+			<tr>
+				<td>
+					<button onclick="exportAsGraph()">Download Graph</button>
+				</td>
+			</tr>
+		</table>
 	</div>
-	<p id = "warning"></p><!--keep log button functional-->
-	<button onclick = "document.location='home.html'" target = "mainframe" style="float: left;">Home</button>
+	<p id="warning"></p>
+	<button onclick="document.location='home.html'" target="mainframe" style="float: right;">Home</button>
+	<br><br><br>
+
 	<script>
 		const data = [];
 		function printChargerNum(){
@@ -123,15 +132,15 @@
 			const outputNum = document.getElementById("output");
 			const outputData = document.getElementById("data");
 			const checkPower = {{ power|tojson }};
-			const checkStatus = {{ chargingStatus|tojson }};
+			const checkStatus = {{ connectorStatus|tojson }};
 			const checkTime = {{ chargingTime|tojson }};
-			const chargerNumFormat = /^CDJ\d{6}$/;/*charger number format, must start with CDJ follow by six digit number*/
-			if(chargerNum === ""){/*check if input is empty*/
+			const chargerNumFormat = /^CDJ\d{6}$/; /* Charger number format, must start with CDJ follow by six digit number */
+			if(chargerNum === ""){ /* Check if input is empty */
 				outputNum.innerHTML = "Please input charger number.";
 				outputNum.style.backgroundColor = "red";
 				clearTable();
                 return;
-			}else if(!chargerNumFormat.test(chargerNum)){/*check if charger number satisfies format*/
+			}else if(!chargerNumFormat.test(chargerNum)){ /* Check if charger number satisfies format */
 				outputNum.innerHTML = "Charger number must start with 'CDJ'<br>follow by a six digit number.";
 				outputNum.style.backgroundColor = "yellow";
 				clearTable();
@@ -152,9 +161,9 @@
             };
 			if(!data.find(entry => entry.ChargerNo === chargerNum)){
                 data.push(dataDisplay);
-				updateHistoryRecord(); /*update history after new entry*/
+				updateHistoryRecord(); /* Update history after new entry */
             }
-			document.getElementById("input").value = '';/*set input to empty after button clicked*/
+			document.getElementById("input").value = ''; /* Set input to empty after button clicked */
 		}
 		function clearTable(){
             document.getElementById("charger-number").textContent = "";
@@ -169,8 +178,8 @@
 		});
 		function updateHistoryRecord() {
             const historyRecord = document.getElementById("history").getElementsByTagName("tbody")[0];
-            historyRecord.innerHTML = ""; /*clear current record*/
-            const history = data.slice(-maxEntries); /*get last maxEntries*/
+            historyRecord.innerHTML = ""; /* Clear current record */
+            const history = data.slice(-maxEntries); /* Get last maxEntries */
             history.forEach(entry => {
                 const row = document.createElement("tr");
                 row.innerHTML =
@@ -178,12 +187,12 @@
                     '<td>' + entry.Power + '</td>' +
                     '<td>' + entry.Status + '</td>' +
                     '<td>' + entry.Time + '</td>';
-                historyRecord.appendChild(row); /*append new row*/
+                historyRecord.appendChild(row); /* Append new row */
             });
         }
 		function exportToExcel(data){
 			const warningData = document.getElementById("warning");
-			const validData = data.filter(entry => entry.ChargerNo && /^CDJ\d{6}$/.test(entry.ChargerNo));/*only allow data with valid charger number been input*/
+			const validData = data.filter(entry => entry.ChargerNo && /^CDJ\d{6}$/.test(entry.ChargerNo)); /* Only allow data with valid charger number been input */
 			if(validData.length === 0){
 				warningData.textContent =("No valid charger data to export.");
 				warningData.style.backgroundColor = "red";
@@ -201,13 +210,15 @@
 			const ctx = document.getElementById('chargerChart').getContext('2d');
 			const chargingStatusValues = {{ chargingStatus_values|tojson }};
 			const chargingTimeValues = {{ chargingTime_values|tojson }};
+			const times = {{ times|tojson }};
+			const current = {{ current|tojson }}; /* Amperes */
 			const chargerChart = new Chart(ctx, {
 				type: 'line',
 				data: {
-					labels: chargingStatusValues,
+					labels: times,
 					datasets: [{
-						label: 'Charging Time',
-						data: chargingTimeValues,
+						label: 'Charging Voltage(unit = voltage)',
+						data: current,
 						borderColor: 'rgba(75, 192, 192, 1)',
 						backgroundColor: 'rgba(75, 192, 192, 0.2)',
 						borderWidth: 2,
@@ -215,35 +226,36 @@
 					}]
 				},
 				options: {
-					responsive: true, /*make the chart responsive*/
-                    maintainAspectRatio: false, /*allow height to be adjusted*/
+					responsive: true,
+					maintainAspectRatio: false,
 					scales: {
-                    x: {
-                        title: {
-                            display: true,
-                            text: 'Charging Status (1 = Charging, 0 = Unknown)'
-                        },
-                        ticks: {
-                            autoSkip: true,
-                            maxTicksLimit: 20
-                        }
-                    },
-                    y: {
-                        title: {
-                            display: true,
-                            text: 'Charging Time'
-                        },
-						min: 0,
-						beginAtZero: true,
-                        ticks: {
-                            stepSize: 1
-                        }
-                    }
-                }
+						x: {
+							title: {
+								display: true,
+								text: 'Time'
+							},
+							ticks: {
+								autoSkip: true,
+								maxTicksLimit: 20
+							}
+						},
+						y: {
+							title: {
+								display: true,
+								text: 'Voltage V'
+							},
+							min: 0,
+							max: 240,
+							beginAtZero: true,
+							ticks: {
+								stepSize: 1
+							}
+						}
+					}
 				}
 			});
 		});
-		function exportAsGraph(charge) {
+		function exportAsGraph() {
 			const chargingStatusValues = {{ chargingStatus_values|tojson }};
 			const chargingTimeValues = {{ chargingTime_values|tojson }};
 			const wb = XLSX.utils.book_new();
