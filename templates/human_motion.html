@@ -22,7 +22,7 @@
 			<tbody>
 				<tr>
 					<td class="info">Charger Number:</td>
-					<td id="charger-number">{{chargerid}}</td>
+					<td id="charger-number">{{chargernum}}</td>
 				</tr>
 				<tr>
 					<td class="info">Power:</td>
@@ -34,10 +34,10 @@
 				</tr>
 				<tr>
 					<td class="info">Human Activity:</td>
-					<td id="human">{{ispresence}}</td>
+					<td id="human">{{ 'Detected' if ispresence == 'pir' else 'Not Detected' }}</td>
 				</tr>
 			</tbody>
-		</table>
+		</table><!--
 		<table class="switchtable">
 			<tr>
 				<th colspan="3">Charger Power</th>
@@ -51,7 +51,7 @@
 				</td>
 				<td><p>ON</p></td>
 			</tr>
-		</table>
+		</table> -->
 	</div>
 	<div class="row">
 		<div class="column container2">
@@ -116,6 +116,7 @@
 	</div>
 	<p id = "warning" class = "dataShow"></p><!--keep log button functional-->
 	<button onclick = "document.location='home.html'" target = "mainframe" style="float: right;">Home</button>
+	<br><br><br>
 	<script>
 		const data = [];
 		function printChargerNum(){
@@ -258,7 +259,7 @@
 			const ws = XLSX.utils.aoa_to_sheet(wsData);
 			XLSX.utils.book_append_sheet(wb, ws, 'Human Motion Data');
 			XLSX.writeFile(wb, 'humanMotionGraphData.xlsx');
-		}
+		}/*
 		document.getElementById("toggleSwitch").addEventListener("change", function() {
 			if (this.checked) {
 				fetch("/toggleHuman_motionTrue", {
@@ -279,7 +280,7 @@
 					if (response.ok) {
 						console.log("Toggle switched to false"); }
 					else {
-						console.error("Failed to send request"); } }).catch(error => { console.error("Error:", error); }); } });
+						console.error("Failed to send request"); } }).catch(error => { console.error("Error:", error); }); } });*/
     </script>
 </body>
 </html>
