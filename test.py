@@ -1,8 +1,5 @@
-import makeJSON
-import time
 from bson.objectid import ObjectId
 from pymongo import MongoClient
-import Motion_sensor, Temp_Hum_sensor, Water_leak_sensor, charger_data
 
 class Database:
     def __init__(self, host):
@@ -15,6 +12,19 @@ class Database:
     def close(self):
         self.client.close()
 
+databaseConnection = Database("mongodb+srv://IoTadmin:admin888@maincluster.xh201.mongodb.net/")
+database = databaseConnection.client.get_database("TestDatabase")
+testdatabase = databaseConnection.client.get_database("TestDatabase")
+linkage = testdatabase.get_collection("linkage")
+thelinkage = linkage.find_one({'ownerid': ObjectId("6784559cdb5ebfa5ad8cc783")})
+thechargerid = thelinkage["chargerid"]
+charger = testdatabase.get_collection("charger")#reach collections
+thecharger = charger.find_one(thechargerid)
+
+control_variable = thecharger['power']
+print(control_variable)
+
+"""
 databaseConnection = Database("mongodb+srv://IoTadmin:admin888@maincluster.xh201.mongodb.net/")
 database = databaseConnection.client.get_database("TestDatabase")
 testdatabase = databaseConnection.client.get_database("TestDatabase")
@@ -36,6 +46,13 @@ thepanelid = thelinkage["panelid"]
 thetemphumidid = thelinkage["temp_humidid"]
 thewaterleakid = thelinkage["waterleakid"]
 
+thecharger = charger.find_one(thechargerid)
+chargernum = thecharger["chargeBoxId"]
+
+
+
+
+print(chargernum)
 def autoUpdate():
     while True:
         try:
@@ -97,4 +114,39 @@ def autoUpdate():
         print("Complete one loop")
         time.sleep(2.5)
 
-autoUpdate()
+historydatabase = databaseConnection.client.get_database("TestHistory")#connect to database history
+chargerhis = historydatabase.get_collection("charger")#reach collections
+human_motionhis = historydatabase.get_collection("human_motion")
+panelhis = historydatabase.get_collection("panel")
+#speaker = testdatabase.get_collection("speaker")
+temp_humidhis = historydatabase.get_collection("temp_humid")
+#user = testdatabase.get_collection("user")
+waterleakhis =historydatabase.get_collection("waterleak")
+linkagehis = historydatabase.get_collection("linkage")
+chargercollection = historydatabase.get_collection("charger")#getting the history data
+#records = list(chargercollection.find({"deviceid": thechargerid }).skip(0).limit(20))
+
+temphumidcollection = historydatabase.get_collection("temp_humid")
+
+threcords = temphumidcollection.find({"deviceid": thetemphumidid }).skip(0).limit(20)
+temperature_list = [record['temperature'] for record in threcords]
+threcords = temphumidcollection.find({"deviceid": thetemphumidid }).skip(0).limit(20)
+humidity_list = [record['humidity'] for record in threcords]
+
+#autoUpdate()
+temprecords = list(temphumidcollection.find({"deviceid": thetemphumidid }).sort([("datetime", -1)]).limit(80))
+rawtemperature_list = [record['temperature'] for record in temprecords]
+temperature_list = [temperature_list[i] for i in range(0, 80, 4)][:20]
+print(tt)
+
+chargercollection = historydatabase.get_collection("charger")#getting the history data
+records = list(chargercollection.find({"deviceid": thechargerid }).sort([("datetime", -1)]).limit(80))
+rawchargingTime_values = [record['chargingTime'] for record in records]
+chargingTime_values = [rawchargingTime_values[i] for i in range(0, 80, 4)][:20]
+
+waterleakcollection = historydatabase.get_collection("waterleak")
+isleakrecords = list(waterleakcollection.find({"deviceid": thewaterleakid }).sort([("datetime", -1)]).limit(80))
+rawisleak_values = [record['isleak'] for record in isleakrecords]
+isleak_values = [rawisleak_values[i] for i in range(0, 80, 4)][:20]
+"""
+
