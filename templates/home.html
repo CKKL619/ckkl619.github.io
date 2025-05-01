@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel = "stylesheet" href = "{{url_for('static', filename='home_style.css')}}">
+	<title>Home</title>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='webpage_style.css') }}">
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<!-- Script for generating excel file -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
 	<script>
         function displayLoginTime() {
             const now = new Date();
@@ -29,57 +32,136 @@
 <body>
 	<h1>Home</h1>
 	<h2>Login success, welcome</h2>
-	<div id="Time">
-		<p id="loginTime"></p>
-		<p id="previousLoginTime"></p>
+	
+	<div class="row container1 time-container">
+		<div id="Time">
+			<p id="loginTime"></p>
+			<p id="previousLoginTime"></p>
+		</div>
 	</div>
-	<div class="grid-container">
-		<a id="charger_preview" href="charger.html" target="mainframe" class="preview item1">
-			<div>
-			<table>
-				<tr><th>Charger</th></tr>
-				<tr><td>Power:</td></tr>
-				<tr><td>{{chpower}}</td></tr>
-				<tr><td>Status:</td></tr>
-				<tr><td>{{chargingStatus}}</td></tr>
-			</table>
-			</div>
-		</a>
-		<a id="human_preview" href="human_motion.html" target="mainframe" class="preview item2">
-			<div>
-			<table>
-				<tr><th>Human Motion</th></tr>
-				<tr><td>Human Activity:</td></tr>
-				<tr><td>{{ispresence}}</td></tr>
-			</table>
-			</div>
-		</a>
-		<a id="water_preview" href="water.html" target="mainframe" class="preview item3">
-			<div>
-			<table>
-				<tr><th>Water Leakage</th></tr>
-				<tr><td>Water Leak:</td></tr>
-				<tr><td>{{isleak}}</td></tr>
-			</table>
-			</div>
-		</a>
+	
+	<div class="row">
+		<div class="column container2">
+			<a id="charger_preview" href="charger.html" target="mainframe" class="preview">
+				<div>
+					<table>
+						<tr><th colspan="2">Charger</th></tr>
+						<tr><th colspan="2">{{chargernum}}</th></tr>
+						<tr>
+							<td>Power:</td>
+							<td>{{chpower}}</td>
+						</tr>
+						<tr>
+							<td>Status:</td>
+							<td>{{chargingStatus}}</td>
+						</tr>
+					</table>
+				</div>
+			</a>
+		</div>
+		
+		<div class="column container2">
+			<a id="human_preview" href="human_motion.html" target="mainframe" class="preview">
+				<div>
+					<table>
+						<tr><th colspan="2">Human Motion</th></tr>
+						<tr>
+							<td>Human Activity:</td>
+							<td>{{ 'Detected' if ispresence == 'pir' else 'Not Detected' }}</td>
+						</tr>
+					</table>
+				</div>
+			</a>
+		</div>
 	</div>
-	<div class="grid-container">
-		<a id="temphumid_preview" href="temp_humid.html" target="mainframe" class="preview">
-			<div>
-			<table class="w3-container">
-				<tr><th>Temperature/Humidity</th></tr>
-				<tr><td>Temperature(°C):</td></tr>
-				<tr class="w3-light-grey">
-					<td class="w3-red">{{temperature}}</td>
-				</tr>
-				<tr><td>Humidity(%):</td></tr>
-				<tr class="w3-light-grey">
-					<td class="w3-green">{{humidity}}</td>
-				</tr>
-			</table>
-			</div>
-		</a>
+	
+	<div class="row">
+		<div class="column container2">
+			<a id="water_preview" href="water.html" target="mainframe" class="preview">
+				<div>
+					<table>
+						<tr><th colspan="2">Water Leakage</th></tr>
+						<tr>
+							<td>Water Leak:</td>
+							<td>{{isleak}}</td>
+						</tr>
+					</table>
+				</div>
+			</a>
+		</div>
+		
+		<div class="column container2">
+			<a id="temphumid_preview" href="temp_humid.html" target="mainframe" class="preview">
+				<div>
+					<table class="w3-container">
+						<tr><th colspan="2">Temperature/Humidity</th></tr>
+						<tr>
+							<td>Temperature(°C):</td>
+							<td class="w3-red">{{temperature}}</td>
+						</tr>
+						<tr>
+							<td>Humidity(%):</td>
+							<td class="w3-green">{{humidity}}</td>
+						</tr>
+					</table>
+				</div>
+			</a>
+		</div>
 	</div>
+	<button onclick="exportToExcel()" class="export-button" style="float: right;">Export Excel</button>
+	<br><br><br>
+
+	<script>
+		function exportToExcel(){
+			// Get data from Flask template variables
+			const times_list = {{ times_list|tojson|safe }};
+			const chargingStatus_list = {{ chargingStatus_list|tojson|safe }};
+			const chargingTime_list = {{ chargingTime_list|tojson|safe }};
+			const current_list = {{ current_list|tojson|safe }};
+			const ispresence_list = {{ ispresence_list|tojson|safe }};
+			const isleak_list = {{ isleak_list|tojson|safe }};
+			const temperature_list = {{ temperature_list|tojson|safe }};
+			const humidity_list = {{ humidity_list|tojson|safe }};
+
+			// Create data array for Excel
+			const data = [];
+			
+			// Add headers
+			data.push([
+				"Time", 
+				"Charger Status", 
+				"Charging Time", 
+				"Current (A)", 
+				"Human Presence", 
+				"Water Leak", 
+				"Temperature (°C)", 
+				"Humidity (%)"
+			]);
+			
+			// Add data rows
+			for (let i = 0; i < times_list.length; i++) {
+				data.push([
+					times_list[i] || "",
+					chargingStatus_list[i] || "",
+					chargingTime_list[i] || "",
+					current_list[i] || "",
+					ispresence_list[i] || "",
+					isleak_list[i] || "",
+					temperature_list[i] || "",
+					humidity_list[i] || ""
+				]);
+			}
+
+			// Create workbook and worksheet
+			const workbook = XLSX.utils.book_new();
+			const worksheet = XLSX.utils.aoa_to_sheet(data);
+			
+			// Add worksheet to workbook
+			XLSX.utils.book_append_sheet(workbook, worksheet, "Combined Data");
+			
+			// Save file
+			XLSX.writeFile(workbook, "CombinedData.xlsx");
+		}
+	</script>
 </body>
 </html>
